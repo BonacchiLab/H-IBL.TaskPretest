@@ -3,7 +3,7 @@
 
 # H-IBL Task
 
-This repository contains the first draft implementation of the Human International Brain Laboratory (H-IBL) task developed in PsychoPy.
+This repository contains the first pretest for the implementation of the Human International Brain Laboratory (H-IBL) task developed in PsychoPy.
 
 The project aims to adapt the IBL perceptual decision-making task for human participants while preserving the core experimental design.
 
@@ -14,13 +14,13 @@ This is an early development version intended for ongoing implementation, testin
 Clone the repository:
 
 ```bash
-git clone https://github.com/BonacchiLab/H-IBL.Task.git
+git clone https://github.com/BonacchiLab/H-IBL.TaskPretest.git
 ```
 
 Navigate to the project directory:
 
 ```bash
-cd H-IBL.Task
+cd H-IBL.TaskPretest
 ```
 
 Open the `.psyexp` file in PsychoPy Builder (recommended) or run the generated Python script to start the experiment.
