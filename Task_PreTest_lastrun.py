@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2026.1.2),
-    on setembro 10, 2026, at 14:49
+    on setembro 10, 2026, at 22:10
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -386,7 +386,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         depth=0.0);
     key_respWelcome = keyboard.Keyboard(deviceName='defaultKeyboard')
     
-    # --- Initialize components for Routine "TrainingTrials" ---
+    # --- Initialize components for Routine "PreTest1Trials" ---
     # set audio backend
     sound.Sound.backend = 'ptb'
     soundGoCue = sound.Sound(
@@ -427,7 +427,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         depth=-4.0);
     keySide = keyboard.Keyboard(deviceName='defaultKeyboard')
     
-    # --- Initialize components for Routine "TrialFeedback" ---
+    # --- Initialize components for Routine "PreTest1TrialFeedback" ---
     # Run 'Begin Experiment' code from codeFconditions
     score = 0
     textFeedback = visual.TextStim(win=win, name='textFeedback',
@@ -446,45 +446,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     )
     soundFeedback.setVolume(1.0)
     
-    # --- Initialize components for Routine "Blank4000" ---
-    textBlank = visual.TextStim(win=win, name='textBlank',
-        text=None,
+    # --- Initialize components for Routine "Pause" ---
+    text = visual.TextStim(win=win, name='text',
+        text='Intervalo',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
-    
-    # --- Initialize components for Routine "InstructionsFull" ---
-    textFull = visual.TextStim(win=win, name='textFull',
-        text='Explicação para full task',
-        font='Arial',
-        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
-        color='white', colorSpace='rgb', opacity=None, 
-        languageStyle='LTR',
-        depth=0.0);
-    key_resp_Full = keyboard.Keyboard(deviceName='defaultKeyboard')
-    
-    # --- Initialize components for Routine "FullTaskTrials" ---
-    
-    # --- Initialize components for Routine "TrialFeedback" ---
-    # Run 'Begin Experiment' code from codeFconditions
-    score = 0
-    textFeedback = visual.TextStim(win=win, name='textFeedback',
-        text='',
-        font='Arial',
-        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
-        color='white', colorSpace='rgb', opacity=None, 
-        languageStyle='LTR',
-        depth=-1.0);
-    soundFeedback = sound.Sound(
-        'A', 
-        secs=-1, 
-        stereo=True, 
-        hamming=True, 
-        speaker=None,    name='soundFeedback'
-    )
-    soundFeedback.setVolume(1.0)
     
     # --- Initialize components for Routine "Blank4000" ---
     textBlank = visual.TextStim(win=win, name='textBlank',
@@ -680,82 +649,82 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     routineTimer.reset()
     
     # set up handler to look after randomisation of conditions etc
-    TrainingBlock = data.TrialHandler2(
-        name='TrainingBlock',
-        nReps=5, 
-        method='random', 
+    Pretest1Block = data.TrialHandler2(
+        name='Pretest1Block',
+        nReps=10, 
+        method='sequential', 
         extraInfo=expInfo, 
         originPath=-1, 
         trialList=[None], 
         seed=None, 
         isTrials=True, 
     )
-    thisExp.addLoop(TrainingBlock)  # add the loop to the experiment
-    thisTrainingBlock = TrainingBlock.trialList[0]  # so we can initialise stimuli with some values
-    # abbreviate parameter names if possible (e.g. rgb = thisTrainingBlock.rgb)
-    if thisTrainingBlock != None:
-        for paramName in thisTrainingBlock:
-            globals()[paramName] = thisTrainingBlock[paramName]
+    thisExp.addLoop(Pretest1Block)  # add the loop to the experiment
+    thisPretest1Block = Pretest1Block.trialList[0]  # so we can initialise stimuli with some values
+    # abbreviate parameter names if possible (e.g. rgb = thisPretest1Block.rgb)
+    if thisPretest1Block != None:
+        for paramName in thisPretest1Block:
+            globals()[paramName] = thisPretest1Block[paramName]
     if thisSession is not None:
         # if running in a Session with a Liaison client, send data up to now
         thisSession.sendExperimentData()
     
-    for thisTrainingBlock in TrainingBlock:
-        TrainingBlock.status = STARTED
-        if hasattr(thisTrainingBlock, 'status'):
-            thisTrainingBlock.status = STARTED
-        currentLoop = TrainingBlock
+    for thisPretest1Block in Pretest1Block:
+        Pretest1Block.status = STARTED
+        if hasattr(thisPretest1Block, 'status'):
+            thisPretest1Block.status = STARTED
+        currentLoop = Pretest1Block
         thisExp.timestampOnFlip(win, 'thisRow.t', format=globalClock.format)
         if thisSession is not None:
             # if running in a Session with a Liaison client, send data up to now
             thisSession.sendExperimentData()
-        # abbreviate parameter names if possible (e.g. rgb = thisTrainingBlock.rgb)
-        if thisTrainingBlock != None:
-            for paramName in thisTrainingBlock:
-                globals()[paramName] = thisTrainingBlock[paramName]
+        # abbreviate parameter names if possible (e.g. rgb = thisPretest1Block.rgb)
+        if thisPretest1Block != None:
+            for paramName in thisPretest1Block:
+                globals()[paramName] = thisPretest1Block[paramName]
         
         # set up handler to look after randomisation of conditions etc
-        trialsTraining = data.TrialHandler2(
-            name='trialsTraining',
-            nReps=1, 
-            method='sequential', 
+        pretest1trialsTraining = data.TrialHandler2(
+            name='pretest1trialsTraining',
+            nReps=3, 
+            method='random', 
             extraInfo=expInfo, 
             originPath=-1, 
             trialList=data.importConditions('Components_parameters.xlsx'), 
             seed=None, 
             isTrials=True, 
         )
-        thisExp.addLoop(trialsTraining)  # add the loop to the experiment
-        thisTrialsTraining = trialsTraining.trialList[0]  # so we can initialise stimuli with some values
-        # abbreviate parameter names if possible (e.g. rgb = thisTrialsTraining.rgb)
-        if thisTrialsTraining != None:
-            for paramName in thisTrialsTraining:
-                globals()[paramName] = thisTrialsTraining[paramName]
+        thisExp.addLoop(pretest1trialsTraining)  # add the loop to the experiment
+        thisPretest1trialsTraining = pretest1trialsTraining.trialList[0]  # so we can initialise stimuli with some values
+        # abbreviate parameter names if possible (e.g. rgb = thisPretest1trialsTraining.rgb)
+        if thisPretest1trialsTraining != None:
+            for paramName in thisPretest1trialsTraining:
+                globals()[paramName] = thisPretest1trialsTraining[paramName]
         if thisSession is not None:
             # if running in a Session with a Liaison client, send data up to now
             thisSession.sendExperimentData()
         
-        for thisTrialsTraining in trialsTraining:
-            trialsTraining.status = STARTED
-            if hasattr(thisTrialsTraining, 'status'):
-                thisTrialsTraining.status = STARTED
-            currentLoop = trialsTraining
+        for thisPretest1trialsTraining in pretest1trialsTraining:
+            pretest1trialsTraining.status = STARTED
+            if hasattr(thisPretest1trialsTraining, 'status'):
+                thisPretest1trialsTraining.status = STARTED
+            currentLoop = pretest1trialsTraining
             thisExp.timestampOnFlip(win, 'thisRow.t', format=globalClock.format)
             if thisSession is not None:
                 # if running in a Session with a Liaison client, send data up to now
                 thisSession.sendExperimentData()
-            # abbreviate parameter names if possible (e.g. rgb = thisTrialsTraining.rgb)
-            if thisTrialsTraining != None:
-                for paramName in thisTrialsTraining:
-                    globals()[paramName] = thisTrialsTraining[paramName]
+            # abbreviate parameter names if possible (e.g. rgb = thisPretest1trialsTraining.rgb)
+            if thisPretest1trialsTraining != None:
+                for paramName in thisPretest1trialsTraining:
+                    globals()[paramName] = thisPretest1trialsTraining[paramName]
             
-            # --- Prepare to start Routine "TrainingTrials" ---
-            # create an object to store info about Routine TrainingTrials
-            TrainingTrials = data.Routine(
-                name='TrainingTrials',
+            # --- Prepare to start Routine "PreTest1Trials" ---
+            # create an object to store info about Routine PreTest1Trials
+            PreTest1Trials = data.Routine(
+                name='PreTest1Trials',
                 components=[soundGoCue, polygonVertical, polygonHorizontal, gabor, textGrating, keySide],
             )
-            TrainingTrials.status = NOT_STARTED
+            PreTest1Trials.status = NOT_STARTED
             continueRoutine = True
             # update component parameters for each repeat
             soundGoCue.setSound('12000', secs=0.08, hamming=True)
@@ -771,15 +740,15 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             keySide.keys = []
             keySide.rt = []
             _keySide_allKeys = []
-            # store start times for TrainingTrials
-            TrainingTrials.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
-            TrainingTrials.tStart = globalClock.getTime(format='float')
-            TrainingTrials.status = STARTED
-            thisExp.addData('TrainingTrials.started', TrainingTrials.tStart)
-            TrainingTrials.maxDuration = None
+            # store start times for PreTest1Trials
+            PreTest1Trials.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
+            PreTest1Trials.tStart = globalClock.getTime(format='float')
+            PreTest1Trials.status = STARTED
+            thisExp.addData('PreTest1Trials.started', PreTest1Trials.tStart)
+            PreTest1Trials.maxDuration = None
             # keep track of which components have finished
-            TrainingTrialsComponents = TrainingTrials.components
-            for thisComponent in TrainingTrials.components:
+            PreTest1TrialsComponents = PreTest1Trials.components
+            for thisComponent in PreTest1Trials.components:
                 thisComponent.tStart = None
                 thisComponent.tStop = None
                 thisComponent.tStartRefresh = None
@@ -791,12 +760,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             _timeToFirstFrame = win.getFutureFlipTime(clock="now")
             frameN = -1
             
-            # --- Run Routine "TrainingTrials" ---
-            thisExp.currentRoutine = TrainingTrials
-            TrainingTrials.forceEnded = routineForceEnded = not continueRoutine
+            # --- Run Routine "PreTest1Trials" ---
+            thisExp.currentRoutine = PreTest1Trials
+            PreTest1Trials.forceEnded = routineForceEnded = not continueRoutine
             while continueRoutine and routineTimer.getTime() < 4.0:
                 # if trial has changed, end Routine now
-                if hasattr(thisTrialsTraining, 'status') and thisTrialsTraining.status == STOPPING:
+                if hasattr(thisPretest1trialsTraining, 'status') and thisPretest1trialsTraining.status == STOPPING:
                     continueRoutine = False
                 # get current time
                 t = routineTimer.getTime()
@@ -1032,20 +1001,20 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                         thisExp=thisExp, 
                         win=win, 
                         timers=[routineTimer, globalClock], 
-                        currentRoutine=TrainingTrials,
+                        currentRoutine=PreTest1Trials,
                     )
                     # skip the frame we paused on
                     continue
                 
                 # has a Component requested the Routine to end?
                 if not continueRoutine:
-                    TrainingTrials.forceEnded = routineForceEnded = True
+                    PreTest1Trials.forceEnded = routineForceEnded = True
                 # has the Routine been forcibly ended?
-                if TrainingTrials.forceEnded or routineForceEnded:
+                if PreTest1Trials.forceEnded or routineForceEnded:
                     break
                 # has every Component finished?
                 continueRoutine = False
-                for thisComponent in TrainingTrials.components:
+                for thisComponent in PreTest1Trials.components:
                     if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
                         continueRoutine = True
                         break  # at least one component has not yet finished
@@ -1054,14 +1023,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
                     win.flip()
             
-            # --- Ending Routine "TrainingTrials" ---
-            for thisComponent in TrainingTrials.components:
+            # --- Ending Routine "PreTest1Trials" ---
+            for thisComponent in PreTest1Trials.components:
                 if hasattr(thisComponent, "setAutoDraw"):
                     thisComponent.setAutoDraw(False)
-            # store stop times for TrainingTrials
-            TrainingTrials.tStop = globalClock.getTime(format='float')
-            TrainingTrials.tStopRefresh = tThisFlipGlobal
-            thisExp.addData('TrainingTrials.stopped', TrainingTrials.tStop)
+            # store stop times for PreTest1Trials
+            PreTest1Trials.tStop = globalClock.getTime(format='float')
+            PreTest1Trials.tStopRefresh = tThisFlipGlobal
+            thisExp.addData('PreTest1Trials.stopped', PreTest1Trials.tStop)
             soundGoCue.pause()  # ensure sound has stopped at end of Routine
             # check responses
             if keySide.keys in ['', [], None]:  # No response was made
@@ -1071,27 +1040,27 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                    keySide.corr = 1;  # correct non-response
                 else:
                    keySide.corr = 0;  # failed to respond (incorrectly)
-            # store data for trialsTraining (TrialHandler)
-            trialsTraining.addData('keySide.keys',keySide.keys)
-            trialsTraining.addData('keySide.corr', keySide.corr)
+            # store data for pretest1trialsTraining (TrialHandler)
+            pretest1trialsTraining.addData('keySide.keys',keySide.keys)
+            pretest1trialsTraining.addData('keySide.corr', keySide.corr)
             if keySide.keys != None:  # we had a response
-                trialsTraining.addData('keySide.rt', keySide.rt)
-                trialsTraining.addData('keySide.duration', keySide.duration)
+                pretest1trialsTraining.addData('keySide.rt', keySide.rt)
+                pretest1trialsTraining.addData('keySide.duration', keySide.duration)
             # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
-            if TrainingTrials.maxDurationReached:
-                routineTimer.addTime(-TrainingTrials.maxDuration)
-            elif TrainingTrials.forceEnded:
+            if PreTest1Trials.maxDurationReached:
+                routineTimer.addTime(-PreTest1Trials.maxDuration)
+            elif PreTest1Trials.forceEnded:
                 routineTimer.reset()
             else:
                 routineTimer.addTime(-4.000000)
             
-            # --- Prepare to start Routine "TrialFeedback" ---
-            # create an object to store info about Routine TrialFeedback
-            TrialFeedback = data.Routine(
-                name='TrialFeedback',
+            # --- Prepare to start Routine "PreTest1TrialFeedback" ---
+            # create an object to store info about Routine PreTest1TrialFeedback
+            PreTest1TrialFeedback = data.Routine(
+                name='PreTest1TrialFeedback',
                 components=[textFeedback, soundFeedback],
             )
-            TrialFeedback.status = NOT_STARTED
+            PreTest1TrialFeedback.status = NOT_STARTED
             continueRoutine = True
             # update component parameters for each repeat
             # Run 'Begin Routine' code from codeFconditions
@@ -1116,15 +1085,15 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             soundFeedback.setSound(sound_feedback , secs=duration, hamming=True)
             soundFeedback.setVolume(1.0, log=False)
             soundFeedback.seek(0)
-            # store start times for TrialFeedback
-            TrialFeedback.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
-            TrialFeedback.tStart = globalClock.getTime(format='float')
-            TrialFeedback.status = STARTED
-            thisExp.addData('TrialFeedback.started', TrialFeedback.tStart)
-            TrialFeedback.maxDuration = None
+            # store start times for PreTest1TrialFeedback
+            PreTest1TrialFeedback.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
+            PreTest1TrialFeedback.tStart = globalClock.getTime(format='float')
+            PreTest1TrialFeedback.status = STARTED
+            thisExp.addData('PreTest1TrialFeedback.started', PreTest1TrialFeedback.tStart)
+            PreTest1TrialFeedback.maxDuration = None
             # keep track of which components have finished
-            TrialFeedbackComponents = TrialFeedback.components
-            for thisComponent in TrialFeedback.components:
+            PreTest1TrialFeedbackComponents = PreTest1TrialFeedback.components
+            for thisComponent in PreTest1TrialFeedback.components:
                 thisComponent.tStart = None
                 thisComponent.tStop = None
                 thisComponent.tStartRefresh = None
@@ -1136,12 +1105,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             _timeToFirstFrame = win.getFutureFlipTime(clock="now")
             frameN = -1
             
-            # --- Run Routine "TrialFeedback" ---
-            thisExp.currentRoutine = TrialFeedback
-            TrialFeedback.forceEnded = routineForceEnded = not continueRoutine
+            # --- Run Routine "PreTest1TrialFeedback" ---
+            thisExp.currentRoutine = PreTest1TrialFeedback
+            PreTest1TrialFeedback.forceEnded = routineForceEnded = not continueRoutine
             while continueRoutine:
                 # if trial has changed, end Routine now
-                if hasattr(thisTrialsTraining, 'status') and thisTrialsTraining.status == STOPPING:
+                if hasattr(thisPretest1trialsTraining, 'status') and thisPretest1trialsTraining.status == STOPPING:
                     continueRoutine = False
                 # get current time
                 t = routineTimer.getTime()
@@ -1224,20 +1193,20 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                         thisExp=thisExp, 
                         win=win, 
                         timers=[routineTimer, globalClock], 
-                        currentRoutine=TrialFeedback,
+                        currentRoutine=PreTest1TrialFeedback,
                     )
                     # skip the frame we paused on
                     continue
                 
                 # has a Component requested the Routine to end?
                 if not continueRoutine:
-                    TrialFeedback.forceEnded = routineForceEnded = True
+                    PreTest1TrialFeedback.forceEnded = routineForceEnded = True
                 # has the Routine been forcibly ended?
-                if TrialFeedback.forceEnded or routineForceEnded:
+                if PreTest1TrialFeedback.forceEnded or routineForceEnded:
                     break
                 # has every Component finished?
                 continueRoutine = False
-                for thisComponent in TrialFeedback.components:
+                for thisComponent in PreTest1TrialFeedback.components:
                     if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
                         continueRoutine = True
                         break  # at least one component has not yet finished
@@ -1246,24 +1215,24 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
                     win.flip()
             
-            # --- Ending Routine "TrialFeedback" ---
-            for thisComponent in TrialFeedback.components:
+            # --- Ending Routine "PreTest1TrialFeedback" ---
+            for thisComponent in PreTest1TrialFeedback.components:
                 if hasattr(thisComponent, "setAutoDraw"):
                     thisComponent.setAutoDraw(False)
-            # store stop times for TrialFeedback
-            TrialFeedback.tStop = globalClock.getTime(format='float')
-            TrialFeedback.tStopRefresh = tThisFlipGlobal
-            thisExp.addData('TrialFeedback.stopped', TrialFeedback.tStop)
+            # store stop times for PreTest1TrialFeedback
+            PreTest1TrialFeedback.tStop = globalClock.getTime(format='float')
+            PreTest1TrialFeedback.tStopRefresh = tThisFlipGlobal
+            thisExp.addData('PreTest1TrialFeedback.stopped', PreTest1TrialFeedback.tStop)
             # Run 'End Routine' code from codeFconditions
             win.color="gray"
             soundFeedback.pause()  # ensure sound has stopped at end of Routine
-            # the Routine "TrialFeedback" was not non-slip safe, so reset the non-slip timer
+            # the Routine "PreTest1TrialFeedback" was not non-slip safe, so reset the non-slip timer
             routineTimer.reset()
-            # mark thisTrialsTraining as finished
-            if hasattr(thisTrialsTraining, 'status'):
-                thisTrialsTraining.status = FINISHED
+            # mark thisPretest1trialsTraining as finished
+            if hasattr(thisPretest1trialsTraining, 'status'):
+                thisPretest1trialsTraining.status = FINISHED
             # if awaiting a pause, pause now
-            if trialsTraining.status == PAUSED:
+            if pretest1trialsTraining.status == PAUSED:
                 thisExp.status = PAUSED
                 pauseExperiment(
                     thisExp=thisExp, 
@@ -1271,665 +1240,147 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     timers=[globalClock], 
                 )
                 # once done pausing, restore running status
-                trialsTraining.status = STARTED
+                pretest1trialsTraining.status = STARTED
             thisExp.nextEntry()
             
-        # completed 1 repeats of 'trialsTraining'
-        trialsTraining.status = FINISHED
+        # completed 3 repeats of 'pretest1trialsTraining'
+        pretest1trialsTraining.status = FINISHED
         
         if thisSession is not None:
             # if running in a Session with a Liaison client, send data up to now
             thisSession.sendExperimentData()
-        # mark thisTrainingBlock as finished
-        if hasattr(thisTrainingBlock, 'status'):
-            thisTrainingBlock.status = FINISHED
-        # if awaiting a pause, pause now
-        if TrainingBlock.status == PAUSED:
-            thisExp.status = PAUSED
-            pauseExperiment(
-                thisExp=thisExp, 
-                win=win, 
-                timers=[globalClock], 
-            )
-            # once done pausing, restore running status
-            TrainingBlock.status = STARTED
-        thisExp.nextEntry()
         
-    # completed 5 repeats of 'TrainingBlock'
-    TrainingBlock.status = FINISHED
-    
-    if thisSession is not None:
-        # if running in a Session with a Liaison client, send data up to now
-        thisSession.sendExperimentData()
-    
-    # --- Prepare to start Routine "Blank4000" ---
-    # create an object to store info about Routine Blank4000
-    Blank4000 = data.Routine(
-        name='Blank4000',
-        components=[textBlank],
-    )
-    Blank4000.status = NOT_STARTED
-    continueRoutine = True
-    # update component parameters for each repeat
-    # store start times for Blank4000
-    Blank4000.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
-    Blank4000.tStart = globalClock.getTime(format='float')
-    Blank4000.status = STARTED
-    thisExp.addData('Blank4000.started', Blank4000.tStart)
-    Blank4000.maxDuration = None
-    # keep track of which components have finished
-    Blank4000Components = Blank4000.components
-    for thisComponent in Blank4000.components:
-        thisComponent.tStart = None
-        thisComponent.tStop = None
-        thisComponent.tStartRefresh = None
-        thisComponent.tStopRefresh = None
-        if hasattr(thisComponent, 'status'):
-            thisComponent.status = NOT_STARTED
-    # reset timers
-    t = 0
-    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
-    frameN = -1
-    
-    # --- Run Routine "Blank4000" ---
-    thisExp.currentRoutine = Blank4000
-    Blank4000.forceEnded = routineForceEnded = not continueRoutine
-    while continueRoutine and routineTimer.getTime() < 4.0:
-        # get current time
-        t = routineTimer.getTime()
-        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
-        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
-        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-        # update/draw components on each frame
-        
-        # *textBlank* updates
-        
-        # if textBlank is starting this frame...
-        if textBlank.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-            # keep track of start time/frame for later
-            textBlank.frameNStart = frameN  # exact frame index
-            textBlank.tStart = t  # local t and not account for scr refresh
-            textBlank.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(textBlank, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'textBlank.started')
-            # update status
-            textBlank.status = STARTED
-            textBlank.setAutoDraw(True)
-        
-        # if textBlank is active this frame...
-        if textBlank.status == STARTED:
-            # update params
-            pass
-        
-        # if textBlank is stopping this frame...
-        if textBlank.status == STARTED:
-            # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > textBlank.tStartRefresh + 4-frameTolerance:
-                # keep track of stop time/frame for later
-                textBlank.tStop = t  # not accounting for scr refresh
-                textBlank.tStopRefresh = tThisFlipGlobal  # on global time
-                textBlank.frameNStop = frameN  # exact frame index
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'textBlank.stopped')
-                # update status
-                textBlank.status = FINISHED
-                textBlank.setAutoDraw(False)
-        
-        # check for quit (typically the Esc key)
-        if defaultKeyboard.getKeys(keyList=["escape"]):
-            thisExp.status = FINISHED
-        if thisExp.status == FINISHED or endExpNow:
-            endExperiment(thisExp, win=win)
-            return
-        # pause experiment here if requested
-        if thisExp.status == PAUSED:
-            pauseExperiment(
-                thisExp=thisExp, 
-                win=win, 
-                timers=[routineTimer, globalClock], 
-                currentRoutine=Blank4000,
-            )
-            # skip the frame we paused on
-            continue
-        
-        # has a Component requested the Routine to end?
-        if not continueRoutine:
-            Blank4000.forceEnded = routineForceEnded = True
-        # has the Routine been forcibly ended?
-        if Blank4000.forceEnded or routineForceEnded:
-            break
-        # has every Component finished?
-        continueRoutine = False
-        for thisComponent in Blank4000.components:
-            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-                continueRoutine = True
-                break  # at least one component has not yet finished
-        
-        # refresh the screen
-        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-            win.flip()
-    
-    # --- Ending Routine "Blank4000" ---
-    for thisComponent in Blank4000.components:
-        if hasattr(thisComponent, "setAutoDraw"):
-            thisComponent.setAutoDraw(False)
-    # store stop times for Blank4000
-    Blank4000.tStop = globalClock.getTime(format='float')
-    Blank4000.tStopRefresh = tThisFlipGlobal
-    thisExp.addData('Blank4000.stopped', Blank4000.tStop)
-    # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
-    if Blank4000.maxDurationReached:
-        routineTimer.addTime(-Blank4000.maxDuration)
-    elif Blank4000.forceEnded:
-        routineTimer.reset()
-    else:
-        routineTimer.addTime(-4.000000)
-    thisExp.nextEntry()
-    
-    # --- Prepare to start Routine "InstructionsFull" ---
-    # create an object to store info about Routine InstructionsFull
-    InstructionsFull = data.Routine(
-        name='InstructionsFull',
-        components=[textFull, key_resp_Full],
-    )
-    InstructionsFull.status = NOT_STARTED
-    continueRoutine = True
-    # update component parameters for each repeat
-    # create starting attributes for key_resp_Full
-    key_resp_Full.keys = []
-    key_resp_Full.rt = []
-    _key_resp_Full_allKeys = []
-    # store start times for InstructionsFull
-    InstructionsFull.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
-    InstructionsFull.tStart = globalClock.getTime(format='float')
-    InstructionsFull.status = STARTED
-    thisExp.addData('InstructionsFull.started', InstructionsFull.tStart)
-    InstructionsFull.maxDuration = None
-    # keep track of which components have finished
-    InstructionsFullComponents = InstructionsFull.components
-    for thisComponent in InstructionsFull.components:
-        thisComponent.tStart = None
-        thisComponent.tStop = None
-        thisComponent.tStartRefresh = None
-        thisComponent.tStopRefresh = None
-        if hasattr(thisComponent, 'status'):
-            thisComponent.status = NOT_STARTED
-    # reset timers
-    t = 0
-    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
-    frameN = -1
-    
-    # --- Run Routine "InstructionsFull" ---
-    thisExp.currentRoutine = InstructionsFull
-    InstructionsFull.forceEnded = routineForceEnded = not continueRoutine
-    while continueRoutine:
-        # get current time
-        t = routineTimer.getTime()
-        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
-        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
-        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-        # update/draw components on each frame
-        
-        # *textFull* updates
-        
-        # if textFull is starting this frame...
-        if textFull.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-            # keep track of start time/frame for later
-            textFull.frameNStart = frameN  # exact frame index
-            textFull.tStart = t  # local t and not account for scr refresh
-            textFull.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(textFull, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'textFull.started')
-            # update status
-            textFull.status = STARTED
-            textFull.setAutoDraw(True)
-        
-        # if textFull is active this frame...
-        if textFull.status == STARTED:
-            # update params
-            pass
-        
-        # *key_resp_Full* updates
-        waitOnFlip = False
-        
-        # if key_resp_Full is starting this frame...
-        if key_resp_Full.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-            # keep track of start time/frame for later
-            key_resp_Full.frameNStart = frameN  # exact frame index
-            key_resp_Full.tStart = t  # local t and not account for scr refresh
-            key_resp_Full.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(key_resp_Full, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'key_resp_Full.started')
-            # update status
-            key_resp_Full.status = STARTED
-            # keyboard checking is just starting
-            waitOnFlip = True
-            win.callOnFlip(key_resp_Full.clock.reset)  # t=0 on next screen flip
-            win.callOnFlip(key_resp_Full.clearEvents, eventType='keyboard')  # clear events on next screen flip
-        if key_resp_Full.status == STARTED and not waitOnFlip:
-            theseKeys = key_resp_Full.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
-            _key_resp_Full_allKeys.extend(theseKeys)
-            if len(_key_resp_Full_allKeys):
-                key_resp_Full.keys = _key_resp_Full_allKeys[-1].name  # just the last key pressed
-                key_resp_Full.rt = _key_resp_Full_allKeys[-1].rt
-                key_resp_Full.duration = _key_resp_Full_allKeys[-1].duration
-                # a response ends the routine
-                continueRoutine = False
-        
-        # check for quit (typically the Esc key)
-        if defaultKeyboard.getKeys(keyList=["escape"]):
-            thisExp.status = FINISHED
-        if thisExp.status == FINISHED or endExpNow:
-            endExperiment(thisExp, win=win)
-            return
-        # pause experiment here if requested
-        if thisExp.status == PAUSED:
-            pauseExperiment(
-                thisExp=thisExp, 
-                win=win, 
-                timers=[routineTimer, globalClock], 
-                currentRoutine=InstructionsFull,
-            )
-            # skip the frame we paused on
-            continue
-        
-        # has a Component requested the Routine to end?
-        if not continueRoutine:
-            InstructionsFull.forceEnded = routineForceEnded = True
-        # has the Routine been forcibly ended?
-        if InstructionsFull.forceEnded or routineForceEnded:
-            break
-        # has every Component finished?
-        continueRoutine = False
-        for thisComponent in InstructionsFull.components:
-            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-                continueRoutine = True
-                break  # at least one component has not yet finished
-        
-        # refresh the screen
-        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-            win.flip()
-    
-    # --- Ending Routine "InstructionsFull" ---
-    for thisComponent in InstructionsFull.components:
-        if hasattr(thisComponent, "setAutoDraw"):
-            thisComponent.setAutoDraw(False)
-    # store stop times for InstructionsFull
-    InstructionsFull.tStop = globalClock.getTime(format='float')
-    InstructionsFull.tStopRefresh = tThisFlipGlobal
-    thisExp.addData('InstructionsFull.stopped', InstructionsFull.tStop)
-    # check responses
-    if key_resp_Full.keys in ['', [], None]:  # No response was made
-        key_resp_Full.keys = None
-    thisExp.addData('key_resp_Full.keys',key_resp_Full.keys)
-    if key_resp_Full.keys != None:  # we had a response
-        thisExp.addData('key_resp_Full.rt', key_resp_Full.rt)
-        thisExp.addData('key_resp_Full.duration', key_resp_Full.duration)
-    thisExp.nextEntry()
-    # the Routine "InstructionsFull" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset()
-    
-    # set up handler to look after randomisation of conditions etc
-    FullBlock = data.TrialHandler2(
-        name='FullBlock',
-        nReps=5, 
-        method='random', 
-        extraInfo=expInfo, 
-        originPath=-1, 
-        trialList=[None], 
-        seed=None, 
-        isTrials=True, 
-    )
-    thisExp.addLoop(FullBlock)  # add the loop to the experiment
-    thisFullBlock = FullBlock.trialList[0]  # so we can initialise stimuli with some values
-    # abbreviate parameter names if possible (e.g. rgb = thisFullBlock.rgb)
-    if thisFullBlock != None:
-        for paramName in thisFullBlock:
-            globals()[paramName] = thisFullBlock[paramName]
-    if thisSession is not None:
-        # if running in a Session with a Liaison client, send data up to now
-        thisSession.sendExperimentData()
-    
-    for thisFullBlock in FullBlock:
-        FullBlock.status = STARTED
-        if hasattr(thisFullBlock, 'status'):
-            thisFullBlock.status = STARTED
-        currentLoop = FullBlock
-        thisExp.timestampOnFlip(win, 'thisRow.t', format=globalClock.format)
-        if thisSession is not None:
-            # if running in a Session with a Liaison client, send data up to now
-            thisSession.sendExperimentData()
-        # abbreviate parameter names if possible (e.g. rgb = thisFullBlock.rgb)
-        if thisFullBlock != None:
-            for paramName in thisFullBlock:
-                globals()[paramName] = thisFullBlock[paramName]
-        
-        # set up handler to look after randomisation of conditions etc
-        trialsFull = data.TrialHandler2(
-            name='trialsFull',
-            nReps=1, 
-            method='random', 
-            extraInfo=expInfo, 
-            originPath=-1, 
-            trialList=[None], 
-            seed=None, 
-            isTrials=True, 
+        # --- Prepare to start Routine "Pause" ---
+        # create an object to store info about Routine Pause
+        Pause = data.Routine(
+            name='Pause',
+            components=[text],
         )
-        thisExp.addLoop(trialsFull)  # add the loop to the experiment
-        thisTrialsFull = trialsFull.trialList[0]  # so we can initialise stimuli with some values
-        # abbreviate parameter names if possible (e.g. rgb = thisTrialsFull.rgb)
-        if thisTrialsFull != None:
-            for paramName in thisTrialsFull:
-                globals()[paramName] = thisTrialsFull[paramName]
-        if thisSession is not None:
-            # if running in a Session with a Liaison client, send data up to now
-            thisSession.sendExperimentData()
+        Pause.status = NOT_STARTED
+        continueRoutine = True
+        # update component parameters for each repeat
+        # store start times for Pause
+        Pause.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
+        Pause.tStart = globalClock.getTime(format='float')
+        Pause.status = STARTED
+        thisExp.addData('Pause.started', Pause.tStart)
+        Pause.maxDuration = None
+        # keep track of which components have finished
+        PauseComponents = Pause.components
+        for thisComponent in Pause.components:
+            thisComponent.tStart = None
+            thisComponent.tStop = None
+            thisComponent.tStartRefresh = None
+            thisComponent.tStopRefresh = None
+            if hasattr(thisComponent, 'status'):
+                thisComponent.status = NOT_STARTED
+        # reset timers
+        t = 0
+        _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+        frameN = -1
         
-        for thisTrialsFull in trialsFull:
-            trialsFull.status = STARTED
-            if hasattr(thisTrialsFull, 'status'):
-                thisTrialsFull.status = STARTED
-            currentLoop = trialsFull
-            thisExp.timestampOnFlip(win, 'thisRow.t', format=globalClock.format)
-            if thisSession is not None:
-                # if running in a Session with a Liaison client, send data up to now
-                thisSession.sendExperimentData()
-            # abbreviate parameter names if possible (e.g. rgb = thisTrialsFull.rgb)
-            if thisTrialsFull != None:
-                for paramName in thisTrialsFull:
-                    globals()[paramName] = thisTrialsFull[paramName]
-            
-            # --- Prepare to start Routine "FullTaskTrials" ---
-            # create an object to store info about Routine FullTaskTrials
-            FullTaskTrials = data.Routine(
-                name='FullTaskTrials',
-                components=[],
-            )
-            FullTaskTrials.status = NOT_STARTED
-            continueRoutine = True
-            # update component parameters for each repeat
-            # store start times for FullTaskTrials
-            FullTaskTrials.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
-            FullTaskTrials.tStart = globalClock.getTime(format='float')
-            FullTaskTrials.status = STARTED
-            thisExp.addData('FullTaskTrials.started', FullTaskTrials.tStart)
-            FullTaskTrials.maxDuration = None
-            # keep track of which components have finished
-            FullTaskTrialsComponents = FullTaskTrials.components
-            for thisComponent in FullTaskTrials.components:
-                thisComponent.tStart = None
-                thisComponent.tStop = None
-                thisComponent.tStartRefresh = None
-                thisComponent.tStopRefresh = None
-                if hasattr(thisComponent, 'status'):
-                    thisComponent.status = NOT_STARTED
-            # reset timers
-            t = 0
-            _timeToFirstFrame = win.getFutureFlipTime(clock="now")
-            frameN = -1
-            
-            # --- Run Routine "FullTaskTrials" ---
-            thisExp.currentRoutine = FullTaskTrials
-            FullTaskTrials.forceEnded = routineForceEnded = not continueRoutine
-            while continueRoutine:
-                # if trial has changed, end Routine now
-                if hasattr(thisTrialsFull, 'status') and thisTrialsFull.status == STOPPING:
-                    continueRoutine = False
-                # get current time
-                t = routineTimer.getTime()
-                tThisFlip = win.getFutureFlipTime(clock=routineTimer)
-                tThisFlipGlobal = win.getFutureFlipTime(clock=None)
-                frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-                # update/draw components on each frame
-                
-                # check for quit (typically the Esc key)
-                if defaultKeyboard.getKeys(keyList=["escape"]):
-                    thisExp.status = FINISHED
-                if thisExp.status == FINISHED or endExpNow:
-                    endExperiment(thisExp, win=win)
-                    return
-                # pause experiment here if requested
-                if thisExp.status == PAUSED:
-                    pauseExperiment(
-                        thisExp=thisExp, 
-                        win=win, 
-                        timers=[routineTimer, globalClock], 
-                        currentRoutine=FullTaskTrials,
-                    )
-                    # skip the frame we paused on
-                    continue
-                
-                # has a Component requested the Routine to end?
-                if not continueRoutine:
-                    FullTaskTrials.forceEnded = routineForceEnded = True
-                # has the Routine been forcibly ended?
-                if FullTaskTrials.forceEnded or routineForceEnded:
-                    break
-                # has every Component finished?
+        # --- Run Routine "Pause" ---
+        thisExp.currentRoutine = Pause
+        Pause.forceEnded = routineForceEnded = not continueRoutine
+        while continueRoutine and routineTimer.getTime() < 15.0:
+            # if trial has changed, end Routine now
+            if hasattr(thisPretest1Block, 'status') and thisPretest1Block.status == STOPPING:
                 continueRoutine = False
-                for thisComponent in FullTaskTrials.components:
-                    if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-                        continueRoutine = True
-                        break  # at least one component has not yet finished
-                
-                # refresh the screen
-                if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-                    win.flip()
+            # get current time
+            t = routineTimer.getTime()
+            tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+            tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+            frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+            # update/draw components on each frame
             
-            # --- Ending Routine "FullTaskTrials" ---
-            for thisComponent in FullTaskTrials.components:
-                if hasattr(thisComponent, "setAutoDraw"):
-                    thisComponent.setAutoDraw(False)
-            # store stop times for FullTaskTrials
-            FullTaskTrials.tStop = globalClock.getTime(format='float')
-            FullTaskTrials.tStopRefresh = tThisFlipGlobal
-            thisExp.addData('FullTaskTrials.stopped', FullTaskTrials.tStop)
-            # the Routine "FullTaskTrials" was not non-slip safe, so reset the non-slip timer
-            routineTimer.reset()
+            # *text* updates
             
-            # --- Prepare to start Routine "TrialFeedback" ---
-            # create an object to store info about Routine TrialFeedback
-            TrialFeedback = data.Routine(
-                name='TrialFeedback',
-                components=[textFeedback, soundFeedback],
-            )
-            TrialFeedback.status = NOT_STARTED
-            continueRoutine = True
-            # update component parameters for each repeat
-            # Run 'Begin Routine' code from codeFconditions
-            if correct_ans == keySide.keys:
-                score += 1
-                text_feedback = f"Correct!\n+1 point\nTotal: {score}"
-                win.color = "green"
-                sound_feedback = 4000
-                volume = 1
-                duration = 0.5
-            else:
-                score += 0
-                text_feedback = f"Wrong!\n+0 points\nTotal: {score}"
-                win.color = "red"
-                sound_feedback = 1000
-                volume = 1
-                duration = 1
+            # if text is starting this frame...
+            if text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                text.frameNStart = frameN  # exact frame index
+                text.tStart = t  # local t and not account for scr refresh
+                text.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(text, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'text.started')
+                # update status
+                text.status = STARTED
+                text.setAutoDraw(True)
             
-                
-            win.flip()
+            # if text is active this frame...
+            if text.status == STARTED:
+                # update params
+                pass
             
-            soundFeedback.setSound(sound_feedback , secs=duration, hamming=True)
-            soundFeedback.setVolume(1.0, log=False)
-            soundFeedback.seek(0)
-            # store start times for TrialFeedback
-            TrialFeedback.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
-            TrialFeedback.tStart = globalClock.getTime(format='float')
-            TrialFeedback.status = STARTED
-            thisExp.addData('TrialFeedback.started', TrialFeedback.tStart)
-            TrialFeedback.maxDuration = None
-            # keep track of which components have finished
-            TrialFeedbackComponents = TrialFeedback.components
-            for thisComponent in TrialFeedback.components:
-                thisComponent.tStart = None
-                thisComponent.tStop = None
-                thisComponent.tStartRefresh = None
-                thisComponent.tStopRefresh = None
-                if hasattr(thisComponent, 'status'):
-                    thisComponent.status = NOT_STARTED
-            # reset timers
-            t = 0
-            _timeToFirstFrame = win.getFutureFlipTime(clock="now")
-            frameN = -1
-            
-            # --- Run Routine "TrialFeedback" ---
-            thisExp.currentRoutine = TrialFeedback
-            TrialFeedback.forceEnded = routineForceEnded = not continueRoutine
-            while continueRoutine:
-                # if trial has changed, end Routine now
-                if hasattr(thisTrialsFull, 'status') and thisTrialsFull.status == STOPPING:
-                    continueRoutine = False
-                # get current time
-                t = routineTimer.getTime()
-                tThisFlip = win.getFutureFlipTime(clock=routineTimer)
-                tThisFlipGlobal = win.getFutureFlipTime(clock=None)
-                frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-                # update/draw components on each frame
-                
-                # *textFeedback* updates
-                
-                # if textFeedback is starting this frame...
-                if textFeedback.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-                    # keep track of start time/frame for later
-                    textFeedback.frameNStart = frameN  # exact frame index
-                    textFeedback.tStart = t  # local t and not account for scr refresh
-                    textFeedback.tStartRefresh = tThisFlipGlobal  # on global time
-                    win.timeOnFlip(textFeedback, 'tStartRefresh')  # time at next scr refresh
+            # if text is stopping this frame...
+            if text.status == STARTED:
+                # is it time to stop? (based on local clock)
+                if tThisFlip > 15-frameTolerance:
+                    # keep track of stop time/frame for later
+                    text.tStop = t  # not accounting for scr refresh
+                    text.tStopRefresh = tThisFlipGlobal  # on global time
+                    text.frameNStop = frameN  # exact frame index
                     # add timestamp to datafile
-                    thisExp.timestampOnFlip(win, 'textFeedback.started')
+                    thisExp.timestampOnFlip(win, 'text.stopped')
                     # update status
-                    textFeedback.status = STARTED
-                    textFeedback.setAutoDraw(True)
-                
-                # if textFeedback is active this frame...
-                if textFeedback.status == STARTED:
-                    # update params
-                    textFeedback.setText(text_feedback, log=False)
-                
-                # if textFeedback is stopping this frame...
-                if textFeedback.status == STARTED:
-                    # is it time to stop? (based on global clock, using actual start)
-                    if tThisFlipGlobal > textFeedback.tStartRefresh + duration-frameTolerance:
-                        # keep track of stop time/frame for later
-                        textFeedback.tStop = t  # not accounting for scr refresh
-                        textFeedback.tStopRefresh = tThisFlipGlobal  # on global time
-                        textFeedback.frameNStop = frameN  # exact frame index
-                        # add timestamp to datafile
-                        thisExp.timestampOnFlip(win, 'textFeedback.stopped')
-                        # update status
-                        textFeedback.status = FINISHED
-                        textFeedback.setAutoDraw(False)
-                
-                # *soundFeedback* updates
-                
-                # if soundFeedback is starting this frame...
-                if soundFeedback.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-                    # keep track of start time/frame for later
-                    soundFeedback.frameNStart = frameN  # exact frame index
-                    soundFeedback.tStart = t  # local t and not account for scr refresh
-                    soundFeedback.tStartRefresh = tThisFlipGlobal  # on global time
-                    # add timestamp to datafile
-                    thisExp.addData('soundFeedback.started', tThisFlipGlobal)
-                    # update status
-                    soundFeedback.status = STARTED
-                    soundFeedback.play(when=win)  # sync with win flip
-                
-                # if soundFeedback is stopping this frame...
-                if soundFeedback.status == STARTED:
-                    # is it time to stop? (based on global clock, using actual start)
-                    if tThisFlipGlobal > soundFeedback.tStartRefresh + duration-frameTolerance or soundFeedback.isFinished:
-                        # keep track of stop time/frame for later
-                        soundFeedback.tStop = t  # not accounting for scr refresh
-                        soundFeedback.tStopRefresh = tThisFlipGlobal  # on global time
-                        soundFeedback.frameNStop = frameN  # exact frame index
-                        # add timestamp to datafile
-                        thisExp.timestampOnFlip(win, 'soundFeedback.stopped')
-                        # update status
-                        soundFeedback.status = FINISHED
-                        soundFeedback.stop()
-                
-                # check for quit (typically the Esc key)
-                if defaultKeyboard.getKeys(keyList=["escape"]):
-                    thisExp.status = FINISHED
-                if thisExp.status == FINISHED or endExpNow:
-                    endExperiment(thisExp, win=win)
-                    return
-                # pause experiment here if requested
-                if thisExp.status == PAUSED:
-                    pauseExperiment(
-                        thisExp=thisExp, 
-                        win=win, 
-                        timers=[routineTimer, globalClock], 
-                        currentRoutine=TrialFeedback,
-                    )
-                    # skip the frame we paused on
-                    continue
-                
-                # has a Component requested the Routine to end?
-                if not continueRoutine:
-                    TrialFeedback.forceEnded = routineForceEnded = True
-                # has the Routine been forcibly ended?
-                if TrialFeedback.forceEnded or routineForceEnded:
-                    break
-                # has every Component finished?
-                continueRoutine = False
-                for thisComponent in TrialFeedback.components:
-                    if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-                        continueRoutine = True
-                        break  # at least one component has not yet finished
-                
-                # refresh the screen
-                if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-                    win.flip()
+                    text.status = FINISHED
+                    text.setAutoDraw(False)
             
-            # --- Ending Routine "TrialFeedback" ---
-            for thisComponent in TrialFeedback.components:
-                if hasattr(thisComponent, "setAutoDraw"):
-                    thisComponent.setAutoDraw(False)
-            # store stop times for TrialFeedback
-            TrialFeedback.tStop = globalClock.getTime(format='float')
-            TrialFeedback.tStopRefresh = tThisFlipGlobal
-            thisExp.addData('TrialFeedback.stopped', TrialFeedback.tStop)
-            # Run 'End Routine' code from codeFconditions
-            win.color="gray"
-            soundFeedback.pause()  # ensure sound has stopped at end of Routine
-            # the Routine "TrialFeedback" was not non-slip safe, so reset the non-slip timer
-            routineTimer.reset()
-            # mark thisTrialsFull as finished
-            if hasattr(thisTrialsFull, 'status'):
-                thisTrialsFull.status = FINISHED
-            # if awaiting a pause, pause now
-            if trialsFull.status == PAUSED:
-                thisExp.status = PAUSED
+            # check for quit (typically the Esc key)
+            if defaultKeyboard.getKeys(keyList=["escape"]):
+                thisExp.status = FINISHED
+            if thisExp.status == FINISHED or endExpNow:
+                endExperiment(thisExp, win=win)
+                return
+            # pause experiment here if requested
+            if thisExp.status == PAUSED:
                 pauseExperiment(
                     thisExp=thisExp, 
                     win=win, 
-                    timers=[globalClock], 
+                    timers=[routineTimer, globalClock], 
+                    currentRoutine=Pause,
                 )
-                # once done pausing, restore running status
-                trialsFull.status = STARTED
-            thisExp.nextEntry()
+                # skip the frame we paused on
+                continue
             
-        # completed 1 repeats of 'trialsFull'
-        trialsFull.status = FINISHED
+            # has a Component requested the Routine to end?
+            if not continueRoutine:
+                Pause.forceEnded = routineForceEnded = True
+            # has the Routine been forcibly ended?
+            if Pause.forceEnded or routineForceEnded:
+                break
+            # has every Component finished?
+            continueRoutine = False
+            for thisComponent in Pause.components:
+                if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                    continueRoutine = True
+                    break  # at least one component has not yet finished
+            
+            # refresh the screen
+            if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+                win.flip()
         
-        if thisSession is not None:
-            # if running in a Session with a Liaison client, send data up to now
-            thisSession.sendExperimentData()
-        # mark thisFullBlock as finished
-        if hasattr(thisFullBlock, 'status'):
-            thisFullBlock.status = FINISHED
+        # --- Ending Routine "Pause" ---
+        for thisComponent in Pause.components:
+            if hasattr(thisComponent, "setAutoDraw"):
+                thisComponent.setAutoDraw(False)
+        # store stop times for Pause
+        Pause.tStop = globalClock.getTime(format='float')
+        Pause.tStopRefresh = tThisFlipGlobal
+        thisExp.addData('Pause.stopped', Pause.tStop)
+        # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
+        if Pause.maxDurationReached:
+            routineTimer.addTime(-Pause.maxDuration)
+        elif Pause.forceEnded:
+            routineTimer.reset()
+        else:
+            routineTimer.addTime(-15.000000)
+        # mark thisPretest1Block as finished
+        if hasattr(thisPretest1Block, 'status'):
+            thisPretest1Block.status = FINISHED
         # if awaiting a pause, pause now
-        if FullBlock.status == PAUSED:
+        if Pretest1Block.status == PAUSED:
             thisExp.status = PAUSED
             pauseExperiment(
                 thisExp=thisExp, 
@@ -1937,11 +1388,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 timers=[globalClock], 
             )
             # once done pausing, restore running status
-            FullBlock.status = STARTED
+            Pretest1Block.status = STARTED
         thisExp.nextEntry()
         
-    # completed 5 repeats of 'FullBlock'
-    FullBlock.status = FINISHED
+    # completed 10 repeats of 'Pretest1Block'
+    Pretest1Block.status = FINISHED
     
     if thisSession is not None:
         # if running in a Session with a Liaison client, send data up to now
