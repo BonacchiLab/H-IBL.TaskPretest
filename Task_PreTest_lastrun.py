@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2026.1.2),
-    on setembro 10, 2026, at 22:10
+    on setembro 11, 2026, at 14:13
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -425,6 +425,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-4.0);
+    # Run 'Begin Experiment' code from codeCorKey
+    total_task_timer = core.Clock()
+    
     keySide = keyboard.Keyboard(deviceName='defaultKeyboard')
     
     # --- Initialize components for Routine "PreTest1TrialFeedback" ---
@@ -447,13 +450,21 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     soundFeedback.setVolume(1.0)
     
     # --- Initialize components for Routine "Pause" ---
-    text = visual.TextStim(win=win, name='text',
+    textPause = visual.TextStim(win=win, name='textPause',
         text='Intervalo',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
+    Returntotasktext = visual.TextStim(win=win, name='Returntotasktext',
+        text='Carrega na SPACEBAR para recomeçar',
+        font='Arial',
+        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=-1.0);
+    key_resp = keyboard.Keyboard(deviceName='defaultKeyboard')
     
     # --- Initialize components for Routine "Blank4000" ---
     textBlank = visual.TextStim(win=win, name='textBlank',
@@ -651,7 +662,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # set up handler to look after randomisation of conditions etc
     Pretest1Block = data.TrialHandler2(
         name='Pretest1Block',
-        nReps=10, 
+        nReps=15, 
         method='sequential', 
         extraInfo=expInfo, 
         originPath=-1, 
@@ -686,7 +697,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # set up handler to look after randomisation of conditions etc
         pretest1trialsTraining = data.TrialHandler2(
             name='pretest1trialsTraining',
-            nReps=3, 
+            nReps=2, 
             method='random', 
             extraInfo=expInfo, 
             originPath=-1, 
@@ -911,7 +922,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # *textGrating* updates
                 
                 # if textGrating is starting this frame...
-                if textGrating.status == NOT_STARTED and tThisFlip >= 1-frameTolerance:
+                if textGrating.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
                     # keep track of start time/frame for later
                     textGrating.frameNStart = frameN  # exact frame index
                     textGrating.tStart = t  # local t and not account for scr refresh
@@ -931,7 +942,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # if textGrating is stopping this frame...
                 if textGrating.status == STARTED:
                     # is it time to stop? (based on global clock, using actual start)
-                    if tThisFlipGlobal > textGrating.tStartRefresh + 3-frameTolerance:
+                    if tThisFlipGlobal > textGrating.tStartRefresh + 0-frameTolerance:
                         # keep track of stop time/frame for later
                         textGrating.tStop = t  # not accounting for scr refresh
                         textGrating.tStopRefresh = tThisFlipGlobal  # on global time
@@ -1032,6 +1043,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             PreTest1Trials.tStopRefresh = tThisFlipGlobal
             thisExp.addData('PreTest1Trials.stopped', PreTest1Trials.tStop)
             soundGoCue.pause()  # ensure sound has stopped at end of Routine
+            # Run 'End Routine' code from codeCorKey
+            total_task_time = total_task_timer.getTime()
+            print(f"TOTAL TASK TIME: {total_task_time:.2f} SECONDS\n")
+            
             # check responses
             if keySide.keys in ['', [], None]:  # No response was made
                 keySide.keys = None
@@ -1243,7 +1258,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 pretest1trialsTraining.status = STARTED
             thisExp.nextEntry()
             
-        # completed 3 repeats of 'pretest1trialsTraining'
+        # completed 2 repeats of 'pretest1trialsTraining'
         pretest1trialsTraining.status = FINISHED
         
         if thisSession is not None:
@@ -1254,11 +1269,15 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # create an object to store info about Routine Pause
         Pause = data.Routine(
             name='Pause',
-            components=[text],
+            components=[textPause, Returntotasktext, key_resp],
         )
         Pause.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
+        # create starting attributes for key_resp
+        key_resp.keys = []
+        key_resp.rt = []
+        _key_resp_allKeys = []
         # store start times for Pause
         Pause.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         Pause.tStart = globalClock.getTime(format='float')
@@ -1282,7 +1301,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # --- Run Routine "Pause" ---
         thisExp.currentRoutine = Pause
         Pause.forceEnded = routineForceEnded = not continueRoutine
-        while continueRoutine and routineTimer.getTime() < 15.0:
+        while continueRoutine:
             # if trial has changed, end Routine now
             if hasattr(thisPretest1Block, 'status') and thisPretest1Block.status == STOPPING:
                 continueRoutine = False
@@ -1293,39 +1312,101 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
             # update/draw components on each frame
             
-            # *text* updates
+            # *textPause* updates
             
-            # if text is starting this frame...
-            if text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # if textPause is starting this frame...
+            if textPause.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
                 # keep track of start time/frame for later
-                text.frameNStart = frameN  # exact frame index
-                text.tStart = t  # local t and not account for scr refresh
-                text.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(text, 'tStartRefresh')  # time at next scr refresh
+                textPause.frameNStart = frameN  # exact frame index
+                textPause.tStart = t  # local t and not account for scr refresh
+                textPause.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(textPause, 'tStartRefresh')  # time at next scr refresh
                 # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'text.started')
+                thisExp.timestampOnFlip(win, 'textPause.started')
                 # update status
-                text.status = STARTED
-                text.setAutoDraw(True)
+                textPause.status = STARTED
+                textPause.setAutoDraw(True)
             
-            # if text is active this frame...
-            if text.status == STARTED:
+            # if textPause is active this frame...
+            if textPause.status == STARTED:
                 # update params
                 pass
             
-            # if text is stopping this frame...
-            if text.status == STARTED:
+            # if textPause is stopping this frame...
+            if textPause.status == STARTED:
                 # is it time to stop? (based on local clock)
                 if tThisFlip > 15-frameTolerance:
                     # keep track of stop time/frame for later
-                    text.tStop = t  # not accounting for scr refresh
-                    text.tStopRefresh = tThisFlipGlobal  # on global time
-                    text.frameNStop = frameN  # exact frame index
+                    textPause.tStop = t  # not accounting for scr refresh
+                    textPause.tStopRefresh = tThisFlipGlobal  # on global time
+                    textPause.frameNStop = frameN  # exact frame index
                     # add timestamp to datafile
-                    thisExp.timestampOnFlip(win, 'text.stopped')
+                    thisExp.timestampOnFlip(win, 'textPause.stopped')
                     # update status
-                    text.status = FINISHED
-                    text.setAutoDraw(False)
+                    textPause.status = FINISHED
+                    textPause.setAutoDraw(False)
+            
+            # *Returntotasktext* updates
+            
+            # if Returntotasktext is starting this frame...
+            if Returntotasktext.status == NOT_STARTED and tThisFlip >= 15-frameTolerance:
+                # keep track of start time/frame for later
+                Returntotasktext.frameNStart = frameN  # exact frame index
+                Returntotasktext.tStart = t  # local t and not account for scr refresh
+                Returntotasktext.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(Returntotasktext, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'Returntotasktext.started')
+                # update status
+                Returntotasktext.status = STARTED
+                Returntotasktext.setAutoDraw(True)
+            
+            # if Returntotasktext is active this frame...
+            if Returntotasktext.status == STARTED:
+                # update params
+                pass
+            
+            # if Returntotasktext is stopping this frame...
+            if Returntotasktext.status == STARTED:
+                # is it time to stop? (based on global clock, using actual start)
+                if tThisFlipGlobal > Returntotasktext.tStartRefresh + 0-frameTolerance:
+                    # keep track of stop time/frame for later
+                    Returntotasktext.tStop = t  # not accounting for scr refresh
+                    Returntotasktext.tStopRefresh = tThisFlipGlobal  # on global time
+                    Returntotasktext.frameNStop = frameN  # exact frame index
+                    # add timestamp to datafile
+                    thisExp.timestampOnFlip(win, 'Returntotasktext.stopped')
+                    # update status
+                    Returntotasktext.status = FINISHED
+                    Returntotasktext.setAutoDraw(False)
+            
+            # *key_resp* updates
+            waitOnFlip = False
+            
+            # if key_resp is starting this frame...
+            if key_resp.status == NOT_STARTED and tThisFlip >= 15-frameTolerance:
+                # keep track of start time/frame for later
+                key_resp.frameNStart = frameN  # exact frame index
+                key_resp.tStart = t  # local t and not account for scr refresh
+                key_resp.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(key_resp, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'key_resp.started')
+                # update status
+                key_resp.status = STARTED
+                # keyboard checking is just starting
+                waitOnFlip = True
+                win.callOnFlip(key_resp.clock.reset)  # t=0 on next screen flip
+                win.callOnFlip(key_resp.clearEvents, eventType='keyboard')  # clear events on next screen flip
+            if key_resp.status == STARTED and not waitOnFlip:
+                theseKeys = key_resp.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
+                _key_resp_allKeys.extend(theseKeys)
+                if len(_key_resp_allKeys):
+                    key_resp.keys = _key_resp_allKeys[-1].name  # just the last key pressed
+                    key_resp.rt = _key_resp_allKeys[-1].rt
+                    key_resp.duration = _key_resp_allKeys[-1].duration
+                    # a response ends the routine
+                    continueRoutine = False
             
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1369,13 +1450,15 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         Pause.tStop = globalClock.getTime(format='float')
         Pause.tStopRefresh = tThisFlipGlobal
         thisExp.addData('Pause.stopped', Pause.tStop)
-        # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
-        if Pause.maxDurationReached:
-            routineTimer.addTime(-Pause.maxDuration)
-        elif Pause.forceEnded:
-            routineTimer.reset()
-        else:
-            routineTimer.addTime(-15.000000)
+        # check responses
+        if key_resp.keys in ['', [], None]:  # No response was made
+            key_resp.keys = None
+        Pretest1Block.addData('key_resp.keys',key_resp.keys)
+        if key_resp.keys != None:  # we had a response
+            Pretest1Block.addData('key_resp.rt', key_resp.rt)
+            Pretest1Block.addData('key_resp.duration', key_resp.duration)
+        # the Routine "Pause" was not non-slip safe, so reset the non-slip timer
+        routineTimer.reset()
         # mark thisPretest1Block as finished
         if hasattr(thisPretest1Block, 'status'):
             thisPretest1Block.status = FINISHED
@@ -1391,7 +1474,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             Pretest1Block.status = STARTED
         thisExp.nextEntry()
         
-    # completed 10 repeats of 'Pretest1Block'
+    # completed 15 repeats of 'Pretest1Block'
     Pretest1Block.status = FINISHED
     
     if thisSession is not None:
