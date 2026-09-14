@@ -1,13 +1,13 @@
 [![PsychoPy](https://img.shields.io/badge/PsychoPy-v2026.1.2-blue)](https://www.psychopy.org/)
 [![Python](https://img.shields.io/badge/Python-3.11-blue)](https://www.python.org/)
 
-# H-IBL Task
+# H-IBL Pretes
 
 This repository contains the first pretest for the implementation of the Human International Brain Laboratory (H-IBL) task developed in PsychoPy.
 
-The project aims to adapt the IBL perceptual decision-making task for human participants while preserving the core experimental design.
+The project aims to find the gratings that best recreate the behaviour as seen in the mice during the IBL perceptual decision-making as well as preserving the core experimental design.
 
-This is an early development version intended for ongoing implementation, testing, and refinement. The codebase is expected to evolve as the task is validated and expanded.
+This is an early development version intended for ongoing implementation, testing, and refinement. The codebase is expected to evolve as the task is validated and expanded. 
 
 ## Installation
 
