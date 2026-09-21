@@ -5,6 +5,9 @@ IBLOriginalMiceTask/
 # Command files
 important.txt
 
+# Cache files
+_pycache__/
+
 
 
 
