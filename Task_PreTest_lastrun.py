@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2026.1.2),
-    on setembro 13, 2026, at 18:31
+    on setembro 22, 2026, at 19:20
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -428,16 +428,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     )
     soundFBTut.setVolume(1.0)
     
-    # --- Initialize components for Routine "InstructionsFullTask" ---
-    textFullTask = visual.TextStim(win=win, name='textFullTask',
-        text='Irá realizar uma pequena sessão de treino.\n\nQuando o estímulo aparecer do lado direito pressione -L- e quando aparecer do lado esquerdo pressione -S-\n\nEstas respostas não serão contabilizadas.\n\nPressione SPACEBAR para iniciar',
-        font='Arial',
-        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
-        color='white', colorSpace='rgb', opacity=None, 
-        languageStyle='LTR',
-        depth=0.0);
-    keyRespFullTask = keyboard.Keyboard(deviceName='defaultKeyboard')
-    
     # --- Initialize components for Routine "Blank4000" ---
     textBlank = visual.TextStim(win=win, name='textBlank',
         text=None,
@@ -446,6 +436,16 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
+    
+    # --- Initialize components for Routine "InstructionsFullTask" ---
+    textFullTask = visual.TextStim(win=win, name='textFullTask',
+        text='Irá iniciar a tarefa completa.\n\nQuando o estímulo aparecer do lado direito pressione -L- e quando aparecer do lado esquerdo pressione -S-\n\nPressione SPACEBAR para iniciar',
+        font='Arial',
+        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=0.0);
+    keyRespFullTask = keyboard.Keyboard(deviceName='defaultKeyboard')
     
     # --- Initialize components for Routine "PreTest1Trials" ---
     soundGoCue = sound.Sound(
@@ -1046,7 +1046,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     continueRoutine = True
     # update component parameters for each repeat
     # Run 'Begin Routine' code from codeFcondTut
-    if correct_ans == keySide.keys:
+    print("keySideTut =", keySideTut)
+    print("correct_ans =", correct_ans)
+    print(type(keySideTut))
+    print(type(correct_ans))
+    
+    if keySideTut.keys == correct_ans:
         text_feedback = f"Correct!"
         win.color = "green"
         sound_feedback = 4000
@@ -1207,6 +1212,131 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # the Routine "TutFeedback" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     
+    # --- Prepare to start Routine "Blank4000" ---
+    # create an object to store info about Routine Blank4000
+    Blank4000 = data.Routine(
+        name='Blank4000',
+        components=[textBlank],
+    )
+    Blank4000.status = NOT_STARTED
+    continueRoutine = True
+    # update component parameters for each repeat
+    # store start times for Blank4000
+    Blank4000.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
+    Blank4000.tStart = globalClock.getTime(format='float')
+    Blank4000.status = STARTED
+    thisExp.addData('Blank4000.started', Blank4000.tStart)
+    Blank4000.maxDuration = None
+    # keep track of which components have finished
+    Blank4000Components = Blank4000.components
+    for thisComponent in Blank4000.components:
+        thisComponent.tStart = None
+        thisComponent.tStop = None
+        thisComponent.tStartRefresh = None
+        thisComponent.tStopRefresh = None
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+    # reset timers
+    t = 0
+    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+    frameN = -1
+    
+    # --- Run Routine "Blank4000" ---
+    thisExp.currentRoutine = Blank4000
+    Blank4000.forceEnded = routineForceEnded = not continueRoutine
+    while continueRoutine and routineTimer.getTime() < 4.0:
+        # get current time
+        t = routineTimer.getTime()
+        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+        
+        # *textBlank* updates
+        
+        # if textBlank is starting this frame...
+        if textBlank.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            textBlank.frameNStart = frameN  # exact frame index
+            textBlank.tStart = t  # local t and not account for scr refresh
+            textBlank.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(textBlank, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'textBlank.started')
+            # update status
+            textBlank.status = STARTED
+            textBlank.setAutoDraw(True)
+        
+        # if textBlank is active this frame...
+        if textBlank.status == STARTED:
+            # update params
+            pass
+        
+        # if textBlank is stopping this frame...
+        if textBlank.status == STARTED:
+            # is it time to stop? (based on global clock, using actual start)
+            if tThisFlipGlobal > textBlank.tStartRefresh + 4-frameTolerance:
+                # keep track of stop time/frame for later
+                textBlank.tStop = t  # not accounting for scr refresh
+                textBlank.tStopRefresh = tThisFlipGlobal  # on global time
+                textBlank.frameNStop = frameN  # exact frame index
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'textBlank.stopped')
+                # update status
+                textBlank.status = FINISHED
+                textBlank.setAutoDraw(False)
+        
+        # check for quit (typically the Esc key)
+        if defaultKeyboard.getKeys(keyList=["escape"]):
+            thisExp.status = FINISHED
+        if thisExp.status == FINISHED or endExpNow:
+            endExperiment(thisExp, win=win)
+            return
+        # pause experiment here if requested
+        if thisExp.status == PAUSED:
+            pauseExperiment(
+                thisExp=thisExp, 
+                win=win, 
+                timers=[routineTimer, globalClock], 
+                currentRoutine=Blank4000,
+            )
+            # skip the frame we paused on
+            continue
+        
+        # has a Component requested the Routine to end?
+        if not continueRoutine:
+            Blank4000.forceEnded = routineForceEnded = True
+        # has the Routine been forcibly ended?
+        if Blank4000.forceEnded or routineForceEnded:
+            break
+        # has every Component finished?
+        continueRoutine = False
+        for thisComponent in Blank4000.components:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+    
+    # --- Ending Routine "Blank4000" ---
+    for thisComponent in Blank4000.components:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    # store stop times for Blank4000
+    Blank4000.tStop = globalClock.getTime(format='float')
+    Blank4000.tStopRefresh = tThisFlipGlobal
+    thisExp.addData('Blank4000.stopped', Blank4000.tStop)
+    # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
+    if Blank4000.maxDurationReached:
+        routineTimer.addTime(-Blank4000.maxDuration)
+    elif Blank4000.forceEnded:
+        routineTimer.reset()
+    else:
+        routineTimer.addTime(-4.000000)
+    thisExp.nextEntry()
+    
     # --- Prepare to start Routine "InstructionsFullTask" ---
     # create an object to store info about Routine InstructionsFullTask
     InstructionsFullTask = data.Routine(
@@ -1351,131 +1481,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     thisExp.nextEntry()
     # the Routine "InstructionsFullTask" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
-    
-    # --- Prepare to start Routine "Blank4000" ---
-    # create an object to store info about Routine Blank4000
-    Blank4000 = data.Routine(
-        name='Blank4000',
-        components=[textBlank],
-    )
-    Blank4000.status = NOT_STARTED
-    continueRoutine = True
-    # update component parameters for each repeat
-    # store start times for Blank4000
-    Blank4000.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
-    Blank4000.tStart = globalClock.getTime(format='float')
-    Blank4000.status = STARTED
-    thisExp.addData('Blank4000.started', Blank4000.tStart)
-    Blank4000.maxDuration = None
-    # keep track of which components have finished
-    Blank4000Components = Blank4000.components
-    for thisComponent in Blank4000.components:
-        thisComponent.tStart = None
-        thisComponent.tStop = None
-        thisComponent.tStartRefresh = None
-        thisComponent.tStopRefresh = None
-        if hasattr(thisComponent, 'status'):
-            thisComponent.status = NOT_STARTED
-    # reset timers
-    t = 0
-    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
-    frameN = -1
-    
-    # --- Run Routine "Blank4000" ---
-    thisExp.currentRoutine = Blank4000
-    Blank4000.forceEnded = routineForceEnded = not continueRoutine
-    while continueRoutine and routineTimer.getTime() < 4.0:
-        # get current time
-        t = routineTimer.getTime()
-        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
-        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
-        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-        # update/draw components on each frame
-        
-        # *textBlank* updates
-        
-        # if textBlank is starting this frame...
-        if textBlank.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-            # keep track of start time/frame for later
-            textBlank.frameNStart = frameN  # exact frame index
-            textBlank.tStart = t  # local t and not account for scr refresh
-            textBlank.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(textBlank, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'textBlank.started')
-            # update status
-            textBlank.status = STARTED
-            textBlank.setAutoDraw(True)
-        
-        # if textBlank is active this frame...
-        if textBlank.status == STARTED:
-            # update params
-            pass
-        
-        # if textBlank is stopping this frame...
-        if textBlank.status == STARTED:
-            # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > textBlank.tStartRefresh + 4-frameTolerance:
-                # keep track of stop time/frame for later
-                textBlank.tStop = t  # not accounting for scr refresh
-                textBlank.tStopRefresh = tThisFlipGlobal  # on global time
-                textBlank.frameNStop = frameN  # exact frame index
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'textBlank.stopped')
-                # update status
-                textBlank.status = FINISHED
-                textBlank.setAutoDraw(False)
-        
-        # check for quit (typically the Esc key)
-        if defaultKeyboard.getKeys(keyList=["escape"]):
-            thisExp.status = FINISHED
-        if thisExp.status == FINISHED or endExpNow:
-            endExperiment(thisExp, win=win)
-            return
-        # pause experiment here if requested
-        if thisExp.status == PAUSED:
-            pauseExperiment(
-                thisExp=thisExp, 
-                win=win, 
-                timers=[routineTimer, globalClock], 
-                currentRoutine=Blank4000,
-            )
-            # skip the frame we paused on
-            continue
-        
-        # has a Component requested the Routine to end?
-        if not continueRoutine:
-            Blank4000.forceEnded = routineForceEnded = True
-        # has the Routine been forcibly ended?
-        if Blank4000.forceEnded or routineForceEnded:
-            break
-        # has every Component finished?
-        continueRoutine = False
-        for thisComponent in Blank4000.components:
-            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-                continueRoutine = True
-                break  # at least one component has not yet finished
-        
-        # refresh the screen
-        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-            win.flip()
-    
-    # --- Ending Routine "Blank4000" ---
-    for thisComponent in Blank4000.components:
-        if hasattr(thisComponent, "setAutoDraw"):
-            thisComponent.setAutoDraw(False)
-    # store stop times for Blank4000
-    Blank4000.tStop = globalClock.getTime(format='float')
-    Blank4000.tStopRefresh = tThisFlipGlobal
-    thisExp.addData('Blank4000.stopped', Blank4000.tStop)
-    # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
-    if Blank4000.maxDurationReached:
-        routineTimer.addTime(-Blank4000.maxDuration)
-    elif Blank4000.forceEnded:
-        routineTimer.reset()
-    else:
-        routineTimer.addTime(-4.000000)
-    thisExp.nextEntry()
     
     # set up handler to look after randomisation of conditions etc
     Pretest1Block = data.TrialHandler2(
