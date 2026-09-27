@@ -153,13 +153,32 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="2.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="Obrigado pela sua participação" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
+      <KeyboardComponent name="keySideGoodbye" plugin="None">
+        <Param val="'space'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="keySideGoodbye" valType="code" updates="None" name="name"/>
+        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="5" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
     </Routine>
     <Routine name="Blank4000">
       <RoutineSettingsComponent name="Blank4000" plugin="None">
@@ -471,8 +490,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="score = 0" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="score = 0;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="if ((correct_ans === keySide.keys)) {&amp;#10;    score += 1;&amp;#10;    text_feedback = `Correct!&amp;#10;+1 point&amp;#10;Total: ${score}`&amp;#10;;&amp;#10;    psychoJS.window.color = &quot;green&quot;;&amp;#10;    sound_feedback = 4000;&amp;#10;    volume = 1;&amp;#10;    duration = 0.5;&amp;#10;} else {&amp;#10;    score += 0;&amp;#10;    text_feedback = `Wrong!&amp;#10;+0 points&amp;#10;Total: ${score}`&amp;#10;;&amp;#10;    psychoJS.window.color = &quot;red&quot;;&amp;#10;    sound_feedback = 1000;&amp;#10;    volume = 1;&amp;#10;    duration = 1;&amp;#10;}&amp;#10;psychoJS.window.flip();&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if correct_ans == keySide.keys:&amp;#10;    score += 1&amp;#10;    text_feedback = f&quot;Correct!\n+1 point\nTotal: {score}&quot;&amp;#10;    win.color = &quot;green&quot;&amp;#10;    sound_feedback = 4000&amp;#10;    volume = 1&amp;#10;    duration = 0.5&amp;#10;else:&amp;#10;    score += 0&amp;#10;    text_feedback = f&quot;Wrong!\n+0 points\nTotal: {score}&quot;&amp;#10;    win.color = &quot;red&quot;&amp;#10;    sound_feedback = 1000&amp;#10;    volume = 1&amp;#10;    duration = 1&amp;#10;&amp;#10;    &amp;#10;win.flip()&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="if ((correct_ans === keySide.keys)) {&amp;#10;    score += 1;&amp;#10;    if ((score === 50)) {&amp;#10;        text_feeback = `Correto!&amp;#10;Nível Principiante&amp;#10;50 pontos até ao próximo nível`&amp;#10;;&amp;#10;        psychoJS.window.color = &quot;green&quot;;&amp;#10;        sound_feedback = 4000;&amp;#10;        volume = 1;&amp;#10;        duration = 0.5;&amp;#10;    } else {&amp;#10;        text_feedback = `Correto!&amp;#10;+1 point&amp;#10;Total: ${score}`&amp;#10;;&amp;#10;        psychoJS.window.color = &quot;green&quot;;&amp;#10;        sound_feedback = 4000;&amp;#10;        volume = 1;&amp;#10;        duration = 0.5;&amp;#10;    }&amp;#10;} else {&amp;#10;    score += 0;&amp;#10;    text_feedback = `Errado!&amp;#10;+0 points&amp;#10;Total: ${score}`&amp;#10;;&amp;#10;    psychoJS.window.color = &quot;red&quot;;&amp;#10;    sound_feedback = 1000;&amp;#10;    volume = 1;&amp;#10;    duration = 1;&amp;#10;}&amp;#10;psychoJS.window.flip();&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if correct_ans == keySide.keys:&amp;#10;    score += 1&amp;#10;    if score == 50:&amp;#10;        text_feeback = f&quot;Correto!\nNível Principiante\n50 pontos até ao próximo nível&quot;&amp;#10;        win.color = &quot;green&quot;&amp;#10;        sound_feedback = 4000&amp;#10;        volume = 1&amp;#10;        duration = 0.5&amp;#10;    else:&amp;#10;        text_feedback = f&quot;Correto!\n+1 point\nTotal: {score}&quot;&amp;#10;        win.color = &quot;green&quot;&amp;#10;        sound_feedback = 4000&amp;#10;        volume = 1&amp;#10;        duration = 0.5&amp;#10;else:&amp;#10;    score += 0&amp;#10;    text_feedback = f&quot;Errado!\n+0 points\nTotal: {score}&quot;&amp;#10;    win.color = &quot;red&quot;&amp;#10;    sound_feedback = 1000&amp;#10;    volume = 1&amp;#10;    duration = 1&amp;#10;&amp;#10;    &amp;#10;win.flip()&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -622,6 +641,83 @@
       </KeyboardComponent>
     </Routine>
     <Routine name="Tutorial">
+      <SoundComponent name="soundTutGoCue" plugin="None">
+        <Param val="" valType="device" updates="None" name="deviceLabel"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="True" valType="bool" updates="constant" name="hamming"/>
+        <Param val="soundTutGoCue" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="12000" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.1" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="0.08" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+        <Param val="" valType="code" updates="None" name="validator"/>
+        <Param val="1" valType="num" updates="constant" name="volume"/>
+      </SoundComponent>
+      <PolygonComponent name="polygonHorizontalTut" plugin="None">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="white" valType="color" updates="constant" name="fillColor"/>
+        <Param val="linear" valType="str" updates="constant" name="interpolate"/>
+        <Param val="$(0.0000, 0.0000, 0.0000)" valType="color" updates="constant" name="lineColor"/>
+        <Param val="fixation_widthT" valType="num" updates="set every frame" name="lineWidth"/>
+        <Param val="4" valType="int" updates="constant" name="nVertices"/>
+        <Param val="polygonHorizontalTut" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="180" valType="num" updates="set every frame" name="ori"/>
+        <Param val="fixation_posT" valType="list" updates="set every frame" name="pos"/>
+        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="rectangle" valType="str" updates="None" name="shape"/>
+        <Param val="fixation_sizeT" valType="list" updates="set every frame" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="1.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="deg" valType="str" updates="None" name="units"/>
+        <Param val="" valType="code" updates="None" name="validator"/>
+        <Param val="" valType="list" updates="constant" name="vertices"/>
+      </PolygonComponent>
+      <PolygonComponent name="polygonVerticalTut" plugin="None">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="white" valType="color" updates="constant" name="fillColor"/>
+        <Param val="linear" valType="str" updates="constant" name="interpolate"/>
+        <Param val="$(0.0000, 0.0000, 0.0000)" valType="color" updates="constant" name="lineColor"/>
+        <Param val="fixation_widthT" valType="num" updates="set every frame" name="lineWidth"/>
+        <Param val="4" valType="int" updates="constant" name="nVertices"/>
+        <Param val="polygonVerticalTut" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="90" valType="num" updates="set every frame" name="ori"/>
+        <Param val="fixation_posT" valType="list" updates="set every frame" name="pos"/>
+        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="rectangle" valType="str" updates="None" name="shape"/>
+        <Param val="fixation_sizeT" valType="list" updates="set every frame" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="1.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="deg" valType="str" updates="None" name="units"/>
+        <Param val="" valType="code" updates="None" name="validator"/>
+        <Param val="" valType="list" updates="constant" name="vertices"/>
+      </PolygonComponent>
       <RoutineSettingsComponent name="Tutorial" plugin="None">
         <Param val="none" valType="str" updates="None" name="backgroundFit"/>
         <Param val="" valType="str" updates="None" name="backgroundImg"/>
@@ -643,27 +739,27 @@
         <Param val="avg" valType="str" updates="constant" name="blendmode"/>
         <Param val="$[1,1,1]" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
-        <Param val="1" valType="num" updates="set every repeat" name="contrast"/>
+        <Param val="gratingT" valType="num" updates="set every repeat" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="False" valType="code" updates="constant" name="draggable"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="linear" valType="str" updates="constant" name="interpolate"/>
-        <Param val="gauss" valType="file" updates="set every frame" name="mask"/>
+        <Param val="$maskT" valType="file" updates="set every frame" name="mask"/>
         <Param val="gaborTut" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
-        <Param val="0" valType="num" updates="set every frame" name="ori"/>
-        <Param val="3" valType="num" updates="set every frame" name="phase"/>
-        <Param val="(30, 0)" valType="list" updates="set every frame" name="pos"/>
+        <Param val="orientationT" valType="num" updates="set every frame" name="ori"/>
+        <Param val="phaseT" valType="num" updates="set every frame" name="phase"/>
+        <Param val="positionT" valType="list" updates="set every frame" name="pos"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="1" valType="num" updates="set every frame" name="sf"/>
-        <Param val="7" valType="list" updates="set every frame" name="size"/>
+        <Param val="spacial_freqT" valType="num" updates="set every frame" name="sf"/>
+        <Param val="sizeT" valType="list" updates="set every frame" name="size"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="1" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="10" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="sin" valType="file" updates="set every frame" name="tex"/>
+        <Param val="$textureT" valType="file" updates="set every frame" name="tex"/>
         <Param val="256" valType="num" updates="constant" name="texture resolution"/>
         <Param val="deg" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
@@ -673,8 +769,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="correct_ans = &quot;l&quot;;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="correct_ans = &quot;l&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="if ((positionT[0] &gt; 0)) {&amp;#10;    correct_ans = &quot;l&quot;;&amp;#10;} else {&amp;#10;    correct_ans = &quot;s&quot;;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if positionT[0] &gt; 0:&amp;#10;    correct_ans = &quot;l&quot;&amp;#10;else:&amp;#10;    correct_ans = &quot;s&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -699,7 +795,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="1.00" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="3" valType="code" updates="constant" name="stopVal"/>
+        <Param val="10" valType="code" updates="constant" name="stopVal"/>
         <Param val="last key" valType="str" updates="constant" name="store"/>
         <Param val="True" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
@@ -791,8 +887,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="console.log(&quot;keySideTut =&quot;, keySideTut);&amp;#10;console.log(&quot;correct_ans =&quot;, correct_ans);&amp;#10;console.log(Object.getPrototypeOf(keySideTut));&amp;#10;console.log(Object.getPrototypeOf(correct_ans));&amp;#10;if ((keySideTut.keys === correct_ans)) {&amp;#10;    text_feedback = `Correct!`;&amp;#10;    psychoJS.window.color = &quot;green&quot;;&amp;#10;    sound_feedback = 4000;&amp;#10;    volume = 1;&amp;#10;    duration = 0.5;&amp;#10;} else {&amp;#10;    text_feedback = `Wrong!`;&amp;#10;    psychoJS.window.color = &quot;red&quot;;&amp;#10;    sound_feedback = 1000;&amp;#10;    volume = 1;&amp;#10;    duration = 1;&amp;#10;}&amp;#10;psychoJS.window.flip();&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="print(&quot;keySideTut =&quot;, keySideTut)&amp;#10;print(&quot;correct_ans =&quot;, correct_ans)&amp;#10;print(type(keySideTut))&amp;#10;print(type(correct_ans))&amp;#10;&amp;#10;if keySideTut.keys == correct_ans:&amp;#10;    text_feedback = f&quot;Correct!&quot;&amp;#10;    win.color = &quot;green&quot;&amp;#10;    sound_feedback = 4000&amp;#10;    volume = 1&amp;#10;    duration = 0.5&amp;#10;else:&amp;#10;    text_feedback = f&quot;Wrong!&quot;&amp;#10;    win.color = &quot;red&quot;&amp;#10;    sound_feedback = 1000&amp;#10;    volume = 1&amp;#10;    duration = 1&amp;#10;&amp;#10;    &amp;#10;win.flip()&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="if ((correct_ans === keySideTut.keys)) {&amp;#10;    text_feedback = `Correto!`;&amp;#10;    psychoJS.window.color = &quot;green&quot;;&amp;#10;    sound_feedback = 4000;&amp;#10;    volume = 1;&amp;#10;    duration = 0.5;&amp;#10;} else {&amp;#10;    score += 0;&amp;#10;    text_feedback = `Errado!`;&amp;#10;    psychoJS.window.color = &quot;red&quot;;&amp;#10;    sound_feedback = 1000;&amp;#10;    volume = 1;&amp;#10;    duration = 1;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if correct_ans == keySideTut.keys:&amp;#10;    text_feedback = f&quot;Correto!&quot;&amp;#10;    win.color = &quot;green&quot;&amp;#10;    sound_feedback = 4000&amp;#10;    volume = 1&amp;#10;    duration = 0.5&amp;#10;else:&amp;#10;    score += 0&amp;#10;    text_feedback = f&quot;Errado!&quot;&amp;#10;    win.color = &quot;red&quot;&amp;#10;    sound_feedback = 1000&amp;#10;    volume = 1&amp;#10;    duration = 1&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -914,12 +1010,42 @@
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
     </Routine>
+    <Routine name="pretest1Tutorial">
+      <RoutineSettingsComponent name="pretest1Tutorial" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
+        <Param val="pretest1Tutorial" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+    </Routine>
   </Routines>
   <Flow>
     <Routine name="WelcomeScreen"/>
     <Routine name="InstructionsTutorial"/>
+    <LoopInitiator loopType="TrialHandler" name="PreTest1TrialsTut">
+      <Param name="Selected rows" updates="None" val="" valType="code"/>
+      <Param name="conditions" updates="None" val="[{'positionT': (30, 0), 'gratingT': 0.025, 'textureT': 'sin', 'maskT': 'gauss', 'phaseT': 3, 'spacial_freqT': 1, 'orientationT': 0, 'sizeT': (7, 7), 'fixation_posT': (0, 0), 'fixation_sizeT': (2, 0.1), 'fixation_widthT': 0.08}, {'positionT': (-30, 0), 'gratingT': 0.025, 'textureT': 'sin', 'maskT': 'gauss', 'phaseT': 3, 'spacial_freqT': 1, 'orientationT': 0, 'sizeT': (7, 7), 'fixation_posT': (0, 0), 'fixation_sizeT': (2, 0.1), 'fixation_widthT': 0.08}, {'positionT': (30, 0), 'gratingT': 1, 'textureT': 'sin', 'maskT': 'gauss', 'phaseT': 3, 'spacial_freqT': 1, 'orientationT': 0, 'sizeT': (7, 7), 'fixation_posT': (0, 0), 'fixation_sizeT': (2, 0.1), 'fixation_widthT': 0.08}, {'positionT': (-30, 0), 'gratingT': 1, 'textureT': 'sin', 'maskT': 'gauss', 'phaseT': 3, 'spacial_freqT': 1, 'orientationT': 0, 'sizeT': (7, 7), 'fixation_posT': (0, 0), 'fixation_sizeT': (2, 0.1), 'fixation_widthT': 0.08}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="Conditions_Tut.xlsx" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="code"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="5" valType="code"/>
+      <Param name="name" updates="None" val="PreTest1TrialsTut" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
     <Routine name="Tutorial"/>
     <Routine name="TutFeedback"/>
+    <LoopTerminator name="PreTest1TrialsTut"/>
     <Routine name="Blank4000"/>
     <Routine name="InstructionsFullTask"/>
     <LoopInitiator loopType="TrialHandler" name="Pretest1Block">
@@ -935,7 +1061,7 @@
     </LoopInitiator>
     <LoopInitiator loopType="TrialHandler" name="pretest1trialsTraining">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
-      <Param name="conditions" updates="None" val="[{'position': (30, 0), 'grating': 0, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.01, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.01, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.02, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.02, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.04, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.04, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.08, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.08, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.16, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.16, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.32, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.32, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 1, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 1, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'position': (30, 0), 'grating': 0, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.02, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.02, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.04, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.04, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.08, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.08, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.01, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.01, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.025, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.025, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 1, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 1, 'texture': 'sin', 'mask': 'gauss', 'phase': 3, 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}]" valType="str"/>
       <Param name="conditionsFile" updates="None" val="Conditions_parameters.xlsx" valType="file"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="code"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>

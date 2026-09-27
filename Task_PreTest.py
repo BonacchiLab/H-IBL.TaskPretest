@@ -744,7 +744,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         method='sequential', 
         extraInfo=expInfo, 
         originPath=-1, 
-        trialList=data.importConditions('Components_parameters.xlsx'), 
+        trialList=data.importConditions('Conditions_parameters.xlsx'), 
         seed=None, 
         isTrials=True, 
     )
