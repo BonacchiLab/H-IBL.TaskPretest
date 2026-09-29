@@ -415,7 +415,7 @@
         <Param val="gabor" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="orientation" valType="num" updates="set every frame" name="ori"/>
-        <Param val="0-1" valType="num" updates="set every frame" name="phase"/>
+        <Param val="0" valType="num" updates="set every frame" name="phase"/>
         <Param val="position" valType="list" updates="set every frame" name="pos"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="spacial_freq" valType="num" updates="set every frame" name="sf"/>
@@ -431,6 +431,23 @@
         <Param val="deg" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
       </GratingComponent>
+      <CodeComponent name="codePhase" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="current_phase = np.random.uniform(0, (2 * np.pi));&amp;#10;gabor.phase = current_phase;&amp;#10;psychoJS.experiment.addData(&quot;gabor_phase&quot;, current_phase);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="# Generate random phase&amp;#10;current_phase = np.random.uniform(0, 2 * np.pi)&amp;#10;&amp;#10;gabor.phase = current_phase&amp;#10;&amp;#10;# Creates a gabor phase column on the csv&amp;#10;thisExp.addData('gabor_phase', current_phase)" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="codePhase" valType="code" updates="None" name="name"/>
+      </CodeComponent>
       <CodeComponent name="codeCorKey" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
@@ -764,13 +781,13 @@
         <Param val="deg" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
       </GratingComponent>
-      <CodeComponent name="codePhase" plugin="None">
+      <CodeComponent name="codePhaseT" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="current_phaseT = np.random.uniform(0, (2 * np.pi));&amp;#10;gaborTut.phase = current_phaseT;&amp;#10;psychoJS.experiment.addData(&quot;gabor_phase&quot;, current_phaseT);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="# Cria a fase aleatória e guarda-a nas variáveis do PsychoPy&amp;#10;current_phaseT = np.random.uniform(0, 2 * np.pi)&amp;#10;&amp;#10;gaborTut.phase = current_phaseT&amp;#10;&amp;#10;# Diz ao PsychoPy para criar uma coluna chamada 'gabor_phase' no ficheiro .csv&amp;#10;thisExp.addData('gabor_phase', current_phaseT)&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="current_phaseT = np.random.uniform(0, (2 * np.pi));&amp;#10;gaborTut.phase = current_phaseT;&amp;#10;psychoJS.experiment.addData(&quot;gabor_phaseT&quot;, current_phaseT);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="# Generate random phase&amp;#10;current_phaseT = np.random.uniform(0, 2 * np.pi)&amp;#10;&amp;#10;gaborTut.phase = current_phaseT&amp;#10;&amp;#10;# Creates a gabor phase column on the csv&amp;#10;thisExp.addData('gabor_phaseT', current_phaseT)&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -779,7 +796,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="codePhase" valType="code" updates="None" name="name"/>
+        <Param val="codePhaseT" valType="code" updates="None" name="name"/>
       </CodeComponent>
       <CodeComponent name="codeCorKeyTut" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
