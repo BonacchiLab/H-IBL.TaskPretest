@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2026.1.2),
-    on setembro 29, 2026, at 16:15
+    on setembro 30, 2026, at 15:00
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -39,7 +39,7 @@ deviceManager = hardware.DeviceManager()
 _thisDir = os.path.dirname(os.path.abspath(__file__))
 # store info about the experiment session
 psychopyVersion = '2026.1.2'
-expName = 'TrainingTask_Test'  # from the Builder filename that created this script
+expName = 'TrainingTask_PreTest'  # from the Builder filename that created this script
 expVersion = ''
 # a list of functions to run when the experiment ends (starts off blank)
 runAtExit = []
@@ -410,7 +410,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     sound.Sound.backend = 'ptb'
     soundTutGoCue = sound.Sound(
         'A', 
-        secs=0.08, 
+        secs=0.1, 
         stereo=True, 
         hamming=True, 
         speaker=None,    name='soundTutGoCue'
@@ -481,7 +481,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # --- Initialize components for Routine "PreTest1Trials" ---
     soundGoCue = sound.Sound(
         'A', 
-        secs=0.08, 
+        secs=0.1, 
         stereo=True, 
         hamming=True, 
         speaker=None,    name='soundGoCue'
@@ -1057,18 +1057,18 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         Tutorial.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
-        soundTutGoCue.setSound('12000', secs=0.08, hamming=True)
+        soundTutGoCue.setSound('5000', secs=0.1, hamming=True)
         soundTutGoCue.setVolume(1.0, log=False)
         soundTutGoCue.seek(0)
         gaborTut.setContrast(gratingT)
-        # Run 'Begin Routine' code from codePhase
-        # Cria a fase aleatória e guarda-a nas variáveis do PsychoPy
+        # Run 'Begin Routine' code from codePhaseT
+        # Generate random phase
         current_phaseT = np.random.uniform(0, 2 * np.pi)
         
         gaborTut.phase = current_phaseT
         
-        # Diz ao PsychoPy para criar uma coluna chamada 'gabor_phase' no ficheiro .csv
-        thisExp.addData('gabor_phase', current_phaseT)
+        # Creates a gabor phase column on the csv
+        thisExp.addData('gabor_phaseT', current_phaseT)
         
         # Run 'Begin Routine' code from codeCorKeyTut
         if positionT[0] > 0:
@@ -1130,7 +1130,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # if soundTutGoCue is stopping this frame...
             if soundTutGoCue.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > soundTutGoCue.tStartRefresh + 0.08-frameTolerance or soundTutGoCue.isFinished:
+                if tThisFlipGlobal > soundTutGoCue.tStartRefresh + 0.1-frameTolerance or soundTutGoCue.isFinished:
                     # keep track of stop time/frame for later
                     soundTutGoCue.tStop = t  # not accounting for scr refresh
                     soundTutGoCue.tStopRefresh = tThisFlipGlobal  # on global time
@@ -1380,7 +1380,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             score += 0
             text_feedback = f"Errado!\n+1 point\nTotal: {score}"
             win.color = "red"
-            sound_feedback = 1000
+            sound_feedback = "sound_files/ibl_noise_burst.wav"
             volume = 1
             duration = 1
         
@@ -1902,10 +1902,18 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             PreTest1Trials.status = NOT_STARTED
             continueRoutine = True
             # update component parameters for each repeat
-            soundGoCue.setSound('12000', secs=0.08, hamming=True)
+            soundGoCue.setSound('5000', secs=0.1, hamming=True)
             soundGoCue.setVolume(1.0, log=False)
             soundGoCue.seek(0)
             gabor.setContrast(grating)
+            # Run 'Begin Routine' code from codePhase
+            # Generate random phase
+            current_phase = np.random.uniform(0, 2 * np.pi)
+            
+            gabor.phase = current_phase
+            
+            # Creates a gabor phase column on the csv
+            thisExp.addData('gabor_phase', current_phase)
             # Run 'Begin Routine' code from codeCorKey
             if position[0] > 0:
                 correct_ans = "l"
@@ -1966,7 +1974,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # if soundGoCue is stopping this frame...
                 if soundGoCue.status == STARTED:
                     # is it time to stop? (based on global clock, using actual start)
-                    if tThisFlipGlobal > soundGoCue.tStartRefresh + 0.08-frameTolerance or soundGoCue.isFinished:
+                    if tThisFlipGlobal > soundGoCue.tStartRefresh + 0.1-frameTolerance or soundGoCue.isFinished:
                         # keep track of stop time/frame for later
                         soundGoCue.tStop = t  # not accounting for scr refresh
                         soundGoCue.tStopRefresh = tThisFlipGlobal  # on global time
@@ -2067,7 +2075,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     gabor.setTex(texture, log=False)
                     gabor.setMask(mask, log=False)
                     gabor.setSF(spacial_freq, log=False)
-                    gabor.setPhase(0-1, log=False)
+                    gabor.setPhase(0.0, log=False)
                 
                 # if gabor is stopping this frame...
                 if gabor.status == STARTED:
@@ -2215,19 +2223,22 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     text_feeback = f"Correto!\nNível Principiante\n50 pontos até ao próximo nível"
                     win.color = "green"
                     sound_feedback = 4000
+                    durationtext = 1
                     volume = 1
                     duration = 0.5
                 else:
                     text_feedback = f"Correto!\n+1 point\nTotal: {score}"
                     win.color = "green"
                     sound_feedback = 4000
+                    durationtext =1
                     volume = 1
                     duration = 0.5
             else:
                 score += 0
                 text_feedback = f"Errado!\n+0 points\nTotal: {score}"
                 win.color = "red"
-                sound_feedback = 1000
+                sound_feedback = "sound_files/ibl_noise_burst.wav"
+                durationtext = 2
                 volume = 1
                 duration = 1
             
@@ -2294,7 +2305,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # if textFeedback is stopping this frame...
                 if textFeedback.status == STARTED:
                     # is it time to stop? (based on global clock, using actual start)
-                    if tThisFlipGlobal > textFeedback.tStartRefresh + duration-frameTolerance:
+                    if tThisFlipGlobal > textFeedback.tStartRefresh + durationtext-frameTolerance:
                         # keep track of stop time/frame for later
                         textFeedback.tStop = t  # not accounting for scr refresh
                         textFeedback.tStopRefresh = tThisFlipGlobal  # on global time
