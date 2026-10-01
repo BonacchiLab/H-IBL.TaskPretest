@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2026.1.2),
-    on setembro 30, 2026, at 15:00
+    on outubro 01, 2026, at 13:12
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -443,6 +443,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     keySideTut = keyboard.Keyboard(deviceName='defaultKeyboard')
     
     # --- Initialize components for Routine "TutFeedback" ---
+    # Run 'Begin Experiment' code from codeFcondTut
+    scoreT = 0
     textFBTut = visual.TextStim(win=win, name='textFBTut',
         text='',
         font='Arial',
@@ -534,19 +536,19 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "Pause" ---
     textPause = visual.TextStim(win=win, name='textPause',
-        text='Intervalo',
+        text='',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
-        depth=0.0);
+        depth=-1.0);
     Returntotasktext = visual.TextStim(win=win, name='Returntotasktext',
         text='Carrega na SPACEBAR para recomeçar',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
-        depth=-1.0);
+        depth=-2.0);
     key_resp = keyboard.Keyboard(deviceName='defaultKeyboard')
     
     # --- Initialize components for Routine "Blank4000" ---
@@ -1016,7 +1018,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # set up handler to look after randomisation of conditions etc
     PreTest1TrialsTut = data.TrialHandler2(
         name='PreTest1TrialsTut',
-        nReps=5, 
+        nReps=1, 
         method='random', 
         extraInfo=expInfo, 
         originPath=-1, 
@@ -1370,21 +1372,21 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # update component parameters for each repeat
         # Run 'Begin Routine' code from codeFcondTut
         if correct_ans == keySideTut.keys:
-            score += 1
-            text_feedback = f"Correto!\n+1 point\nTotal: {score}"
+            scoreT += 1
+            text_feedback = f"Correto!\n+1 point\nTotal: {scoreT}"
             win.color = "green"
             sound_feedback = 4000
             volume = 1
             duration = 0.5
         else:
-            score += 0
-            text_feedback = f"Errado!\n+1 point\nTotal: {score}"
+            scoreT += 0
+            text_feedback = f"Errado!\n+1 point\nTotal: {scoreT}"
             win.color = "red"
             sound_feedback = "sound_files/ibl_noise_burst.wav"
             volume = 1
             duration = 1
         
-        
+        win.flip()
         soundFBTut.setSound(sound_feedback , secs=duration, hamming=True)
         soundFBTut.setVolume(1.0, log=False)
         soundFBTut.seek(0)
@@ -1546,7 +1548,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             PreTest1TrialsTut.status = STARTED
         thisExp.nextEntry()
         
-    # completed 5 repeats of 'PreTest1TrialsTut'
+    # completed 1 repeats of 'PreTest1TrialsTut'
     PreTest1TrialsTut.status = FINISHED
     
     if thisSession is not None:
@@ -2422,6 +2424,42 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         Pause.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
+        # Run 'Begin Routine' code from codeLevels
+        # Lista de níveis atualizada sem cores cinzentas
+        levels_config = [
+            {"min_score": 0,   "name": "Recruta",      "color": "#FFFFFF"},  # Branco (Contraste total com o fundo cinzento)
+            {"min_score": 50,  "name": "Iniciante",    "color": "#CD7F32"},  # Bronze / Castanho Quente
+            {"min_score": 100, "name": "Explorador",   "color": "#4CAF50"},  # Verde
+            {"min_score": 150, "name": "Praticante",   "color": "#00BCD4"},  # Ciano / Azul Claro
+            {"min_score": 200, "name": "Especialista", "color": "#2196F3"},  # Azul
+            {"min_score": 250, "name": "Perito",       "color": "#9C27B0"},  # Roxo
+            {"min_score": 300, "name": "Mestre",       "color": "#E91E63"},  # Rosa Forte
+            {"min_score": 350, "name": "Guru",         "color": "#FF9800"},  # Laranja
+            {"min_score": 400, "name": "Lenda",        "color": "#FFD700"}   # Dourado
+        ]
+        
+        current_level = levels_config[0]
+        next_level = None
+        
+        for level in levels_config:
+            if score >= level["min_score"]:
+                current_level = level
+            else:
+                next_level = level
+                break
+        
+        level_name = current_level["name"]
+        level_color = current_level["color"]  
+        
+        
+        text_pause = f"Pausa\nPossui neste momento {score} pontos\n"
+        
+        if score >= 400:
+            text_pause += f"Nível {level_name}\nNível Máximo Atingido!"
+        else:
+            pontos_em_falta = next_level["min_score"] - score
+            text_pause += f"Nível {level_name}\nFaltam {pontos_em_falta} pontos para o próximo nível"
+        
         # create starting attributes for key_resp
         key_resp.keys = []
         key_resp.rt = []
@@ -2478,7 +2516,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # if textPause is active this frame...
             if textPause.status == STARTED:
                 # update params
-                pass
+                textPause.setText(text_pause, log=False)
             
             # if textPause is stopping this frame...
             if textPause.status == STARTED:
