@@ -8,6 +8,10 @@ important.txt
 # Cache files
 __pycache__/
 
+.venv/
+
+
+
 
 
 
