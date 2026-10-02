@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2026.1.2),
-    on outubro 02, 2026, at 14:33
+    on outubro 02, 2026, at 14:44
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -1027,7 +1027,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # set up handler to look after randomisation of conditions etc
     PreTest1TrialsTut = data.TrialHandler2(
         name='PreTest1TrialsTut',
-        nReps=1, 
+        nReps=3, 
         method='random', 
         extraInfo=expInfo, 
         originPath=-1, 
@@ -1385,15 +1385,17 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             text_feedback = f"Correto!\n+1 point\nTotal: {scoreT}"
             win.color = "green"
             sound_feedback = 4000
+            durationtextT = 0.5
             volume = 1
-            duration = 0.5
+            duration = 0.25
         else:
             scoreT += 0
             text_feedback = f"Errado!\n+1 point\nTotal: {scoreT}"
             win.color = "red"
             sound_feedback = "sound_files/ibl_noise_burst.wav"
+            durationtextT = 1
             volume = 1
-            duration = 1
+            duration = 0.5
         
         win.flip()
         soundFBTut.setSound(sound_feedback , secs=duration, hamming=True)
@@ -1456,7 +1458,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # if textFBTut is stopping this frame...
             if textFBTut.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > textFBTut.tStartRefresh + duration-frameTolerance:
+                if tThisFlipGlobal > textFBTut.tStartRefresh + durationtextT-frameTolerance:
                     # keep track of stop time/frame for later
                     textFBTut.tStop = t  # not accounting for scr refresh
                     textFBTut.tStopRefresh = tThisFlipGlobal  # on global time
@@ -1557,7 +1559,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             PreTest1TrialsTut.status = STARTED
         thisExp.nextEntry()
         
-    # completed 1 repeats of 'PreTest1TrialsTut'
+    # completed 3 repeats of 'PreTest1TrialsTut'
     PreTest1TrialsTut.status = FINISHED
     
     if thisSession is not None:
@@ -1837,8 +1839,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # set up handler to look after randomisation of conditions etc
     Pretest1Block = data.TrialHandler2(
         name='Pretest1Block',
-        nReps=1, 
-        method='sequential', 
+        nReps=15, 
+        method='random', 
         extraInfo=expInfo, 
         originPath=-1, 
         trialList=[None], 
@@ -1872,7 +1874,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # set up handler to look after randomisation of conditions etc
         pretest1trialsTraining = data.TrialHandler2(
             name='pretest1trialsTraining',
-            nReps=1, 
+            nReps=2, 
             method='random', 
             extraInfo=expInfo, 
             originPath=-1, 
@@ -2230,20 +2232,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # Run 'Begin Routine' code from codeFconditions
             if correct_ans == keySide.keys:
                 score += 1
-                if score == 50:
-                    text_feeback = f"Correto!\nNível Principiante\n50 pontos até ao próximo nível"
-                    win.color = "green"
-                    sound_feedback = 4000
-                    durationtext = 1
-                    volume = 1
-                    duration = 0.5
-                else:
-                    text_feedback = f"Correto!\n+1 point\nTotal: {score}"
-                    win.color = "green"
-                    sound_feedback = 4000
-                    durationtext =1
-                    volume = 1
-                    duration = 0.5
+                text_feedback = f"Correto!\n+1 point\nTotal: {score}"
+                win.color = "green"
+                sound_feedback = 4000
+                durationtext =1
+                volume = 1
+                duration = 0.5
             else:
                 score += 0
                 text_feedback = f"Errado!\n+0 points\nTotal: {score}"
@@ -2417,7 +2411,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 pretest1trialsTraining.status = STARTED
             thisExp.nextEntry()
             
-        # completed 1 repeats of 'pretest1trialsTraining'
+        # completed 2 repeats of 'pretest1trialsTraining'
         pretest1trialsTraining.status = FINISHED
         
         if thisSession is not None:
@@ -2669,7 +2663,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             Pretest1Block.status = STARTED
         thisExp.nextEntry()
         
-    # completed 1 repeats of 'Pretest1Block'
+    # completed 15 repeats of 'Pretest1Block'
     Pretest1Block.status = FINISHED
     
     if thisSession is not None:
