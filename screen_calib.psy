@@ -1,0 +1,106 @@
+import sys
+import time
+import tkinter as tk
+
+class MonitorCalibrationApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Calibração de Monitor")
+        
+        # Configurar ecrã inteiro sem bordas
+        self.root.attributes('-fullscreen', True)
+        self.root.configure(background='black')
+        
+        # Tecla ESC para fechar a qualquer momento
+        self.root.bind("<Escape>", lambda e: self.root.destroy())
+
+        # Criar canvas onde vamos desenhar os estímulos
+        self.canvas = tk.Canvas(root, highlightthickness=0, bg='black')
+        self.canvas.pack(fill=tk.BOTH, expand=True)
+        
+        # Obter dimensões do ecrã
+        self.screen_width = self.root.winfo_screenwidth()
+        self.screen_height = self.root.winfo_screenheight()
+        
+        # Tamanhos das ROIs (em píxeis)
+        self.patch_size = 400
+        self.sync_size = 100
+
+        # Posições
+        # Patch central (estímulo de medição)
+        cx, cy = self.screen_width // 2, self.screen_height // 2
+        self.target_coords = (
+            cx - self.patch_size // 2, cy - self.patch_size // 2,
+            cx + self.patch_size // 2, cy + self.patch_size // 2
+        )
+
+        # Sync patch (canto superior esquerdo para o trigger óptico)
+        self.sync_coords = (10, 10, 10 + self.sync_size, 10 + self.sync_size)
+
+        # Desenhar elementos iniciais (pretos)
+        self.target_rect = self.canvas.create_rectangle(*self.target_coords, fill="#000000", outline="")
+        self.sync_rect = self.canvas.create_rectangle(*self.sync_coords, fill="#000000", outline="")
+
+        # Iniciar a sequência após 2 segundos
+        self.root.after(2000, self.run_calibration)
+
+    def set_colors(self, target_hex, sync_hex):
+        """Atualiza a cor do patch alvo e do marcador de sincronização."""
+        self.canvas.itemconfig(self.target_rect, fill=target_hex)
+        self.canvas.itemconfig(self.sync_rect, fill=sync_hex)
+        self.root.update_idletasks()
+        self.root.update()
+
+    def run_calibration(self):
+        print("=== A INICIAR CALIBRAÇÃO ===")
+        print("Pressiona ESC a qualquer momento para fechar.")
+
+        # -------------------------------------------------------------
+        # FASE 1: TESTE DE LATÊNCIA E TEMPO DE RESPOSTA (ONSET / RISE TIME)
+        # -------------------------------------------------------------
+        print("\n[1/2] Teste de Latência (Flash Preto -> Branco)...")
+        time.sleep(1.0)
+
+        for i in range(5):  # 5 repetições para tirar média
+            # Estado Base: Preto total por 1 segundo
+            self.set_colors("#000000", "#000000")
+            time.sleep(1.0)
+
+            # Mudança Abrupta: Branco + Trigger óptico ligado simultaneamente
+            self.set_colors("#FFFFFF", "#FFFFFF")
+            time.sleep(1.0)
+
+        # Voltar a preto entre fases
+        self.set_colors("#000000", "#000000")
+        time.sleep(2.0)
+
+        # -------------------------------------------------------------
+        # FASE 2: TESTE DA CURVA GAMMA (RAMPA DE LUMINÂNCIA)
+        # -------------------------------------------------------------
+        print("\n[2/2] Teste de Curva Gamma (17 níveis de cinzento)...")
+        
+        # Níveis de cinzento de 0 a 255 em passos iguais
+        steps = [int(v) for v in range(0, 256, 16)] # [0, 16, 32, ..., 240, 255]
+        if steps[-1] != 255:
+            steps.append(255)
+
+        for val in steps:
+            # Converter valor 0-255 para hexadecimal (#RRGGBB)
+            hex_color = f"#{val:02x}{val:02x}{val:02x}"
+            
+            # Sync fica branco para sinalizar frame de medição estática
+            self.set_colors(hex_color, "#FFFFFF")
+            
+            # Manter cada nível durante 1.2 segundos para estabilizar
+            time.sleep(1.2)
+
+        # Finalização
+        self.set_colors("#000000", "#000000")
+        print("\n=== CALIBRAÇÃO CONCLUÍDA ===")
+        time.sleep(1.0)
+        self.root.destroy()
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = MonitorCalibrationApp(root)
+    root.mainloop()
