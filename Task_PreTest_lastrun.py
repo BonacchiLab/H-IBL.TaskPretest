@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2026.1.2),
-    on outubro 01, 2026, at 13:12
+    on outubro 02, 2026, at 14:33
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -561,14 +561,23 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         depth=0.0);
     
     # --- Initialize components for Routine "GoodbyeScreen" ---
-    textGoodbye = visual.TextStim(win=win, name='textGoodbye',
-        text='Obrigado pela sua participação',
+    textEnd = visual.TextStim(win=win, name='textEnd',
+        text='Chegou ao fim da tarefa. \n\nEnviaremos os leaderboard da sessão por email. Constará apenas o número de ID garantido o seu anonimato. Caso tenha interesse em participar pressione -y-, caso contrário pression -n-',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
-    keySideGoodbye = keyboard.Keyboard(deviceName='defaultKeyboard')
+    keyLeaderBoard = keyboard.Keyboard(deviceName='defaultKeyboard')
+    
+    # --- Initialize components for Routine "IDScreen" ---
+    textGoodbye = visual.TextStim(win=win, name='textGoodbye',
+        text='',
+        font='Arial',
+        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=0.0);
     
     # create some handy timers
     
@@ -1828,7 +1837,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # set up handler to look after randomisation of conditions etc
     Pretest1Block = data.TrialHandler2(
         name='Pretest1Block',
-        nReps=15, 
+        nReps=1, 
         method='sequential', 
         extraInfo=expInfo, 
         originPath=-1, 
@@ -1863,7 +1872,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # set up handler to look after randomisation of conditions etc
         pretest1trialsTraining = data.TrialHandler2(
             name='pretest1trialsTraining',
-            nReps=2, 
+            nReps=1, 
             method='random', 
             extraInfo=expInfo, 
             originPath=-1, 
@@ -2408,7 +2417,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 pretest1trialsTraining.status = STARTED
             thisExp.nextEntry()
             
-        # completed 2 repeats of 'pretest1trialsTraining'
+        # completed 1 repeats of 'pretest1trialsTraining'
         pretest1trialsTraining.status = FINISHED
         
         if thisSession is not None:
@@ -2660,7 +2669,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             Pretest1Block.status = STARTED
         thisExp.nextEntry()
         
-    # completed 15 repeats of 'Pretest1Block'
+    # completed 1 repeats of 'Pretest1Block'
     Pretest1Block.status = FINISHED
     
     if thisSession is not None:
@@ -2796,15 +2805,15 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # create an object to store info about Routine GoodbyeScreen
     GoodbyeScreen = data.Routine(
         name='GoodbyeScreen',
-        components=[textGoodbye, keySideGoodbye],
+        components=[textEnd, keyLeaderBoard],
     )
     GoodbyeScreen.status = NOT_STARTED
     continueRoutine = True
     # update component parameters for each repeat
-    # create starting attributes for keySideGoodbye
-    keySideGoodbye.keys = []
-    keySideGoodbye.rt = []
-    _keySideGoodbye_allKeys = []
+    # create starting attributes for keyLeaderBoard
+    keyLeaderBoard.keys = []
+    keyLeaderBoard.rt = []
+    _keyLeaderBoard_allKeys = []
     # store start times for GoodbyeScreen
     GoodbyeScreen.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
     GoodbyeScreen.tStart = globalClock.getTime(format='float')
@@ -2836,51 +2845,51 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
         
-        # *textGoodbye* updates
+        # *textEnd* updates
         
-        # if textGoodbye is starting this frame...
-        if textGoodbye.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # if textEnd is starting this frame...
+        if textEnd.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
             # keep track of start time/frame for later
-            textGoodbye.frameNStart = frameN  # exact frame index
-            textGoodbye.tStart = t  # local t and not account for scr refresh
-            textGoodbye.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(textGoodbye, 'tStartRefresh')  # time at next scr refresh
+            textEnd.frameNStart = frameN  # exact frame index
+            textEnd.tStart = t  # local t and not account for scr refresh
+            textEnd.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(textEnd, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'textGoodbye.started')
+            thisExp.timestampOnFlip(win, 'textEnd.started')
             # update status
-            textGoodbye.status = STARTED
-            textGoodbye.setAutoDraw(True)
+            textEnd.status = STARTED
+            textEnd.setAutoDraw(True)
         
-        # if textGoodbye is active this frame...
-        if textGoodbye.status == STARTED:
+        # if textEnd is active this frame...
+        if textEnd.status == STARTED:
             # update params
             pass
         
-        # *keySideGoodbye* updates
+        # *keyLeaderBoard* updates
         waitOnFlip = False
         
-        # if keySideGoodbye is starting this frame...
-        if keySideGoodbye.status == NOT_STARTED and tThisFlip >= 5-frameTolerance:
+        # if keyLeaderBoard is starting this frame...
+        if keyLeaderBoard.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
             # keep track of start time/frame for later
-            keySideGoodbye.frameNStart = frameN  # exact frame index
-            keySideGoodbye.tStart = t  # local t and not account for scr refresh
-            keySideGoodbye.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(keySideGoodbye, 'tStartRefresh')  # time at next scr refresh
+            keyLeaderBoard.frameNStart = frameN  # exact frame index
+            keyLeaderBoard.tStart = t  # local t and not account for scr refresh
+            keyLeaderBoard.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(keyLeaderBoard, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'keySideGoodbye.started')
+            thisExp.timestampOnFlip(win, 'keyLeaderBoard.started')
             # update status
-            keySideGoodbye.status = STARTED
+            keyLeaderBoard.status = STARTED
             # keyboard checking is just starting
             waitOnFlip = True
-            win.callOnFlip(keySideGoodbye.clock.reset)  # t=0 on next screen flip
-            win.callOnFlip(keySideGoodbye.clearEvents, eventType='keyboard')  # clear events on next screen flip
-        if keySideGoodbye.status == STARTED and not waitOnFlip:
-            theseKeys = keySideGoodbye.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
-            _keySideGoodbye_allKeys.extend(theseKeys)
-            if len(_keySideGoodbye_allKeys):
-                keySideGoodbye.keys = _keySideGoodbye_allKeys[-1].name  # just the last key pressed
-                keySideGoodbye.rt = _keySideGoodbye_allKeys[-1].rt
-                keySideGoodbye.duration = _keySideGoodbye_allKeys[-1].duration
+            win.callOnFlip(keyLeaderBoard.clock.reset)  # t=0 on next screen flip
+            win.callOnFlip(keyLeaderBoard.clearEvents, eventType='keyboard')  # clear events on next screen flip
+        if keyLeaderBoard.status == STARTED and not waitOnFlip:
+            theseKeys = keyLeaderBoard.getKeys(keyList=['y','n'], ignoreKeys=["escape"], waitRelease=False)
+            _keyLeaderBoard_allKeys.extend(theseKeys)
+            if len(_keyLeaderBoard_allKeys):
+                keyLeaderBoard.keys = _keyLeaderBoard_allKeys[0].name  # just the first key pressed
+                keyLeaderBoard.rt = _keyLeaderBoard_allKeys[0].rt
+                keyLeaderBoard.duration = _keyLeaderBoard_allKeys[0].duration
                 # a response ends the routine
                 continueRoutine = False
         
@@ -2927,15 +2936,163 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     GoodbyeScreen.tStopRefresh = tThisFlipGlobal
     thisExp.addData('GoodbyeScreen.stopped', GoodbyeScreen.tStop)
     # check responses
-    if keySideGoodbye.keys in ['', [], None]:  # No response was made
-        keySideGoodbye.keys = None
-    thisExp.addData('keySideGoodbye.keys',keySideGoodbye.keys)
-    if keySideGoodbye.keys != None:  # we had a response
-        thisExp.addData('keySideGoodbye.rt', keySideGoodbye.rt)
-        thisExp.addData('keySideGoodbye.duration', keySideGoodbye.duration)
+    if keyLeaderBoard.keys in ['', [], None]:  # No response was made
+        keyLeaderBoard.keys = None
+    thisExp.addData('keyLeaderBoard.keys',keyLeaderBoard.keys)
+    if keyLeaderBoard.keys != None:  # we had a response
+        thisExp.addData('keyLeaderBoard.rt', keyLeaderBoard.rt)
+        thisExp.addData('keyLeaderBoard.duration', keyLeaderBoard.duration)
+    # Run 'End Routine' code from codepartID
+    # Inicializa a variável para evitar erros
+    selected_key = None
+    
+    # Verifica se existe alguma tecla na lista
+    if keyLeaderBoard.keys and len(keyLeaderBoard.keys) > 0:
+        # Se for uma lista, pega o primeiro item. Se não, pega o valor direto.
+        if isinstance(keyLeaderBoard.keys, list):
+            selected_key = keyLeaderBoard.keys[0]
+        else:
+            selected_key = keyLeaderBoard.keys
+    
+    # Mensagem base
+    end_msg = "Obrigado pela sua participação!"
+    
+    # Lógica das condições
+    if selected_key == 'y':
+        end_msg += f"\nEste é o seu ID de participante: {expInfo['participant']}"
+    elif selected_key == 'n':
+        end_msg += f"\nO seu ID não aparecerá no leaderboard."
+    
     thisExp.nextEntry()
     # the Routine "GoodbyeScreen" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
+    
+    # --- Prepare to start Routine "IDScreen" ---
+    # create an object to store info about Routine IDScreen
+    IDScreen = data.Routine(
+        name='IDScreen',
+        components=[textGoodbye],
+    )
+    IDScreen.status = NOT_STARTED
+    continueRoutine = True
+    # update component parameters for each repeat
+    # store start times for IDScreen
+    IDScreen.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
+    IDScreen.tStart = globalClock.getTime(format='float')
+    IDScreen.status = STARTED
+    thisExp.addData('IDScreen.started', IDScreen.tStart)
+    IDScreen.maxDuration = None
+    # keep track of which components have finished
+    IDScreenComponents = IDScreen.components
+    for thisComponent in IDScreen.components:
+        thisComponent.tStart = None
+        thisComponent.tStop = None
+        thisComponent.tStartRefresh = None
+        thisComponent.tStopRefresh = None
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+    # reset timers
+    t = 0
+    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+    frameN = -1
+    
+    # --- Run Routine "IDScreen" ---
+    thisExp.currentRoutine = IDScreen
+    IDScreen.forceEnded = routineForceEnded = not continueRoutine
+    while continueRoutine and routineTimer.getTime() < 3.0:
+        # get current time
+        t = routineTimer.getTime()
+        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+        
+        # *textGoodbye* updates
+        
+        # if textGoodbye is starting this frame...
+        if textGoodbye.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            textGoodbye.frameNStart = frameN  # exact frame index
+            textGoodbye.tStart = t  # local t and not account for scr refresh
+            textGoodbye.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(textGoodbye, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'textGoodbye.started')
+            # update status
+            textGoodbye.status = STARTED
+            textGoodbye.setAutoDraw(True)
+        
+        # if textGoodbye is active this frame...
+        if textGoodbye.status == STARTED:
+            # update params
+            textGoodbye.setText(end_msg
+            
+            , log=False)
+        
+        # if textGoodbye is stopping this frame...
+        if textGoodbye.status == STARTED:
+            # is it time to stop? (based on global clock, using actual start)
+            if tThisFlipGlobal > textGoodbye.tStartRefresh + 3-frameTolerance:
+                # keep track of stop time/frame for later
+                textGoodbye.tStop = t  # not accounting for scr refresh
+                textGoodbye.tStopRefresh = tThisFlipGlobal  # on global time
+                textGoodbye.frameNStop = frameN  # exact frame index
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'textGoodbye.stopped')
+                # update status
+                textGoodbye.status = FINISHED
+                textGoodbye.setAutoDraw(False)
+        
+        # check for quit (typically the Esc key)
+        if defaultKeyboard.getKeys(keyList=["escape"]):
+            thisExp.status = FINISHED
+        if thisExp.status == FINISHED or endExpNow:
+            endExperiment(thisExp, win=win)
+            return
+        # pause experiment here if requested
+        if thisExp.status == PAUSED:
+            pauseExperiment(
+                thisExp=thisExp, 
+                win=win, 
+                timers=[routineTimer, globalClock], 
+                currentRoutine=IDScreen,
+            )
+            # skip the frame we paused on
+            continue
+        
+        # has a Component requested the Routine to end?
+        if not continueRoutine:
+            IDScreen.forceEnded = routineForceEnded = True
+        # has the Routine been forcibly ended?
+        if IDScreen.forceEnded or routineForceEnded:
+            break
+        # has every Component finished?
+        continueRoutine = False
+        for thisComponent in IDScreen.components:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+    
+    # --- Ending Routine "IDScreen" ---
+    for thisComponent in IDScreen.components:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    # store stop times for IDScreen
+    IDScreen.tStop = globalClock.getTime(format='float')
+    IDScreen.tStopRefresh = tThisFlipGlobal
+    thisExp.addData('IDScreen.stopped', IDScreen.tStop)
+    # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
+    if IDScreen.maxDurationReached:
+        routineTimer.addTime(-IDScreen.maxDuration)
+    elif IDScreen.forceEnded:
+        routineTimer.reset()
+    else:
+        routineTimer.addTime(-3.000000)
+    thisExp.nextEntry()
     
     # mark experiment as finished
     endExperiment(thisExp, win=win)
