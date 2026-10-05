@@ -1,13 +1,15 @@
-# Data files
+# Data folders
 data/
-IBLOriginalMiceTask/
+screen_calibration/dataset_test/
 
-# Command files
+# Misc. folders/files
 important.txt
 
 # Cache files
 __pycache__/
+*.py[cod]
 
+#Virtual environment
 .venv/
 
 
