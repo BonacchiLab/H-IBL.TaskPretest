@@ -1,3 +1,8 @@
+'''This script reads CSV files from a folder or a single CSV file and generates plots for psychometric function 
+and reaction time performance between blocks. These plots are useful for fitting the data to the similar behavioral data
+seen in the original IBL task.'''
+
+
 import os
 import time
 
