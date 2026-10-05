@@ -11,7 +11,7 @@ Data extracted will enable the user to check the calibration in terms of:
 import time
 import tkinter as tk
 
-timer = time.time()  # Start the timer
+start_timer = time.time()  # Start the timer
 
 class CalibrationApp:
     def __init__(self, root, display_time=5.0, pause_between=2.0):
@@ -68,5 +68,5 @@ if __name__ == "__main__":
     app = CalibrationApp(root, display_time=5.0, pause_between=2.0)
     root.mainloop()
 
-timer_end = time.time()  # Stop the timer
-print(f"\n=== Total execution time: {timer_end - timer:.2f} seconds ===")
+elapsed_time = time.time() - start_timer  # Calculate the exact difference
+print(f"\n=== Total execution time: {elapsed_time:.2f} seconds ===")
