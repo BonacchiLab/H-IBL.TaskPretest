@@ -89,7 +89,7 @@ def plot_psychometric(data):
     ax.spines["right"].set_visible(False)
 
     main_color = "#7E1010"
-    x_smooth = np.linspace(-32, 32, 200)
+    x_smooth = np.linspace(-100, 100, 400)
     stats = data.groupby("contrast")["choice_binary"].agg(["mean", "sem"]).reset_index()
     stats[["mean", "sem"]] *= 100
     x_data = stats["contrast"].values
@@ -127,8 +127,8 @@ def plot_psychometric(data):
     ax.set_xlabel(r"$\Delta$ Contrast (%)", fontsize=11)
     ax.set_ylabel("Rightward choices (%)", fontsize=11)
     ax.set_ylim(-5, 105)
-    ax.set_xlim(-35, 35)
-    x_ticks = [-32, -16, -8, -4, -2, 0, 2, 4, 8, 16, 32]
+    ax.set_xlim(-105, 105)
+    x_ticks = [-100, -8, -4, -2.5, -2, -1, 0, 1, 2, 2.5, 4, 8, 100]
     ax.set_xticks(x_ticks)
     ax.set_xticklabels([str(tick) for tick in x_ticks], rotation=45)
     ax.legend(frameon=False, loc="upper left")
@@ -137,23 +137,26 @@ def plot_psychometric(data):
 
 
 def plot_performance_between_blocks(data):
-    """Plot accuracy by block."""
+    """Plot reaction time by block."""
     block_column = "Pretest1Block.thisN"
     if block_column not in data.columns or data[block_column].nunique() < 2:
         print("Skipping block plot: at least two blocks are required.")
         return
 
-    if "keySide.corr" not in data.columns:
-        print("Skipping block plot: the 'keySide.corr' column was not found.")
+    if "keySide.rt" not in data.columns:
+        print("Skipping block plot: the 'keySide.rt' column was not found.")
         return
 
-    block_stats = data.groupby(block_column)["keySide.corr"].mean() * 100
+    valid = data[[block_column, "keySide.rt"]].copy()
+    valid["keySide.rt"] = pd.to_numeric(valid["keySide.rt"], errors="coerce")
+    valid = valid[valid["keySide.rt"] > 0]
+    block_stats = valid.groupby(block_column)["keySide.rt"].mean() * 1000
     fig, ax = plt.subplots(figsize=(6, 5))
     ax.plot(block_stats.index, block_stats.values, marker="o", color="#7E1010")
     ax.set_xlabel("Block")
-    ax.set_ylabel("Correct responses (%)")
-    ax.set_ylim(0, 105)
-    ax.set_title("Performance between blocks")
+    ax.set_ylabel("Reaction time (ms)")
+    ax.set_ylim(bottom=0)
+    ax.set_title("Reaction time between blocks")
     ax.grid(axis="y", alpha=0.25)
     fig.tight_layout()
 
