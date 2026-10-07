@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2026.1.2),
-    on outubro 02, 2026, at 14:44
+    on outubro 07, 2026, at 16:23
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -31,6 +31,8 @@ import os  # handy system and path functions
 import sys  # to get file system encoding
 
 from psychopy.hardware import keyboard
+from psychopy.hardware import camera
+from psychopy.sound import microphone
 
 # --- Setup global variables (available in all functions) ---
 # create a device manager to handle hardware (keyboards, mice, mirophones, speakers, etc.)
@@ -264,6 +266,18 @@ def setupDevices(expInfo, thisExp, win):
         deviceManager.addDevice(
             deviceClass='keyboard', deviceName='defaultKeyboard', backend='ptb'
         )
+    # initialize 'WebCam'
+    deviceManager.addDevice(
+        deviceName='WebCam',
+        deviceClass='psychopy.hardware.camera.CameraDevice',
+        device=49,
+        captureLib='ffpyplayer',
+        pixelFormat='yuyv422',
+        codecFormat='',
+        captureAPI='DirectShow',
+        frameRate=None,
+        frameSize=[]
+    )
     # return True if completed successfully
     return True
 
@@ -377,13 +391,37 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # Start Code - component code to be run after the window creation
     
     # --- Initialize components for Routine "WelcomeScreen" ---
+    # Run 'Begin Experiment' code from GlobalCam
+    import cv2
+    import psychopy
+    
+    # Índice do dispositivo (normalmente 0 para a webcam principal do sistema)
+    CAM_INDEX = 1
+    
+    if not hasattr(psychopy, "GlobalCam") or psychopy.GlobalCam is None:
+        psychopy.GlobalCam = cv2.VideoCapture(CAM_INDEX)
+        psychopy.GlobalCam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+        psychopy.GlobalCam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+    
+    if psychopy.GlobalCam.isOpened():
+        print(f"✅ Webcam Logi C270 (índice {CAM_INDEX}) associada com sucesso!")
+        video_filename = "sessao_completa.avi"
+        fourcc = cv2.VideoWriter_fourcc(*"XVID")
+        psychopy.global_video_writer = cv2.VideoWriter(
+            video_filename, fourcc, 30.0, (1280, 720)
+        )
+    else:
+        print(
+            f"❌ Não foi possível abrir a webcam no índice {CAM_INDEX}. Tenta mudar CAM_INDEX para 1."
+        )
+        psychopy.global_video_writer = None
     textWelcome = visual.TextStim(win=win, name='textWelcome',
         text='Irá iniciar a tarefa. A mesma consiste na apresentação de um contraste à direita/esquerda. Indique em cada trial o lado do estímulo utilizando a tecla -S- para o lado esquerdo e  -L- para o lado direito. \n\nPedimos que mantenha o olhar no centro do ecrã durante a experiência\n\nPressione a SPACEBAR para começar',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
-        depth=0.0);
+        depth=-1.0);
     key_respWelcome = keyboard.Keyboard(deviceName='defaultKeyboard')
     
     # --- Initialize components for Routine "blank2000" ---
@@ -562,7 +600,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "GoodbyeScreen" ---
     textEnd = visual.TextStim(win=win, name='textEnd',
-        text='Chegou ao fim da tarefa. \n\nEnviaremos os leaderboard da sessão por email. Constará apenas o número de ID garantido o seu anonimato. Caso tenha interesse em participar pressione -y-, caso contrário pression -n-',
+        text='Chegou ao fim da tarefa. \n\nEnviaremos os leaderboard da sessão por email. Constará apenas o número de ID, garantido o seu anonimato. Caso tenha interesse em participar pressione -y-, caso contrário pressione -n-.',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -652,6 +690,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         tThisFlipGlobal = win.getFutureFlipTime(clock=None)
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
+        # Run 'Each Frame' code from GlobalCam
+        # Corre a cada fotograma em QUALQUER rotina onde este Code Component ou variável exista
+        if hasattr(psychopy, 'global_cam') and psychopy.global_cam.isOpened():
+            ret, frame = psychopy.global_cam.read()
+            if ret and hasattr(psychopy, 'global_video_writer') and psychopy.global_video_writer is not None:
+                psychopy.global_video_writer.write(frame)
         
         # *textWelcome* updates
         
@@ -743,6 +787,20 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     WelcomeScreen.tStop = globalClock.getTime(format='float')
     WelcomeScreen.tStopRefresh = tThisFlipGlobal
     thisExp.addData('WelcomeScreen.stopped', WelcomeScreen.tStop)
+    # Run 'End Routine' code from GlobalCam
+    if (
+        hasattr(psychopy, "global_video_writer")
+        and psychopy.global_video_writer is not None
+    ):
+        psychopy.global_video_writer.release()
+        psychopy.global_video_writer = None
+    
+    if hasattr(psychopy, "global_cam") and psychopy.global_cam is not None:
+        psychopy.global_cam.release()
+        psychopy.global_cam = None
+    
+    cv2.destroyAllWindows()
+    print("Ficheiro de vídeo gravado e fechado com sucesso!")
     # check responses
     if key_respWelcome.keys in ['', [], None]:  # No response was made
         key_respWelcome.keys = None
@@ -2235,17 +2293,17 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 text_feedback = f"Correto!\n+1 point\nTotal: {score}"
                 win.color = "green"
                 sound_feedback = 4000
-                durationtext =1
+                durationtext = 0.5
                 volume = 1
-                duration = 0.5
+                duration = 0.25
             else:
                 score += 0
                 text_feedback = f"Errado!\n+0 points\nTotal: {score}"
                 win.color = "red"
                 sound_feedback = "sound_files/ibl_noise_burst.wav"
-                durationtext = 2
+                durationtext = 1.5
                 volume = 1
-                duration = 1
+                duration = 0.5
             
                 
             win.flip()
@@ -2929,6 +2987,24 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     GoodbyeScreen.tStop = globalClock.getTime(format='float')
     GoodbyeScreen.tStopRefresh = tThisFlipGlobal
     thisExp.addData('GoodbyeScreen.stopped', GoodbyeScreen.tStop)
+    # Run 'End Routine' code from codepartID
+    selected_key = None
+    
+    
+    if keyLeaderBoard.keys and len(keyLeaderBoard.keys) > 0:
+        if isinstance(keyLeaderBoard.keys, list):
+            selected_key = keyLeaderBoard.keys[0]
+        else:
+            selected_key = keyLeaderBoard.keys
+    
+    
+    end_msg = "Obrigado pela sua participação!"
+    
+    if selected_key == 'y':
+        end_msg += f"\nEste é o seu ID de participante: {expInfo['participant']}.\n Guarde este número para verificar onde ficou colocado"
+    elif selected_key == 'n':
+        end_msg += f"\nO seu ID não aparecerá no leaderboard."
+    
     # check responses
     if keyLeaderBoard.keys in ['', [], None]:  # No response was made
         keyLeaderBoard.keys = None
@@ -2936,27 +3012,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     if keyLeaderBoard.keys != None:  # we had a response
         thisExp.addData('keyLeaderBoard.rt', keyLeaderBoard.rt)
         thisExp.addData('keyLeaderBoard.duration', keyLeaderBoard.duration)
-    # Run 'End Routine' code from codepartID
-    # Inicializa a variável para evitar erros
-    selected_key = None
-    
-    # Verifica se existe alguma tecla na lista
-    if keyLeaderBoard.keys and len(keyLeaderBoard.keys) > 0:
-        # Se for uma lista, pega o primeiro item. Se não, pega o valor direto.
-        if isinstance(keyLeaderBoard.keys, list):
-            selected_key = keyLeaderBoard.keys[0]
-        else:
-            selected_key = keyLeaderBoard.keys
-    
-    # Mensagem base
-    end_msg = "Obrigado pela sua participação!"
-    
-    # Lógica das condições
-    if selected_key == 'y':
-        end_msg += f"\nEste é o seu ID de participante: {expInfo['participant']}"
-    elif selected_key == 'n':
-        end_msg += f"\nO seu ID não aparecerá no leaderboard."
-    
     thisExp.nextEntry()
     # the Routine "GoodbyeScreen" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
