@@ -3,7 +3,7 @@ data/
 screen_calibration/dataset_test/
 
 # Misc. folders/files
-important.txt
+Misc/
 
 # Cache files
 __pycache__/
