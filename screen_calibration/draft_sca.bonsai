@@ -8,15 +8,15 @@
     <Nodes>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="gl:CreateWindow">
-          <gl:Width>640</gl:Width>
-          <gl:Height>480</gl:Height>
+          <gl:Width>1920</gl:Width>
+          <gl:Height>1080</gl:Height>
           <gl:VSync>On</gl:VSync>
           <gl:SwapSync>false</gl:SwapSync>
           <gl:ClearColor>Black</gl:ClearColor>
           <gl:ClearMask>DepthBufferBit ColorBufferBit</gl:ClearMask>
-          <gl:CursorVisible>true</gl:CursorVisible>
+          <gl:CursorVisible>false</gl:CursorVisible>
           <gl:Location xsi:nil="true" />
-          <gl:WindowBorder>Resizable</gl:WindowBorder>
+          <gl:WindowBorder>Borderless</gl:WindowBorder>
           <gl:WindowState>Fullscreen</gl:WindowState>
           <gl:DisplayDevice>Primary</gl:DisplayDevice>
           <gl:TargetRenderFrequency>60</gl:TargetRenderFrequency>
@@ -52,8 +52,8 @@
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Environment.NormalizedView.bonsai" />
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
-        <ExtentX>1</ExtentX>
-        <ExtentY>1</ExtentY>
+        <ExtentX>2</ExtentX>
+        <ExtentY>2</ExtentY>
         <LocationX>0</LocationX>
         <LocationY>0</LocationY>
         <Layer>0</Layer>
