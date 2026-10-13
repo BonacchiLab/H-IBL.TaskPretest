@@ -4,6 +4,7 @@ screen_calibration/dataset_test/
 
 # Misc. folders/files
 Misc/
+screen_calibration/screen_data/teste.avi
 
 # Cache files
 __pycache__/

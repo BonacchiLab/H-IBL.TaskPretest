@@ -1,4 +1,6 @@
-"""Analyze RGB intensity and spatial uniformity in screen-calibration AVI videos.
+""" This script analyzes AVI videos for screen calibration, focusing on RGB intensity and spatial uniformity.
+It is directly compatible with the bonsai workflow for screen calibration, but can also be run as a standalone script.
+It analyze RGB intensity and spatial uniformity in screen-calibration AVI videos.
 
 Each video should show a single screen. Videos may be placed directly in the data
 directory or in subfolders named PC_01, PC_02, and so on.
@@ -7,6 +9,7 @@ directory or in subfolders named PC_01, PC_02, and so on.
 import argparse
 import glob
 import os
+import sys
 import time
 
 import cv2
@@ -180,10 +183,10 @@ def main():
     parser.add_argument(
         "data_directory",
         nargs="?",
-        default="dataset_test",
+        default=os.path.join(os.path.dirname(__file__), "screen_data"),
         help="Directory containing AVI videos or PC_* subfolders.",
     )
-    args = parser.parse_args()
+    args = parser.parse_args([] if "ipykernel" in sys.modules else None)
 
     start_time = time.time()
     df_results = analyze_all_computers(args.data_directory)
