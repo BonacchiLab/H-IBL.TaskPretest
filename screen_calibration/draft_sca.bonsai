@@ -7,7 +7,6 @@
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
-                 xmlns:gli="clr-namespace:Bonsai.Shaders.Input;assembly=Bonsai.Shaders"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -73,10 +72,10 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Users\Asus\Videos\TesteSpinnaker\teste.avi</cv:FileName>
-          <cv:Suffix>None</cv:Suffix>
+          <cv:FileName>C:\Users\Asus\Documents\H-IBL.TaskPretest\screen_calibration\screen_data\teste.avi</cv:FileName>
+          <cv:Suffix>Timestamp</cv:Suffix>
           <cv:Buffered>true</cv:Buffered>
-          <cv:Overwrite>false</cv:Overwrite>
+          <cv:Overwrite>true</cv:Overwrite>
           <cv:FourCC>FMP4</cv:FourCC>
           <cv:FrameRate>30</cv:FrameRate>
           <cv:FrameSize>
@@ -619,18 +618,12 @@
         <Combinator xsi:type="rx:Timestamp" />
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>timestamps_cores.csv</io:FileName>
+        <io:FileName>C:\Users\Asus\Documents\H-IBL.TaskPretest\screen_calibration\screen_data\timestamps_sc.csv</io:FileName>
         <io:Delimiter>,</io:Delimiter>
         <io:Append>false</io:Append>
         <io:Overwrite>true</io:Overwrite>
-        <io:Suffix>None</io:Suffix>
+        <io:Suffix>Timestamp</io:Suffix>
         <io:IncludeHeader>true</io:IncludeHeader>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="gli:KeyDown">
-          <gli:Key>Escape</gli:Key>
-          <gli:Modifiers xsi:nil="true" />
-        </Combinator>
       </Expression>
     </Nodes>
     <Edges>
