@@ -90,6 +90,7 @@ def plot_psychometric(data):
 
     main_color = "#7E1010"
     x_smooth = np.linspace(-100, 100, 400)
+    data = data.loc[~data["contrast"].abs().round(8).isin({4, 8})]
     stats = data.groupby("contrast")["choice_binary"].agg(["mean", "sem"]).reset_index()
     stats[["mean", "sem"]] *= 100
     x_data = stats["contrast"].values
@@ -110,6 +111,7 @@ def plot_psychometric(data):
         print("\nFit completed successfully:")
         print(f" -> Bias (target point of indifference): {popt[0]:.2f}%")
         print(f" -> Slope (subject sensitivity): {popt[1]:.4f}")
+        print(f" -> Mean reaction time: {data['keySide.rt'].mean() * 1000:.2f} ms")
     except Exception as error:
         print(f"\nCould not fit the logistic curve: {error}")
 
@@ -128,7 +130,7 @@ def plot_psychometric(data):
     ax.set_ylabel("Rightward choices (%)", fontsize=11)
     ax.set_ylim(-5, 105)
     ax.set_xlim(-105, 105)
-    x_ticks = [-100, -8, -4, -2.5, -2, -1, 0, 1, 2, 2.5, 4, 8, 100]
+    x_ticks = [-100, -2.5, -2, -1, 0, 1, 2, 2.5, 100]
     ax.set_xticks(x_ticks)
     ax.set_xticklabels([str(tick) for tick in x_ticks], rotation=45)
     ax.legend(frameon=False, loc="upper left")
@@ -173,6 +175,9 @@ def main():
 
     end_time = time.perf_counter()
     print(f"Processing time: {end_time - start_time:.4f} seconds")
+
+
+
 
 
 if __name__ == "__main__":
