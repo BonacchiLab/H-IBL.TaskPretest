@@ -611,6 +611,635 @@
           </Edges>
         </Workflow>
       </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Blue20Screen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>0</ColorR>
+              <ColorG>0</ColorG>
+              <ColorB>0.2</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Blue40Screen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>0</ColorR>
+              <ColorG>0</ColorG>
+              <ColorB>0.4</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Blue60Screen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>0</ColorR>
+              <ColorG>0</ColorG>
+              <ColorB>0.6</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Blue80Screen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>0</ColorR>
+              <ColorG>0</ColorG>
+              <ColorB>0.8</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>BlueScreen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>0</ColorR>
+              <ColorG>0</ColorG>
+              <ColorB>1</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>BlackScreen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>0</ColorR>
+              <ColorG>0</ColorG>
+              <ColorB>0</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Red20Screen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>0.2</ColorR>
+              <ColorG>0</ColorG>
+              <ColorB>0</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Red40Screen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>0.4</ColorR>
+              <ColorG>0</ColorG>
+              <ColorB>0</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Red60Screen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>0.6</ColorR>
+              <ColorG>0</ColorG>
+              <ColorB>0</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Red80Screen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>0.8</ColorR>
+              <ColorG>0</ColorG>
+              <ColorB>0</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>RedScreen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>1</ColorR>
+              <ColorG>0</ColorG>
+              <ColorB>0</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>BlackScreen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>0</ColorR>
+              <ColorG>0</ColorG>
+              <ColorB>0</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Green20Screen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>0</ColorR>
+              <ColorG>0.2</ColorG>
+              <ColorB>0</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Green40Screen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>0</ColorR>
+              <ColorG>0.4</ColorG>
+              <ColorB>0</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Green60Screen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>0</ColorR>
+              <ColorG>0.6</ColorG>
+              <ColorB>0</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Green80Screen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>0</ColorR>
+              <ColorG>0.8</ColorG>
+              <ColorB>0</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>GreenScreen</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DrawFrame</Name>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+              <ExtentX>3.56</ExtentX>
+              <ExtentY>2</ExtentY>
+              <LocationX>0</LocationX>
+              <LocationY>0</LocationY>
+              <Layer>1</Layer>
+              <Angle>0</Angle>
+              <ColorR>0</ColorR>
+              <ColorG>1</ColorG>
+              <ColorB>0</ColorB>
+              <ColorA>1</ColorA>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:TakeUntil" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:Concat" />
       </Expression>
@@ -635,22 +1264,39 @@
       <Edge From="7" To="8" Label="Source1" />
       <Edge From="8" To="9" Label="Source1" />
       <Edge From="9" To="10" Label="Source1" />
-      <Edge From="11" To="25" Label="Source1" />
-      <Edge From="12" To="25" Label="Source2" />
-      <Edge From="13" To="25" Label="Source3" />
-      <Edge From="14" To="25" Label="Source4" />
-      <Edge From="15" To="25" Label="Source5" />
-      <Edge From="16" To="25" Label="Source6" />
-      <Edge From="17" To="25" Label="Source7" />
-      <Edge From="18" To="25" Label="Source8" />
-      <Edge From="19" To="25" Label="Source9" />
-      <Edge From="20" To="25" Label="Source10" />
-      <Edge From="21" To="25" Label="Source11" />
-      <Edge From="22" To="25" Label="Source12" />
-      <Edge From="23" To="25" Label="Source13" />
-      <Edge From="24" To="25" Label="Source14" />
-      <Edge From="25" To="26" Label="Source1" />
-      <Edge From="26" To="27" Label="Source1" />
+      <Edge From="11" To="42" Label="Source1" />
+      <Edge From="12" To="42" Label="Source2" />
+      <Edge From="13" To="42" Label="Source3" />
+      <Edge From="14" To="42" Label="Source4" />
+      <Edge From="15" To="42" Label="Source5" />
+      <Edge From="16" To="42" Label="Source6" />
+      <Edge From="17" To="42" Label="Source7" />
+      <Edge From="18" To="42" Label="Source8" />
+      <Edge From="19" To="42" Label="Source9" />
+      <Edge From="20" To="42" Label="Source10" />
+      <Edge From="21" To="42" Label="Source11" />
+      <Edge From="22" To="42" Label="Source12" />
+      <Edge From="23" To="42" Label="Source13" />
+      <Edge From="24" To="42" Label="Source14" />
+      <Edge From="25" To="42" Label="Source15" />
+      <Edge From="26" To="42" Label="Source16" />
+      <Edge From="27" To="42" Label="Source17" />
+      <Edge From="28" To="42" Label="Source18" />
+      <Edge From="29" To="42" Label="Source19" />
+      <Edge From="30" To="42" Label="Source20" />
+      <Edge From="31" To="42" Label="Source21" />
+      <Edge From="32" To="42" Label="Source22" />
+      <Edge From="33" To="42" Label="Source23" />
+      <Edge From="34" To="42" Label="Source24" />
+      <Edge From="35" To="42" Label="Source25" />
+      <Edge From="36" To="42" Label="Source26" />
+      <Edge From="37" To="42" Label="Source27" />
+      <Edge From="38" To="42" Label="Source28" />
+      <Edge From="39" To="42" Label="Source29" />
+      <Edge From="40" To="42" Label="Source30" />
+      <Edge From="41" To="42" Label="Source31" />
+      <Edge From="42" To="43" Label="Source1" />
+      <Edge From="43" To="44" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
