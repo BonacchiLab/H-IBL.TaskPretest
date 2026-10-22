@@ -1,6 +1,8 @@
-""" This script analyzes AVI videos for screen calibration, focusing on RGB intensity and spatial uniformity.
+"""Analyze AVI videos for screen calibration, focusing on RGB intensity,
+luminance, and spatial uniformity.
 It is directly compatible with the bonsai workflow for screen calibration, but can also be run as a standalone script.
-It analyze RGB intensity and spatial uniformity in screen-calibration AVI videos. It functions for the:
+It analyzes RGB intensity, luminance, spatial uniformity, and per-frame
+RGB/luminance changes in screen-calibration AVI videos. It functions for the:
 - Control screens (black-white-black-blue-black-red-black-green-black)
 - Grey sweeps
 - Blue sweeps
@@ -187,6 +189,32 @@ def _load_screen_segments(csv_path, frame_count):
     return segments
 
 
+def _video_folders(data_directory):
+    """Return the PC_* data folders, or the directory itself if there are none."""
+    pc_folders = sorted(
+        (
+            folder
+            for folder in glob.glob(os.path.join(data_directory, "PC_*"))
+            if os.path.isdir(folder)
+        ),
+        key=str.lower,
+    )
+    return pc_folders or [data_directory]
+
+
+def _avi_files(folder):
+    """Return AVI files directly inside a data folder."""
+    return sorted(
+        (
+            os.path.join(folder, name)
+            for name in os.listdir(folder)
+            if name.lower().endswith(".avi")
+            and os.path.isfile(os.path.join(folder, name))
+        ),
+        key=str.lower,
+    )
+
+
 def analyze_video_sweeps(file_path, timing_csv):
     """Measure each changing Bonsai screen state in a continuous AVI recording."""
     capture = cv2.VideoCapture(file_path)
@@ -262,19 +290,8 @@ def analyze_all_computers(data_directory):
     if not os.path.isdir(data_directory):
         raise FileNotFoundError(f"Data directory does not exist: {data_directory}")
 
-    pc_folders = sorted(
-        (
-            folder
-            for folder in glob.glob(os.path.join(data_directory, "PC_*"))
-            if os.path.isdir(folder)
-        ),
-        key=str.lower,
-    )
-    if not pc_folders:
-        pc_folders = [data_directory]
-
     results = []
-    for folder in pc_folders:
+    for folder in _video_folders(data_directory):
         timing_files = {}
         for name in os.listdir(folder):
             if name.lower().endswith(".csv"):
@@ -292,17 +309,7 @@ def analyze_all_computers(data_directory):
             if os.path.normcase(folder) != os.path.normcase(data_directory)
             else "Single_Folder"
         )
-        avi_files = sorted(
-            (
-                os.path.join(folder, name)
-                for name in os.listdir(folder)
-                if name.lower().endswith(".avi")
-                and os.path.isfile(os.path.join(folder, name))
-            ),
-            key=str.lower,
-        )
-
-        for file_path in avi_files:
+        for file_path in _avi_files(folder):
             token = _timestamp_token(os.path.basename(file_path))
             timing_csv = timing_files.get(token) if token else None
             recording = token or os.path.splitext(os.path.basename(file_path))[0]
@@ -327,6 +334,85 @@ def analyze_all_computers(data_directory):
             )
 
     return pd.DataFrame(results)
+
+
+def plot_video_time_series(data_directory, show=True):
+    """Plot center-ROI RGB intensity and luminance for every frame of each AVI."""
+    video_files = [
+        file_path
+        for folder in _video_folders(data_directory)
+        for file_path in _avi_files(folder)
+    ]
+    if not video_files:
+        print("No AVI video data found for time-series plotting.")
+        return
+
+    columns = min(2, len(video_files))
+    rows = int(np.ceil(len(video_files) / columns))
+    fig, axes = plt.subplots(
+        rows,
+        columns,
+        figsize=(12, 4 * rows),
+        squeeze=False,
+    )
+    for axis, file_path in zip(axes.flat, video_files):
+        capture = cv2.VideoCapture(file_path)
+        if not capture.isOpened():
+            capture.release()
+            raise OSError(f"Could not open AVI video: {file_path}")
+
+        fps = capture.get(cv2.CAP_PROP_FPS)
+        center_means = []
+        try:
+            while True:
+                success, bgr_frame = capture.read()
+                if not success:
+                    break
+
+                rgb_frame = cv2.cvtColor(bgr_frame, cv2.COLOR_BGR2RGB)
+                center_means.append(
+                    _roi_channel_means(rgb_frame, (0.4, 0.4, 0.6, 0.6))
+                )
+        finally:
+            capture.release()
+
+        if not center_means:
+            raise ValueError(f"No readable frames found in AVI video: {file_path}")
+
+        center_means = np.asarray(center_means)
+        if np.isfinite(fps) and fps > 0:
+            x_values = np.arange(len(center_means)) / fps
+            x_label = "Time (seconds)"
+        else:
+            x_values = np.arange(len(center_means))
+            x_label = "Frame"
+
+        axis.plot(x_values, center_means[:, 0], color="red", label="Red")
+        axis.plot(x_values, center_means[:, 1], color="green", label="Green")
+        axis.plot(x_values, center_means[:, 2], color="blue", label="Blue")
+        luminance = center_means @ np.array((0.2126, 0.7152, 0.0722))
+        axis.plot(
+            x_values,
+            luminance,
+            color="black",
+            linestyle="--",
+            label="Luminance",
+        )
+        title = os.path.relpath(file_path, data_directory)
+        axis.set_title(title)
+        axis.set_xlabel(x_label)
+        axis.set_ylabel("Center ROI intensity (8-bit)")
+        axis.set_ylim(0, 255)
+        axis.grid(axis="y", alpha=0.25)
+        axis.legend()
+
+    for axis in axes.flat[len(video_files):]:
+        axis.axis("off")
+
+    fig.suptitle("Center ROI RGB intensity and luminance over time")
+    fig.tight_layout()
+    if show:
+        plt.show()
 
 
 def _adjust_p_values(p_values):
@@ -423,7 +509,7 @@ def compare_screen_recordings(df):
     return comparison_df
 
 
-def plot_comparison(df, comparison_df=None):
+def plot_comparison(df, comparison_df=None, show=True):
     """Plot screen measurements across recordings and annotate significant results."""
     if df.empty:
         print("No AVI video data found to plot.")
@@ -520,7 +606,8 @@ def plot_comparison(df, comparison_df=None):
             )
 
     fig.tight_layout()
-    plt.show()
+    if show:
+        plt.show()
 
 
 def main():
@@ -574,7 +661,9 @@ def main():
                 "each display in separate PC_* folders."
             )
 
-    plot_comparison(df_results, comparison_df)
+    plot_video_time_series(args.data_directory, show=False)
+    plot_comparison(df_results, comparison_df, show=False)
+    plt.show()
     print(f"Total processing time: {time.time() - start_time:.2f} seconds")
 
 
