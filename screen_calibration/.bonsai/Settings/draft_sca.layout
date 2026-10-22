@@ -1,24 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<VisualizerLayout Version="2.9.1">
-  <WindowSettings Index="7">
-    <Visible>false</Visible>
-    <Location>
-      <X>676</X>
-      <Y>101</Y>
-    </Location>
-    <Size>
-      <Width>416</Width>
-      <Height>279</Height>
-    </Size>
-    <WindowState>Maximized</WindowState>
-    <VisualizerTypeName>Bonsai.Vision.Design.ScalarVisualizer</VisualizerTypeName>
-    <VisualizerSettings>
-      <ScalarVisualizer>
-        <Capacity>640</Capacity>
-        <Min>0</Min>
-        <Max>250</Max>
-        <AutoScale>true</AutoScale>
-      </ScalarVisualizer>
-    </VisualizerSettings>
-  </WindowSettings>
-</VisualizerLayout>
+<VisualizerLayout Version="2.9.1" />
