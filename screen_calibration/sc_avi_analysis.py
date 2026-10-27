@@ -337,7 +337,7 @@ def analyze_all_computers(data_directory):
 
 
 def plot_video_time_series(data_directory, show=True):
-    """Plot center-ROI RGB intensity and luminance for every frame of each AVI."""
+    """Plot a time series for each RGB channel with one curve per AVI."""
     video_files = [
         file_path
         for folder in _video_folders(data_directory)
@@ -347,15 +347,8 @@ def plot_video_time_series(data_directory, show=True):
         print("No AVI video data found for time-series plotting.")
         return
 
-    columns = min(2, len(video_files))
-    rows = int(np.ceil(len(video_files) / columns))
-    fig, axes = plt.subplots(
-        rows,
-        columns,
-        figsize=(12, 4 * rows),
-        squeeze=False,
-    )
-    for axis, file_path in zip(axes.flat, video_files):
+    video_series = []
+    for file_path in video_files:
         capture = cv2.VideoCapture(file_path)
         if not capture.isOpened():
             capture.release()
@@ -379,37 +372,50 @@ def plot_video_time_series(data_directory, show=True):
         if not center_means:
             raise ValueError(f"No readable frames found in AVI video: {file_path}")
 
-        center_means = np.asarray(center_means)
-        if np.isfinite(fps) and fps > 0:
-            x_values = np.arange(len(center_means)) / fps
-            x_label = "Time (seconds)"
-        else:
-            x_values = np.arange(len(center_means))
-            x_label = "Frame"
+        video_series.append((file_path, np.asarray(center_means), fps))
 
-        axis.plot(x_values, center_means[:, 0], color="red", label="Red")
-        axis.plot(x_values, center_means[:, 1], color="green", label="Green")
-        axis.plot(x_values, center_means[:, 2], color="blue", label="Blue")
-        luminance = center_means @ np.array((0.2126, 0.7152, 0.0722))
-        axis.plot(
-            x_values,
-            luminance,
-            color="black",
-            linestyle="--",
-            label="Luminance",
+    use_seconds = all(
+        np.isfinite(fps) and fps > 0 for _, _, fps in video_series
+    )
+
+    channel_plots = (
+        ("Blue", 2, "Blues"),
+        ("Green", 1, "Greens"),
+        ("Red", 0, "Reds"),
+    )
+    fig, axes = plt.subplots(
+        len(channel_plots),
+        1,
+        figsize=(12, 4 * len(channel_plots)),
+        squeeze=False,
+    )
+    for axis, (channel_name, channel_index, color_map) in zip(
+        axes.flat, channel_plots
+    ):
+        shades = plt.get_cmap(color_map)(
+            np.linspace(0.45, 0.95, len(video_series))
         )
-        title = os.path.relpath(file_path, data_directory)
-        axis.set_title(title)
-        axis.set_xlabel(x_label)
+        for (file_path, center_means, fps), color in zip(video_series, shades):
+            x_values = (
+                np.arange(len(center_means)) / fps
+                if use_seconds
+                else np.arange(len(center_means))
+            )
+            axis.plot(
+                x_values,
+                center_means[:, channel_index],
+                color=color,
+                label=os.path.relpath(file_path, data_directory),
+            )
+
+        axis.set_title(f"{channel_name} channel")
+        axis.set_xlabel("Time (seconds)" if use_seconds else "Frame")
         axis.set_ylabel("Center ROI intensity (8-bit)")
         axis.set_ylim(0, 255)
         axis.grid(axis="y", alpha=0.25)
-        axis.legend()
+        axis.legend(title="Video")
 
-    for axis in axes.flat[len(video_files):]:
-        axis.axis("off")
-
-    fig.suptitle("Center ROI RGB intensity and luminance over time")
+    fig.suptitle("Center ROI RGB intensity over time by video")
     fig.tight_layout()
     if show:
         plt.show()
