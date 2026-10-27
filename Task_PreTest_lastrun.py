@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2026.1.2),
-    on outubro 26, 2026, at 23:32
+    on outubro 27, 2026, at 14:08
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -395,54 +395,85 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     import cv2, threading, csv, atexit
     from psychopy import core
     
-    CAM_INDEX = 1            # 0 = built in came
-    REQ_W, REQ_H, REQ_FPS = 1280, 720, 30
+    CAM_INDEX = 1                       # 0 = interna, 1 = C270 USB
+    REQ_W, REQ_H, REQ_FPS = 640, 480, 30
+    EXPOSURE = -6                       # teste -5, -6, -7 (mais negativo = mais escuro e mais fps)
     
     class CamRecorder:
         def __init__(self, index, video_path, csv_path):
+            self.ok = False
+            self.n = 0              # frames reais capturados
+            self.written = 0        # frames escritos no ficheiro
+            self.fps = float(REQ_FPS)
+            self._stop = threading.Event()
             self.cap = cv2.VideoCapture(index, cv2.CAP_DSHOW)
-            self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
             self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, REQ_W)
             self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, REQ_H)
+            self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
             self.cap.set(cv2.CAP_PROP_FPS, REQ_FPS)
-            self.ok = self.cap.isOpened() and self.cap.read()[0]
-            self.n = 0
-            self._stop = threading.Event()
-            if not self.ok:
+            self.cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)   # modo manual
+            self.cap.set(cv2.CAP_PROP_EXPOSURE, EXPOSURE)
+            if not (self.cap.isOpened() and self.cap.read()[0]):
+                print("Câmara não abriu. A correr sem gravação.")
                 return
             w = int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))
             h = int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-            fps = self.cap.get(cv2.CAP_PROP_FPS) or REQ_FPS
+            fc = int(self.cap.get(cv2.CAP_PROP_FOURCC))
+            fmt = "".join(chr((fc >> 8 * i) & 0xFF) for i in range(4))
             self.writer = cv2.VideoWriter(
-                video_path, cv2.VideoWriter_fourcc(*"MJPG"), fps, (w, h))
+                video_path, cv2.VideoWriter_fourcc(*"MJPG"), self.fps, (w, h))
             self._csvfile = open(csv_path, "w", newline="")
             self._csv = csv.writer(self._csvfile)
-            self._csv.writerow(["frame", "psychopy_time"])
-            print(f"Cam OK: {w}x{h} @ {fps} fps")
+            self._csv.writerow(["real_frame", "video_frame", "psychopy_time"])
+            self.t_first = None
+            self.t_last = None
+            self.ok = True
+            print(f"Câmara OK: {w}x{h}, formato {fmt}, ficheiro a {self.fps} fps")
             self.thread = threading.Thread(target=self._loop, daemon=True)
             self.thread.start()
     
         def _loop(self):
+            t0 = None
             while not self._stop.is_set():
                 ok, frame = self.cap.read()
-                t = core.getTime()          # time right after capture
-                if ok:
+                t = core.getTime()
+                if not ok:
+                    continue
+                if t0 is None:
+                    t0 = t
+                    self.t_first = t
+                self.t_last = t
+                # nº de frames que o ficheiro já devia ter neste instante
+                target = int((t - t0) * self.fps) + 1
+                first_idx = self.written
+                while self.written < target:
                     self.writer.write(frame)
-                    self._csv.writerow([self.n, t])
-                    self.n += 1
+                    self.written += 1
+                # frame real -> índice do 1º frame do ficheiro que o representa
+                self._csv.writerow([self.n, first_idx, t])
+                self.n += 1
     
         def stop(self):
             if not self.ok:
                 return
+            self.ok = False
             self._stop.set()
             self.thread.join(timeout=2)
             self.writer.release()
             self.cap.release()
             self._csvfile.close()
-            self.ok = False
+            if self.t_last and self.t_first and self.t_last > self.t_first:
+                dur = self.t_last - self.t_first
+                print(f"fps reais da câmara: {self.n / dur:.1f} "
+                      f"({self.n} frames reais, {self.written} no ficheiro, {dur:.1f} s)")
     
-    video_path = filename + "_cam.avi"
-    csv_path = filename + "_cam_timestamps.csv"
+    try:
+        base = filename
+    except NameError:
+        base = thisExp.dataFileName
+    
+    video_path = base + "_cam.avi"
+    csv_path = base + "_cam_timestamps.csv"
     rec = CamRecorder(CAM_INDEX, video_path, csv_path)
     atexit.register(rec.stop)
     textWelcome = visual.TextStim(win=win, name='textWelcome',
