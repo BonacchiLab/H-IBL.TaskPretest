@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2026.1.2),
-    on outubro 12, 2026, at 19:22
+    on outubro 26, 2026, at 23:32
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -392,29 +392,59 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "WelcomeScreen" ---
     # Run 'Begin Experiment' code from GlobalCam
-    import cv2
-    import psychopy
+    import cv2, threading, csv, atexit
+    from psychopy import core
     
-    # Índice do dispositivo (normalmente 0 para a webcam principal do sistema)
-    CAM_INDEX = 1
+    CAM_INDEX = 1            # 0 = built in came
+    REQ_W, REQ_H, REQ_FPS = 1280, 720, 30
     
-    if not hasattr(psychopy, "GlobalCam") or psychopy.GlobalCam is None:
-        psychopy.GlobalCam = cv2.VideoCapture(CAM_INDEX)
-        psychopy.GlobalCam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-        psychopy.GlobalCam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+    class CamRecorder:
+        def __init__(self, index, video_path, csv_path):
+            self.cap = cv2.VideoCapture(index, cv2.CAP_DSHOW)
+            self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
+            self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, REQ_W)
+            self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, REQ_H)
+            self.cap.set(cv2.CAP_PROP_FPS, REQ_FPS)
+            self.ok = self.cap.isOpened() and self.cap.read()[0]
+            self.n = 0
+            self._stop = threading.Event()
+            if not self.ok:
+                return
+            w = int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+            h = int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+            fps = self.cap.get(cv2.CAP_PROP_FPS) or REQ_FPS
+            self.writer = cv2.VideoWriter(
+                video_path, cv2.VideoWriter_fourcc(*"MJPG"), fps, (w, h))
+            self._csvfile = open(csv_path, "w", newline="")
+            self._csv = csv.writer(self._csvfile)
+            self._csv.writerow(["frame", "psychopy_time"])
+            print(f"Cam OK: {w}x{h} @ {fps} fps")
+            self.thread = threading.Thread(target=self._loop, daemon=True)
+            self.thread.start()
     
-    if psychopy.GlobalCam.isOpened():
-        print(f"✅ Webcam Logi C270 (índice {CAM_INDEX}) associada com sucesso!")
-        video_filename = "sessao_completa.avi"
-        fourcc = cv2.VideoWriter_fourcc(*"XVID")
-        psychopy.global_video_writer = cv2.VideoWriter(
-            video_filename, fourcc, 30.0, (1280, 720)
-        )
-    else:
-        print(
-            f"❌ Não foi possível abrir a webcam no índice {CAM_INDEX}. Tenta mudar CAM_INDEX para 1."
-        )
-        psychopy.global_video_writer = None
+        def _loop(self):
+            while not self._stop.is_set():
+                ok, frame = self.cap.read()
+                t = core.getTime()          # time right after capture
+                if ok:
+                    self.writer.write(frame)
+                    self._csv.writerow([self.n, t])
+                    self.n += 1
+    
+        def stop(self):
+            if not self.ok:
+                return
+            self._stop.set()
+            self.thread.join(timeout=2)
+            self.writer.release()
+            self.cap.release()
+            self._csvfile.close()
+            self.ok = False
+    
+    video_path = filename + "_cam.avi"
+    csv_path = filename + "_cam_timestamps.csv"
+    rec = CamRecorder(CAM_INDEX, video_path, csv_path)
+    atexit.register(rec.stop)
     textWelcome = visual.TextStim(win=win, name='textWelcome',
         text='Irá iniciar a tarefa. A mesma consiste na apresentação de um contraste à direita/esquerda. Indique em cada trial o lado do estímulo utilizando a tecla -S- para o lado esquerdo e  -L- para o lado direito. \n\nPedimos que mantenha o olhar no centro do ecrã durante a experiência\n\nPressione a SPACEBAR para começar',
         font='Arial',
@@ -691,11 +721,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
         # Run 'Each Frame' code from GlobalCam
-        # Corre a cada fotograma em QUALQUER rotina onde este Code Component ou variável exista
-        if hasattr(psychopy, 'global_cam') and psychopy.global_cam.isOpened():
-            ret, frame = psychopy.global_cam.read()
-            if ret and hasattr(psychopy, 'global_video_writer') and psychopy.global_video_writer is not None:
-                psychopy.global_video_writer.write(frame)
+        thisExp.addData("cam_frame_at_stim", rec.n)
+        thisExp.addData("cam_time_at_stim", core.getTime())
         
         # *textWelcome* updates
         
@@ -787,20 +814,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     WelcomeScreen.tStop = globalClock.getTime(format='float')
     WelcomeScreen.tStopRefresh = tThisFlipGlobal
     thisExp.addData('WelcomeScreen.stopped', WelcomeScreen.tStop)
-    # Run 'End Routine' code from GlobalCam
-    if (
-        hasattr(psychopy, "global_video_writer")
-        and psychopy.global_video_writer is not None
-    ):
-        psychopy.global_video_writer.release()
-        psychopy.global_video_writer = None
-    
-    if hasattr(psychopy, "global_cam") and psychopy.global_cam is not None:
-        psychopy.global_cam.release()
-        psychopy.global_cam = None
-    
-    cv2.destroyAllWindows()
-    print("Ficheiro de vídeo gravado e fechado com sucesso!")
     # check responses
     if key_respWelcome.keys in ['', [], None]:  # No response was made
         key_respWelcome.keys = None
@@ -3142,6 +3155,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     else:
         routineTimer.addTime(-3.000000)
     thisExp.nextEntry()
+    # Run 'End Experiment' code from GlobalCam
+    rec.stop()
+    print("Saved Capture.")
     
     # mark experiment as finished
     endExperiment(thisExp, win=win)
