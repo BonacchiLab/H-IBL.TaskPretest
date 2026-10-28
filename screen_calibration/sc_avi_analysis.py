@@ -32,8 +32,8 @@ import numpy as np
 import pandas as pd
 from scipy.stats import ttest_ind
 
-
-def _roi_channel_means(rgb_frame, roi_box):
+# This function is used to calculate the mean RGB values for a ROI. 
+def _roi_channel_means(rgb_frame, roi_box): 
     """Return RGB means for a normalized (x_min, y_min, x_max, y_max) ROI."""
     if rgb_frame.ndim != 3 or rgb_frame.shape[2] != 3:
         raise ValueError("Expected a video frame with three RGB channels.")
@@ -49,7 +49,8 @@ def _roi_channel_means(rgb_frame, roi_box):
 
     return roi.mean(axis=(0, 1))
 
-
+# This function analyzes a video file and calculates the mean RGB values for the center and corner regions of each frame.
+# It also computes the luminance and uniformity percentage based on these values.
 def analyze_video(file_path):
     """Measure mean center and top-left RGB intensity across all video frames."""
     capture = cv2.VideoCapture(file_path)
@@ -75,7 +76,7 @@ def analyze_video(file_path):
     finally:
         capture.release()
 
-    if frame_count == 0:
+    if frame_count == 0: #debug 
         raise ValueError(f"No readable frames found in AVI video: {file_path}")
 
     center_rgb = center_sum / frame_count
@@ -100,13 +101,13 @@ def analyze_video(file_path):
         ),
     }
 
-
-def _timestamp_token(file_name):
+# Function for csv timestamp extraction from file name
+def _timestamp_token(file_name): 
     """Return the Bonsai timestamp shared by an AVI and its timing CSV."""
     match = re.search(r"\d{4}-\d{2}-\d{2}T\d{2}_\d{2}_\d{2}", file_name)
     return match.group(0) if match else None
 
-
+# This function converts RGB values to a readable screen name based on the intensity and active channels.
 def _screen_name(rgb):
     """Convert a Bonsai RGB stimulus value to a readable screen name."""
     channels = np.asarray(rgb, dtype=np.float64)
@@ -131,7 +132,7 @@ def _screen_name(rgb):
 
     return "RGB_" + "_".join(f"{value:g}" for value in channels)
 
-
+# Function to load screen segments from a CSV file and map them onto AVI frame ranges.
 def _load_screen_segments(csv_path, frame_count):
     """Map Bonsai's per-frame RGB values and timestamps onto AVI frame ranges."""
     timing = pd.read_csv(csv_path)
@@ -148,14 +149,14 @@ def _load_screen_segments(csv_path, frame_count):
     colors = timing[["Value.X", "Value.Y", "Value.Z"]].to_numpy(dtype=np.float64)
     timestamps = pd.to_datetime(timing["Timestamp"], errors="coerce", utc=True)
     if not np.isfinite(colors).all() or timestamps.isna().any():
-        raise ValueError(f"Timing CSV contains invalid screen data: {csv_path}")
+        raise ValueError(f"Timing CSV contains invalid screen data: {csv_path}") 
 
     timestamp_seconds = timestamps.astype("int64").to_numpy() / 1e9
     intervals = np.diff(timestamp_seconds)
     positive_intervals = intervals[intervals > 0]
     if not len(positive_intervals):
         if len(timestamp_seconds) > 1:
-            raise ValueError(f"Timing CSV timestamps are not increasing: {csv_path}")
+            raise ValueError(f"Timing CSV timestamps are not increasing: {csv_path}") 
         median_interval = 1.0
     else:
         if np.any(intervals < 0):
@@ -167,7 +168,7 @@ def _load_screen_segments(csv_path, frame_count):
         raise ValueError(f"Timing CSV has an invalid duration: {csv_path}")
 
     run_starts = np.r_[0, np.flatnonzero(np.any(np.diff(colors, axis=0) != 0, axis=1)) + 1]
-    segments = []
+    segments = [] 
     for index, row_start in enumerate(run_starts):
         start_time = timestamp_seconds[row_start] - timestamp_seconds[0]
         start_frame = int(round(start_time / total_duration * frame_count))
@@ -188,7 +189,8 @@ def _load_screen_segments(csv_path, frame_count):
 
     return segments
 
-
+# Function to find video folders in the data directory, returning either the PC_* subfolders or the directory itself 
+# if none are found.
 def _video_folders(data_directory):
     """Return the PC_* data folders, or the directory itself if there are none."""
     pc_folders = sorted(
@@ -201,7 +203,7 @@ def _video_folders(data_directory):
     )
     return pc_folders or [data_directory]
 
-
+# Function to find AVI files in a given folder, returning a sorted list of file paths.
 def _avi_files(folder):
     """Return AVI files directly inside a data folder."""
     return sorted(
@@ -214,7 +216,8 @@ def _avi_files(folder):
         key=str.lower,
     )
 
-
+# This function analyzes a video file and its corresponding timing CSV to measure each changing Bonsai screen state 
+# in a continuous AVI recording.
 def analyze_video_sweeps(file_path, timing_csv):
     """Measure each changing Bonsai screen state in a continuous AVI recording."""
     capture = cv2.VideoCapture(file_path)
@@ -284,7 +287,7 @@ def analyze_video_sweeps(file_path, timing_csv):
 
     return results
 
-
+# Compares AVI videos in PC_* subfolders or directly in the given directory, returning a DataFrame with the results.
 def analyze_all_computers(data_directory):
     """Analyze AVI videos in PC_* subfolders or directly in the given directory."""
     if not os.path.isdir(data_directory):
@@ -335,7 +338,7 @@ def analyze_all_computers(data_directory):
 
     return pd.DataFrame(results)
 
-
+#Plots a time series for each RGB channel with one curve per AVI.
 def plot_video_time_series(data_directory, show=True):
     """Plot a time series for each RGB channel with one curve per AVI."""
     video_files = [
@@ -420,7 +423,7 @@ def plot_video_time_series(data_directory, show=True):
     if show:
         plt.show()
 
-
+# P-value adjustment function
 def _adjust_p_values(p_values):
     """Apply the Benjamini-Hochberg correction to a sequence of p-values."""
     p_values = np.asarray(p_values, dtype=np.float64)
@@ -514,7 +517,7 @@ def compare_screen_recordings(df):
 
     return comparison_df
 
-
+# Function to plot screen measurements across recordings and annotate significant results.
 def plot_comparison(df, comparison_df=None, show=True):
     """Plot screen measurements across recordings and annotate significant results."""
     if df.empty:
