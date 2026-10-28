@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 from scipy.optimize import curve_fit
 
-
+# Psychometric function for contrast x behavior fitting, based on a logistic function.
 def psychometric_function(x, bias, slope):
     return 100 / (1 + np.exp(-slope * (x - bias)))
 
@@ -81,7 +81,7 @@ def prepare_data(data):
     )
     return data.dropna(subset=["choice_binary"])
 
-
+# Main function to find the contrasts that better fit the psychometric.
 def plot_psychometric(data):
     """Plot rightward-choice rate and the fitted psychometric curve."""
     fig, ax = plt.subplots(figsize=(6, 5))
@@ -90,7 +90,7 @@ def plot_psychometric(data):
 
     main_color = "#7E1010"
     x_smooth = np.linspace(-100, 100, 400)
-    data = data.loc[~data["contrast"].abs().round(8).isin({4, 8})]
+    data = data.loc[~data["contrast"].abs().round(8).isin({2.5, 8})] # abs()
     stats = data.groupby("contrast")["choice_binary"].agg(["mean", "sem"]).reset_index()
     stats[["mean", "sem"]] *= 100
     x_data = stats["contrast"].values
@@ -130,7 +130,7 @@ def plot_psychometric(data):
     ax.set_ylabel("Rightward choices (%)", fontsize=11)
     ax.set_ylim(-5, 105)
     ax.set_xlim(-105, 105)
-    x_ticks = [-100, -2.5, -2, -1, 0, 1, 2, 2.5, 100]
+    x_ticks = [-100, -4, -2, -1, 0, 1, 2, 4, 100]
     ax.set_xticks(x_ticks)
     ax.set_xticklabels([str(tick) for tick in x_ticks], rotation=45)
     ax.legend(frameon=False, loc="upper left")
@@ -138,6 +138,66 @@ def plot_psychometric(data):
     fig.tight_layout()
 
 
+# Main function to find the contrasts that better fit the psychometric. 
+# HAS ALL CONTRASTS
+def plot_psychometric_all_contrasts(data):
+    """Plot rightward-choice rate and the fitted psychometric curve."""
+    fig, ax = plt.subplots(figsize=(6, 5))
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    main_color = "#7E1010"
+    x_smooth = np.linspace(-100, 100, 400)
+    stats = data.groupby("contrast")["choice_binary"].agg(["mean", "sem"]).reset_index()
+    stats[["mean", "sem"]] *= 100
+    x_data = stats["contrast"].values
+    y_data = stats["mean"].values
+    y_err = stats["sem"].values
+
+    try:
+        popt, _ = curve_fit(
+            psychometric_function, x_data, y_data, p0=[0, 0.1], maxfev=5000
+        )
+        ax.plot(
+            x_smooth,
+            psychometric_function(x_smooth, *popt),
+            color=main_color,
+            lw=2.5,
+            label="Psychometric fit",
+        )
+        print("\nFit completed successfully:")
+        print(f" -> Bias (target point of indifference): {popt[0]:.2f}%")
+        print(f" -> Slope (subject sensitivity): {popt[1]:.4f}")
+        print(f" -> Mean reaction time: {data['keySide.rt'].mean() * 1000:.2f} ms")
+    except Exception as error:
+        print(f"\nCould not fit the logistic curve: {error}")
+
+    ax.errorbar(
+        x_data,
+        y_data,
+        yerr=y_err,
+        fmt="o",
+        color=main_color,
+        mec="w",
+        mew=0.5,
+        ms=7,
+        label="Subject data",
+    )
+    ax.set_xlabel(r"$\Delta$ Contrast (%)", fontsize=11)
+    ax.set_ylabel("Rightward choices (%)", fontsize=11)
+    ax.set_ylim(-5, 105)
+    ax.set_xlim(-105, 105)
+    x_ticks = [-100,- 8, -4, -2.5, -2, -1, 0, 1, 2, 2.5, 4, 8, 100]
+    ax.set_xticks(x_ticks)
+    ax.set_xticklabels([str(tick) for tick in x_ticks], rotation=45)
+    ax.legend(frameon=False, loc="upper left")
+    ax.set_title("Psychometric function")
+    fig.tight_layout()
+
+
+
+
+""" OTHER PLOTS"""
 def plot_performance_between_blocks(data):
     """Plot reaction time by block."""
     block_column = "Pretest1Block.thisN"
@@ -170,6 +230,7 @@ def main():
     data = prepare_data(load_data(csv_paths))
 
     plot_psychometric(data)
+    plot_psychometric_all_contrasts(data)
     plot_performance_between_blocks(data)
     plt.show()
 
