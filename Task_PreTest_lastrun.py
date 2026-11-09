@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2026.1.2),
-    on outubro 27, 2026, at 14:08
+    on novembro 09, 2026, at 16:33
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -395,15 +395,15 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     import cv2, threading, csv, atexit
     from psychopy import core
     
-    CAM_INDEX = 1                       # 0 = interna, 1 = C270 USB
+    CAM_INDEX = 1                       # 0 = built-in, 1 = external USB C270
     REQ_W, REQ_H, REQ_FPS = 640, 480, 30
-    EXPOSURE = -6                       # teste -5, -6, -7 (mais negativo = mais escuro e mais fps)
+    EXPOSURE = -6                       # try -5, -6, -7 (more negative = darker but higher fps)
     
     class CamRecorder:
         def __init__(self, index, video_path, csv_path):
             self.ok = False
-            self.n = 0              # frames reais capturados
-            self.written = 0        # frames escritos no ficheiro
+            self.n = 0              # real frames captured
+            self.written = 0        # frames written to the video file
             self.fps = float(REQ_FPS)
             self._stop = threading.Event()
             self.cap = cv2.VideoCapture(index, cv2.CAP_DSHOW)
@@ -411,10 +411,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, REQ_H)
             self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
             self.cap.set(cv2.CAP_PROP_FPS, REQ_FPS)
-            self.cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)   # modo manual
+            self.cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)   # manual exposure mode
             self.cap.set(cv2.CAP_PROP_EXPOSURE, EXPOSURE)
             if not (self.cap.isOpened() and self.cap.read()[0]):
-                print("Câmara não abriu. A correr sem gravação.")
+                print("Camera failed to open. Running without recording.")
                 return
             w = int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))
             h = int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -428,7 +428,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             self.t_first = None
             self.t_last = None
             self.ok = True
-            print(f"Câmara OK: {w}x{h}, formato {fmt}, ficheiro a {self.fps} fps")
+            print(f"Camera OK: {w}x{h}, format {fmt}, file written at {self.fps} fps")
             self.thread = threading.Thread(target=self._loop, daemon=True)
             self.thread.start()
     
@@ -443,13 +443,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     t0 = t
                     self.t_first = t
                 self.t_last = t
-                # nº de frames que o ficheiro já devia ter neste instante
+                # number of frames the file should contain at this instant
                 target = int((t - t0) * self.fps) + 1
                 first_idx = self.written
                 while self.written < target:
                     self.writer.write(frame)
                     self.written += 1
-                # frame real -> índice do 1º frame do ficheiro que o representa
+                # real frame -> index of the first video-file frame that represents it
                 self._csv.writerow([self.n, first_idx, t])
                 self.n += 1
     
@@ -464,8 +464,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             self._csvfile.close()
             if self.t_last and self.t_first and self.t_last > self.t_first:
                 dur = self.t_last - self.t_first
-                print(f"fps reais da câmara: {self.n / dur:.1f} "
-                      f"({self.n} frames reais, {self.written} no ficheiro, {dur:.1f} s)")
+                print(f"Actual camera fps: {self.n / dur:.1f} "
+                      f"({self.n} real frames, {self.written} in file, {dur:.1f} s)")
     
     try:
         base = filename
@@ -509,7 +509,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     sound.Sound.backend = 'ptb'
     soundTutGoCue = sound.Sound(
         'A', 
-        secs=0.1, 
+        secs=0.08, 
         stereo=True, 
         hamming=True, 
         speaker=None,    name='soundTutGoCue'
@@ -582,7 +582,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # --- Initialize components for Routine "PreTest1Trials" ---
     soundGoCue = sound.Sound(
         'A', 
-        secs=0.1, 
+        secs=0.08, 
         stereo=True, 
         hamming=True, 
         speaker=None,    name='soundGoCue'
@@ -1134,7 +1134,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         extraInfo=expInfo, 
         originPath=-1, 
         trialList=data.importConditions('Conditions_Tut.xlsx'), 
-        seed=None, 
+        seed=45, 
         isTrials=True, 
     )
     thisExp.addLoop(PreTest1TrialsTut)  # add the loop to the experiment
@@ -1170,7 +1170,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         Tutorial.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
-        soundTutGoCue.setSound('5000', secs=0.1, hamming=True)
+        soundTutGoCue.setSound('5000', secs=0.08, hamming=True)
         soundTutGoCue.setVolume(1.0, log=False)
         soundTutGoCue.seek(0)
         gaborTut.setContrast(gratingT)
@@ -1243,7 +1243,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # if soundTutGoCue is stopping this frame...
             if soundTutGoCue.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > soundTutGoCue.tStartRefresh + 0.1-frameTolerance or soundTutGoCue.isFinished:
+                if tThisFlipGlobal > soundTutGoCue.tStartRefresh + 0.08-frameTolerance or soundTutGoCue.isFinished:
                     # keep track of stop time/frame for later
                     soundTutGoCue.tStop = t  # not accounting for scr refresh
                     soundTutGoCue.tStopRefresh = tThisFlipGlobal  # on global time
@@ -1486,13 +1486,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             scoreT += 1
             text_feedback = f"Correto!\n+1 point\nTotal: {scoreT}"
             win.color = "green"
-            sound_feedback = 4000
             durationtextT = 0.5
+            sound_feedback = None
             volume = 1
-            duration = 0.25
+            duration = 0
         else:
             scoreT += 0
-            text_feedback = f"Errado!\n+1 point\nTotal: {scoreT}"
+            text_feedback = f"Errado!\n+0 points\nTotal: {scoreT}"
             win.color = "red"
             sound_feedback = "sound_files/ibl_noise_burst.wav"
             durationtextT = 1
@@ -1976,12 +1976,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # set up handler to look after randomisation of conditions etc
         pretest1trialsTraining = data.TrialHandler2(
             name='pretest1trialsTraining',
-            nReps=2, 
+            nReps=3, 
             method='random', 
             extraInfo=expInfo, 
             originPath=-1, 
             trialList=data.importConditions('Conditions_parameters.xlsx'), 
-            seed=None, 
+            seed=45, 
             isTrials=True, 
         )
         thisExp.addLoop(pretest1trialsTraining)  # add the loop to the experiment
@@ -2017,7 +2017,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             PreTest1Trials.status = NOT_STARTED
             continueRoutine = True
             # update component parameters for each repeat
-            soundGoCue.setSound('5000', secs=0.1, hamming=True)
+            soundGoCue.setSound('5000', secs=0.08, hamming=True)
             soundGoCue.setVolume(1.0, log=False)
             soundGoCue.seek(0)
             gabor.setContrast(grating)
@@ -2089,7 +2089,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # if soundGoCue is stopping this frame...
                 if soundGoCue.status == STARTED:
                     # is it time to stop? (based on global clock, using actual start)
-                    if tThisFlipGlobal > soundGoCue.tStartRefresh + 0.1-frameTolerance or soundGoCue.isFinished:
+                    if tThisFlipGlobal > soundGoCue.tStartRefresh + 0.08-frameTolerance or soundGoCue.isFinished:
                         # keep track of stop time/frame for later
                         soundGoCue.tStop = t  # not accounting for scr refresh
                         soundGoCue.tStopRefresh = tThisFlipGlobal  # on global time
@@ -2336,7 +2336,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 score += 1
                 text_feedback = f"Correto!\n+1 point\nTotal: {score}"
                 win.color = "green"
-                sound_feedback = 4000
+                sound_feedback = None
                 durationtext = 0.5
                 volume = 1
                 duration = 0.25
@@ -2513,7 +2513,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 pretest1trialsTraining.status = STARTED
             thisExp.nextEntry()
             
-        # completed 2 repeats of 'pretest1trialsTraining'
+        # completed 3 repeats of 'pretest1trialsTraining'
         pretest1trialsTraining.status = FINISHED
         
         if thisSession is not None:
