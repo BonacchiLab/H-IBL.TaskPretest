@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2026.1.2),
-    on novembro 09, 2026, at 16:33
+    on novembro 12, 2026, at 20:35
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -31,8 +31,6 @@ import os  # handy system and path functions
 import sys  # to get file system encoding
 
 from psychopy.hardware import keyboard
-from psychopy.hardware import camera
-from psychopy.sound import microphone
 
 # --- Setup global variables (available in all functions) ---
 # create a device manager to handle hardware (keyboards, mice, mirophones, speakers, etc.)
@@ -266,18 +264,6 @@ def setupDevices(expInfo, thisExp, win):
         deviceManager.addDevice(
             deviceClass='keyboard', deviceName='defaultKeyboard', backend='ptb'
         )
-    # initialize 'WebCam'
-    deviceManager.addDevice(
-        deviceName='WebCam',
-        deviceClass='psychopy.hardware.camera.CameraDevice',
-        device=49,
-        captureLib='ffpyplayer',
-        pixelFormat='yuyv422',
-        codecFormat='',
-        captureAPI='DirectShow',
-        frameRate=None,
-        frameSize=[]
-    )
     # return True if completed successfully
     return True
 
@@ -392,7 +378,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "WelcomeScreen" ---
     # Run 'Begin Experiment' code from GlobalCam
-    import cv2, threading, csv, atexit
+    """import cv2, threading, csv, atexit
     from psychopy import core
     
     CAM_INDEX = 1                       # 0 = built-in, 1 = external USB C270
@@ -475,7 +461,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     video_path = base + "_cam.avi"
     csv_path = base + "_cam_timestamps.csv"
     rec = CamRecorder(CAM_INDEX, video_path, csv_path)
-    atexit.register(rec.stop)
+    atexit.register(rec.stop)"""
     textWelcome = visual.TextStim(win=win, name='textWelcome',
         text='Irá iniciar a tarefa. A mesma consiste na apresentação de um contraste à direita/esquerda. Indique em cada trial o lado do estímulo utilizando a tecla -S- para o lado esquerdo e  -L- para o lado direito. \n\nPedimos que mantenha o olhar no centro do ecrã durante a experiência\n\nPressione a SPACEBAR para começar',
         font='Arial',
@@ -752,8 +738,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
         # Run 'Each Frame' code from GlobalCam
-        thisExp.addData("cam_frame_at_stim", rec.n)
-        thisExp.addData("cam_time_at_stim", core.getTime())
+        """thisExp.addData("cam_frame_at_stim", rec.n)
+        thisExp.addData("cam_time_at_stim", core.getTime())"""
         
         # *textWelcome* updates
         
@@ -3187,8 +3173,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         routineTimer.addTime(-3.000000)
     thisExp.nextEntry()
     # Run 'End Experiment' code from GlobalCam
-    rec.stop()
-    print("Saved Capture.")
+    """rec.stop()
+    print("Saved Capture.")"""
+    
     
     # mark experiment as finished
     endExperiment(thisExp, win=win)
