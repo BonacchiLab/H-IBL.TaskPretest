@@ -238,7 +238,15 @@ def main():
     print(f"Processing time: {end_time - start_time:.4f} seconds")
 
 
+def descStats():
+    mistakes_all = data["choice_binary"].apply(lambda x: 1 if x == 0 else 0).sum()
+    total_trials = len(data)
+    mistakes_per_session = data.groupby("Pretest1Block.thisN")["choice_binary"].apply(lambda x: (x == 0).sum())
+    print("Mistakes per session:")
+    print(mistakes_per_session)
+    print(f"Total mistakes: {mistakes_all} out of {total_trials} trials ({(mistakes_all / total_trials) * 100:.2f}%)")
 
+    
 
 
 if __name__ == "__main__":
