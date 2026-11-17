@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2026.1.2),
-    on novembro 12, 2026, at 20:35
+    on novembro 17, 2026, at 12:30
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -377,98 +377,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # Start Code - component code to be run after the window creation
     
     # --- Initialize components for Routine "WelcomeScreen" ---
-    # Run 'Begin Experiment' code from GlobalCam
-    """import cv2, threading, csv, atexit
-    from psychopy import core
-    
-    CAM_INDEX = 1                       # 0 = built-in, 1 = external USB C270
-    REQ_W, REQ_H, REQ_FPS = 640, 480, 30
-    EXPOSURE = -6                       # try -5, -6, -7 (more negative = darker but higher fps)
-    
-    class CamRecorder:
-        def __init__(self, index, video_path, csv_path):
-            self.ok = False
-            self.n = 0              # real frames captured
-            self.written = 0        # frames written to the video file
-            self.fps = float(REQ_FPS)
-            self._stop = threading.Event()
-            self.cap = cv2.VideoCapture(index, cv2.CAP_DSHOW)
-            self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, REQ_W)
-            self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, REQ_H)
-            self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
-            self.cap.set(cv2.CAP_PROP_FPS, REQ_FPS)
-            self.cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)   # manual exposure mode
-            self.cap.set(cv2.CAP_PROP_EXPOSURE, EXPOSURE)
-            if not (self.cap.isOpened() and self.cap.read()[0]):
-                print("Camera failed to open. Running without recording.")
-                return
-            w = int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-            h = int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-            fc = int(self.cap.get(cv2.CAP_PROP_FOURCC))
-            fmt = "".join(chr((fc >> 8 * i) & 0xFF) for i in range(4))
-            self.writer = cv2.VideoWriter(
-                video_path, cv2.VideoWriter_fourcc(*"MJPG"), self.fps, (w, h))
-            self._csvfile = open(csv_path, "w", newline="")
-            self._csv = csv.writer(self._csvfile)
-            self._csv.writerow(["real_frame", "video_frame", "psychopy_time"])
-            self.t_first = None
-            self.t_last = None
-            self.ok = True
-            print(f"Camera OK: {w}x{h}, format {fmt}, file written at {self.fps} fps")
-            self.thread = threading.Thread(target=self._loop, daemon=True)
-            self.thread.start()
-    
-        def _loop(self):
-            t0 = None
-            while not self._stop.is_set():
-                ok, frame = self.cap.read()
-                t = core.getTime()
-                if not ok:
-                    continue
-                if t0 is None:
-                    t0 = t
-                    self.t_first = t
-                self.t_last = t
-                # number of frames the file should contain at this instant
-                target = int((t - t0) * self.fps) + 1
-                first_idx = self.written
-                while self.written < target:
-                    self.writer.write(frame)
-                    self.written += 1
-                # real frame -> index of the first video-file frame that represents it
-                self._csv.writerow([self.n, first_idx, t])
-                self.n += 1
-    
-        def stop(self):
-            if not self.ok:
-                return
-            self.ok = False
-            self._stop.set()
-            self.thread.join(timeout=2)
-            self.writer.release()
-            self.cap.release()
-            self._csvfile.close()
-            if self.t_last and self.t_first and self.t_last > self.t_first:
-                dur = self.t_last - self.t_first
-                print(f"Actual camera fps: {self.n / dur:.1f} "
-                      f"({self.n} real frames, {self.written} in file, {dur:.1f} s)")
-    
-    try:
-        base = filename
-    except NameError:
-        base = thisExp.dataFileName
-    
-    video_path = base + "_cam.avi"
-    csv_path = base + "_cam_timestamps.csv"
-    rec = CamRecorder(CAM_INDEX, video_path, csv_path)
-    atexit.register(rec.stop)"""
     textWelcome = visual.TextStim(win=win, name='textWelcome',
         text='Irá iniciar a tarefa. A mesma consiste na apresentação de um contraste à direita/esquerda. Indique em cada trial o lado do estímulo utilizando a tecla -S- para o lado esquerdo e  -L- para o lado direito. \n\nPedimos que mantenha o olhar no centro do ecrã durante a experiência\n\nPressione a SPACEBAR para começar',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
-        depth=-1.0);
+        depth=0.0);
     key_respWelcome = keyboard.Keyboard(deviceName='defaultKeyboard')
     
     # --- Initialize components for Routine "blank2000" ---
@@ -737,9 +652,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         tThisFlipGlobal = win.getFutureFlipTime(clock=None)
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
-        # Run 'Each Frame' code from GlobalCam
-        """thisExp.addData("cam_frame_at_stim", rec.n)
-        thisExp.addData("cam_time_at_stim", core.getTime())"""
         
         # *textWelcome* updates
         
@@ -1171,9 +1083,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         
         # Run 'Begin Routine' code from codeCorKeyTut
         if positionT[0] > 0:
-            correct_ans = "l"
+            correct_ans = "l" or "L"
         else:
-            correct_ans = "s"
+            correct_ans = "s" or "S"
         # create starting attributes for keySideTut
         keySideTut.keys = []
         keySideTut.rt = []
@@ -1379,7 +1291,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     keySideTut.status = FINISHED
                     keySideTut.status = FINISHED
             if keySideTut.status == STARTED and not waitOnFlip:
-                theseKeys = keySideTut.getKeys(keyList=['s','l'], ignoreKeys=["escape"], waitRelease=False)
+                theseKeys = keySideTut.getKeys(keyList=['s','l','S','L'], ignoreKeys=["escape"], waitRelease=False)
                 _keySideTut_allKeys.extend(theseKeys)
                 if len(_keySideTut_allKeys):
                     keySideTut.keys = _keySideTut_allKeys[-1].name  # just the last key pressed
@@ -2017,9 +1929,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             thisExp.addData('gabor_phase', current_phase)
             # Run 'Begin Routine' code from codeCorKey
             if position[0] > 0:
-                correct_ans = "l"
+                correct_ans = "l" or "L"
             else:
-                correct_ans = "s"
+                correct_ans = "s" or "S"
             # create starting attributes for keySide
             keySide.keys = []
             keySide.rt = []
@@ -2225,7 +2137,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                         keySide.status = FINISHED
                         keySide.status = FINISHED
                 if keySide.status == STARTED and not waitOnFlip:
-                    theseKeys = keySide.getKeys(keyList=['s','l'], ignoreKeys=["escape"], waitRelease=False)
+                    theseKeys = keySide.getKeys(keyList=['s','l','S','L'], ignoreKeys=["escape"], waitRelease=False)
                     _keySide_allKeys.extend(theseKeys)
                     if len(_keySide_allKeys):
                         keySide.keys = _keySide_allKeys[-1].name  # just the last key pressed
@@ -2516,17 +2428,18 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         # Run 'Begin Routine' code from codeLevels
-        # Lista de níveis atualizada sem cores cinzentas
         levels_config = [
-            {"min_score": 0,   "name": "Recruta",      "color": "#FFFFFF"},  # Branco (Contraste total com o fundo cinzento)
-            {"min_score": 50,  "name": "Iniciante",    "color": "#CD7F32"},  # Bronze / Castanho Quente
-            {"min_score": 100, "name": "Explorador",   "color": "#4CAF50"},  # Verde
-            {"min_score": 150, "name": "Praticante",   "color": "#00BCD4"},  # Ciano / Azul Claro
-            {"min_score": 200, "name": "Especialista", "color": "#2196F3"},  # Azul
-            {"min_score": 250, "name": "Perito",       "color": "#9C27B0"},  # Roxo
-            {"min_score": 300, "name": "Mestre",       "color": "#E91E63"},  # Rosa Forte
-            {"min_score": 350, "name": "Guru",         "color": "#FF9800"},  # Laranja
-            {"min_score": 400, "name": "Lenda",        "color": "#FFD700"}   # Dourado
+            {"min_score": 0,   "name": "Recruta"},  
+            {"min_score": 50,  "name": "Iniciante"},  
+            {"min_score": 100, "name": "Explorador"},  
+            {"min_score": 150, "name": "Praticante"},  
+            {"min_score": 200, "name": "Especialista"},  
+            {"min_score": 250, "name": "Perito"},  
+            {"min_score": 300, "name": "Mestre"},  
+            {"min_score": 350, "name": "Guru"},  
+            {"min_score": 400, "name": "Lenda"}, 
+            {"min_score": 450, "name": "Titã"}, 
+            {"min_score": 500, "name": "Divino"}   
         ]
         
         current_level = levels_config[0]
@@ -2545,7 +2458,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         
         text_pause = f"Pausa\nPossui neste momento {score} pontos\n"
         
-        if score >= 400:
+        if score >= 500:
             text_pause += f"Nível {level_name}\nNível Máximo Atingido!"
         else:
             pontos_em_falta = next_level["min_score"] - score
@@ -3172,10 +3085,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     else:
         routineTimer.addTime(-3.000000)
     thisExp.nextEntry()
-    # Run 'End Experiment' code from GlobalCam
-    """rec.stop()
-    print("Saved Capture.")"""
-    
     
     # mark experiment as finished
     endExperiment(thisExp, win=win)
