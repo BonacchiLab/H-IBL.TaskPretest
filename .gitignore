@@ -2,10 +2,14 @@
 data/
 screen_calibration/dataset_test/
 
+# Last run generated files
+Task_PreTest_lastrun.py/
+*.py[cod]
+
 # Misc. folders/files
 Misc/
 screen_calibration/screen_data/
-test.py/
+test.py
 *.py
 
 # Cache files
