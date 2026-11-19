@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="2026.1.2">
+<PsychoPy2experiment encoding="utf-8" version="2026.2.5">
   <Settings>
     <Param val="ptb" valType="str" updates="None" name="Audio lib"/>
     <Param val="" valType="str" updates="None" name="Completed URL"/>
@@ -24,8 +24,8 @@
     <Param val="True" valType="bool" updates="None" name="Show info dlg"/>
     <Param val="False" valType="bool" updates="None" name="Show mouse"/>
     <Param val="height" valType="str" updates="None" name="Units"/>
-    <Param val="" valType="str" updates="None" name="Use version"/>
-    <Param val="(1024, 768)" valType="list" updates="None" name="Window size (pixels)"/>
+    <Param val="2026.2.5" valType="str" updates="None" name="Use version"/>
+    <Param val="[1920,1080]" valType="list" updates="None" name="Window size (pixels)"/>
     <Param val="none" valType="str" updates="None" name="backgroundFit"/>
     <Param val="" valType="str" updates="None" name="backgroundImg"/>
     <Param val="avg" valType="str" updates="None" name="blendMode"/>
@@ -34,21 +34,47 @@
     <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
     <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
     <Param val="warning" valType="code" updates="None" name="consoleLoggingLevel"/>
-    <Param val="TrainingTask_PreTest" valType="str" updates="None" name="expName"/>
+    <Param val="default" valType="str" updates="None" name="ecSampleRate"/>
+    <Param val="100.1.1.1" valType="str" updates="None" name="elAddress"/>
+    <Param val="FILTER_LEVEL_2" valType="str" updates="None" name="elDataFiltering"/>
+    <Param val="FILTER_LEVEL_OFF" valType="str" updates="None" name="elLiveFiltering"/>
+    <Param val="EYELINK 1000 DESKTOP" valType="str" updates="None" name="elModel"/>
+    <Param val="ELLIPSE_FIT" valType="str" updates="None" name="elPupilAlgorithm"/>
+    <Param val="PUPIL_AREA" valType="str" updates="None" name="elPupilMeasure"/>
+    <Param val="1000" valType="num" updates="None" name="elSampleRate"/>
+    <Param val="False" valType="bool" updates="None" name="elSimMode"/>
+    <Param val="RIGHT_EYE" valType="str" updates="None" name="elTrackEyes"/>
+    <Param val="PUPIL_CR_TRACKING" valType="str" updates="None" name="elTrackingMode"/>
+    <Param val="Cam_Task_PreTest" valType="str" updates="None" name="expName"/>
     <Param val="" valType="str" updates="None" name="expVersion"/>
     <Param val="on Sync" valType="str" updates="None" name="exportHTML"/>
     <Param val="None" valType="str" updates="None" name="eyetracker"/>
     <Param val="" valType="code" updates="None" name="frameRate"/>
     <Param val="Attempting to measure frame rate of screen, please wait..." valType="str" updates="None" name="frameRateMsg"/>
+    <Param val="127.0.0.1" valType="str" updates="None" name="gpAddress"/>
+    <Param val="4242" valType="num" updates="None" name="gpPort"/>
     <Param val="PsychToolbox" valType="str" updates="None" name="keyboardBackend"/>
     <Param val="info" valType="code" updates="None" name="logging level"/>
     <Param val="True" valType="bool" updates="None" name="measureFrameRate"/>
     <Param val="['MIDDLE_BUTTON']" valType="list" updates="None" name="mgBlink"/>
     <Param val="CONTINUOUS" valType="str" updates="None" name="mgMove"/>
     <Param val="0.5" valType="num" updates="None" name="mgSaccade"/>
+    <Param val="neon.local" valType="str" updates="None" name="plCompanionAddress"/>
+    <Param val="8080" valType="num" updates="None" name="plCompanionPort"/>
+    <Param val="0.6" valType="num" updates="None" name="plConfidenceThreshold"/>
+    <Param val="" valType="str" updates="None" name="plPupilCaptureRecordingLocation"/>
+    <Param val="127.0.0.1" valType="str" updates="None" name="plPupilRemoteAddress"/>
+    <Param val="50020" valType="num" updates="None" name="plPupilRemotePort"/>
+    <Param val="1000" valType="num" updates="None" name="plPupilRemoteTimeoutMs"/>
+    <Param val="False" valType="bool" updates="None" name="plPupillometryOnly"/>
+    <Param val="psychopy_iohub_surface" valType="str" updates="None" name="plSurfaceName"/>
     <Param val="1" valType="code" updates="None" name="runMode"/>
     <Param val="False" valType="bool" updates="None" name="rush"/>
     <Param val="time" valType="str" updates="None" name="sortColumns"/>
+    <Param val="" valType="str" updates="None" name="tbLicenseFile"/>
+    <Param val="" valType="str" updates="None" name="tbModel"/>
+    <Param val="60" valType="num" updates="None" name="tbSampleRate"/>
+    <Param val="" valType="str" updates="None" name="tbSerialNo"/>
     <Param val="pyglet" valType="str" updates="None" name="winBackend"/>
   </Settings>
   <Routines>
@@ -72,8 +98,8 @@
       <CodeComponent name="GlobalCam" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="import cv2, threading, csv, atexit&amp;#10;from psychopy import core&amp;#10;&amp;#10;CAM_INDEX = 1                       # 0 = built-in, 1 = external USB C270&amp;#10;REQ_W, REQ_H, REQ_FPS = 640, 480, 30&amp;#10;EXPOSURE = -6                       # try -5, -6, -7 (more negative = darker but higher fps)&amp;#10;&amp;#10;class CamRecorder:&amp;#10;    def __init__(self, index, video_path, csv_path):&amp;#10;        self.ok = False&amp;#10;        self.n = 0              # real frames captured&amp;#10;        self.written = 0        # frames written to the video file&amp;#10;        self.fps = float(REQ_FPS)&amp;#10;        self._stop = threading.Event()&amp;#10;        self.cap = cv2.VideoCapture(index, cv2.CAP_DSHOW)&amp;#10;        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, REQ_W)&amp;#10;        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, REQ_H)&amp;#10;        self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*&quot;MJPG&quot;))&amp;#10;        self.cap.set(cv2.CAP_PROP_FPS, REQ_FPS)&amp;#10;        self.cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)   # manual exposure mode&amp;#10;        self.cap.set(cv2.CAP_PROP_EXPOSURE, EXPOSURE)&amp;#10;        if not (self.cap.isOpened() and self.cap.read()[0]):&amp;#10;            print(&quot;Camera failed to open. Running without recording.&quot;)&amp;#10;            return&amp;#10;        w = int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))&amp;#10;        h = int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))&amp;#10;        fc = int(self.cap.get(cv2.CAP_PROP_FOURCC))&amp;#10;        fmt = &quot;&quot;.join(chr((fc &gt;&gt; 8 * i) &amp; 0xFF) for i in range(4))&amp;#10;        self.writer = cv2.VideoWriter(&amp;#10;            video_path, cv2.VideoWriter_fourcc(*&quot;MJPG&quot;), self.fps, (w, h))&amp;#10;        self._csvfile = open(csv_path, &quot;w&quot;, newline=&quot;&quot;)&amp;#10;        self._csv = csv.writer(self._csvfile)&amp;#10;        self._csv.writerow([&quot;real_frame&quot;, &quot;video_frame&quot;, &quot;psychopy_time&quot;])&amp;#10;        self.t_first = None&amp;#10;        self.t_last = None&amp;#10;        self.ok = True&amp;#10;        print(f&quot;Camera OK: {w}x{h}, format {fmt}, file written at {self.fps} fps&quot;)&amp;#10;        self.thread = threading.Thread(target=self._loop, daemon=True)&amp;#10;        self.thread.start()&amp;#10;&amp;#10;    def _loop(self):&amp;#10;        t0 = None&amp;#10;        while not self._stop.is_set():&amp;#10;            ok, frame = self.cap.read()&amp;#10;            t = core.getTime()&amp;#10;            if not ok:&amp;#10;                continue&amp;#10;            if t0 is None:&amp;#10;                t0 = t&amp;#10;                self.t_first = t&amp;#10;            self.t_last = t&amp;#10;            # number of frames the file should contain at this instant&amp;#10;            target = int((t - t0) * self.fps) + 1&amp;#10;            first_idx = self.written&amp;#10;            while self.written &lt; target:&amp;#10;                self.writer.write(frame)&amp;#10;                self.written += 1&amp;#10;            # real frame -&gt; index of the first video-file frame that represents it&amp;#10;            self._csv.writerow([self.n, first_idx, t])&amp;#10;            self.n += 1&amp;#10;&amp;#10;    def stop(self):&amp;#10;        if not self.ok:&amp;#10;            return&amp;#10;        self.ok = False&amp;#10;        self._stop.set()&amp;#10;        self.thread.join(timeout=2)&amp;#10;        self.writer.release()&amp;#10;        self.cap.release()&amp;#10;        self._csvfile.close()&amp;#10;        if self.t_last and self.t_first and self.t_last &gt; self.t_first:&amp;#10;            dur = self.t_last - self.t_first&amp;#10;            print(f&quot;Actual camera fps: {self.n / dur:.1f} &quot;&amp;#10;                  f&quot;({self.n} real frames, {self.written} in file, {dur:.1f} s)&quot;)&amp;#10;&amp;#10;try:&amp;#10;    base = filename&amp;#10;except NameError:&amp;#10;    base = thisExp.dataFileName&amp;#10;&amp;#10;video_path = base + &quot;_cam.avi&quot;&amp;#10;csv_path = base + &quot;_cam_timestamps.csv&quot;&amp;#10;rec = CamRecorder(CAM_INDEX, video_path, csv_path)&amp;#10;atexit.register(rec.stop)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="/* Syntax Error: Fix Python code */" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="import cv2, threading, csv, atexit&amp;#10;from psychopy import core&amp;#10;&amp;#10;CAM_INDEX = 0                       # 0 = built-in, 1 = external USB C270&amp;#10;REQ_W, REQ_H, REQ_FPS = 640, 480, 30&amp;#10;# EXPOSURE = -7                       # try -5, -6, -7 (more negative = darker but higher fps)&amp;#10;&amp;#10;class CamRecorder:&amp;#10;    def __init__(self, index, video_path, csv_path):&amp;#10;        self.ok = False&amp;#10;        self.n = 0              # real frames captured&amp;#10;        self.written = 0        # frames written to the video file&amp;#10;        self.fps = float(REQ_FPS)&amp;#10;        self._stop = threading.Event()&amp;#10;        self.cap = cv2.VideoCapture(index, cv2.CAP_DSHOW)&amp;#10;        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, REQ_W)&amp;#10;        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, REQ_H)&amp;#10;        self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*&quot;MJPG&quot;))&amp;#10;        self.cap.set(cv2.CAP_PROP_FPS, REQ_FPS)&amp;#10;        self.cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)   # manual exposure mode&amp;#10;        # self.cap.set(cv2.CAP_PROP_EXPOSURE, EXPOSURE)&amp;#10;        if not (self.cap.isOpened() and self.cap.read()[0]):&amp;#10;            print(&quot;Camera failed to open. Running without recording.&quot;)&amp;#10;            return&amp;#10;        w = int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))&amp;#10;        h = int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))&amp;#10;        fc = int(self.cap.get(cv2.CAP_PROP_FOURCC))&amp;#10;        fmt = &quot;&quot;.join(chr((fc &gt;&gt; 8 * i) &amp; 0xFF) for i in range(4))&amp;#10;        self.writer = cv2.VideoWriter(&amp;#10;            video_path, cv2.VideoWriter_fourcc(*&quot;MJPG&quot;), self.fps, (w, h))&amp;#10;        self._csvfile = open(csv_path, &quot;w&quot;, newline=&quot;&quot;)&amp;#10;        self._csv = csv.writer(self._csvfile)&amp;#10;        self._csv.writerow([&quot;real_frame&quot;, &quot;video_frame&quot;, &quot;psychopy_time&quot;])&amp;#10;        self.t_first = None&amp;#10;        self.t_last = None&amp;#10;        self.ok = True&amp;#10;        print(f&quot;Camera OK: {w}x{h}, format {fmt}, file written at {self.fps} fps&quot;)&amp;#10;        self.thread = threading.Thread(target=self._loop, daemon=True)&amp;#10;        self.thread.start()&amp;#10;&amp;#10;    def _loop(self):&amp;#10;        t0 = None&amp;#10;        while not self._stop.is_set():&amp;#10;            ok, frame = self.cap.read()&amp;#10;            t = core.getTime()&amp;#10;            if not ok:&amp;#10;                continue&amp;#10;            if t0 is None:&amp;#10;                t0 = t&amp;#10;                self.t_first = t&amp;#10;            self.t_last = t&amp;#10;            # number of frames the file should contain at this instant&amp;#10;            target = int((t - t0) * self.fps) + 1&amp;#10;            first_idx = self.written&amp;#10;            while self.written &lt; target:&amp;#10;                self.writer.write(frame)&amp;#10;                self.written += 1&amp;#10;            # real frame -&gt; index of the first video-file frame that represents it&amp;#10;            self._csv.writerow([self.n, first_idx, t])&amp;#10;            self.n += 1&amp;#10;&amp;#10;    def stop(self):&amp;#10;        if not self.ok:&amp;#10;            return&amp;#10;        self.ok = False&amp;#10;        self._stop.set()&amp;#10;        self.thread.join(timeout=2)&amp;#10;        self.writer.release()&amp;#10;        self.cap.release()&amp;#10;        self._csvfile.close()&amp;#10;        if self.t_last and self.t_first and self.t_last &gt; self.t_first:&amp;#10;            dur = self.t_last - self.t_first&amp;#10;            print(f&quot;Actual camera fps: {self.n / dur:.1f} &quot;&amp;#10;                  f&quot;({self.n} real frames, {self.written} in file, {dur:.1f} s)&quot;)&amp;#10;&amp;#10;try:&amp;#10;    base = filename&amp;#10;except NameError:&amp;#10;    base = thisExp.dataFileName&amp;#10;&amp;#10;video_path = base + &quot;_cam.avi&quot;&amp;#10;csv_path = base + &quot;_cam_timestamps.csv&quot;&amp;#10;rec = CamRecorder(CAM_INDEX, video_path, csv_path)&amp;#10;atexit.register(rec.stop)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="// Error in Python code" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
@@ -85,6 +111,23 @@
         <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="GlobalCam" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <CodeComponent name="GenVar" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="volume = 0.5&amp;#10;durationT = 0.5&amp;#10;duration = 0.5&amp;#10;pressed_key = &quot;&quot;&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="volume = 0.5;&amp;#10;durationT = 0.5;&amp;#10;duration = 0.5;&amp;#10;pressed_key = &quot;&quot;;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="GenVar" valType="code" updates="None" name="name"/>
       </CodeComponent>
       <TextComponent name="textWelcome" plugin="None">
         <Param val="white" valType="color" updates="constant" name="color"/>
@@ -359,14 +402,14 @@
         <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
       </RoutineSettingsComponent>
       <SoundComponent name="soundGoCue" plugin="None">
-        <Param val="" valType="device" updates="None" name="deviceLabel"/>
+        <Param val="iblphones2" valType="device" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="soundGoCue" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="5000" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="2000" valType="str" updates="set every repeat" name="sound"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.1" valType="code" updates="None" name="startVal"/>
@@ -375,7 +418,7 @@
         <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
         <Param val="" valType="code" updates="None" name="validator"/>
-        <Param val="1" valType="num" updates="constant" name="volume"/>
+        <Param val="volume" valType="num" updates="set every frame" name="volume"/>
       </SoundComponent>
       <PolygonComponent name="polygonVertical" plugin="None">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
@@ -435,6 +478,23 @@
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="" valType="list" updates="constant" name="vertices"/>
       </PolygonComponent>
+      <CodeComponent name="codePhase" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="psychoJS.window.color = &quot;gray&quot;;&amp;#10;current_phase = np.random.uniform(0, (2 * np.pi));&amp;#10;gabor.phase = current_phase;&amp;#10;psychoJS.experiment.addData(&quot;gabor_phase&quot;, current_phase);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="win.color = &quot;gray&quot;&amp;#10;# Generate random phase&amp;#10;current_phase = np.random.uniform(0, 2 * np.pi)&amp;#10;&amp;#10;gabor.phase = current_phase&amp;#10;&amp;#10;# Creates a gabor phase column on the csv&amp;#10;thisExp.addData('gabor_phase', current_phase)" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="codePhase" valType="code" updates="None" name="name"/>
+      </CodeComponent>
       <GratingComponent name="gabor" plugin="None">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="avg" valType="str" updates="constant" name="blendmode"/>
@@ -458,30 +518,13 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="1" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="10" valType="code" updates="constant" name="stopVal"/>
+        <Param val="10.00" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="$texture" valType="file" updates="set every frame" name="tex"/>
         <Param val="256" valType="num" updates="constant" name="texture resolution"/>
         <Param val="deg" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
       </GratingComponent>
-      <CodeComponent name="codePhase" plugin="None">
-        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="current_phase = np.random.uniform(0, (2 * np.pi));&amp;#10;gabor.phase = current_phase;&amp;#10;psychoJS.experiment.addData(&quot;gabor_phase&quot;, current_phase);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="# Generate random phase&amp;#10;current_phase = np.random.uniform(0, 2 * np.pi)&amp;#10;&amp;#10;gabor.phase = current_phase&amp;#10;&amp;#10;# Creates a gabor phase column on the csv&amp;#10;thisExp.addData('gabor_phase', current_phase)" valType="extendedCode" updates="constant" name="Begin Routine"/>
-        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="codePhase" valType="code" updates="None" name="name"/>
-      </CodeComponent>
       <CodeComponent name="codeCorKey" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
@@ -541,8 +584,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="score = 0" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="score = 0;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="if ((correct_ans === keySide.keys)) {&amp;#10;    score += 1;&amp;#10;    text_feedback = `Correto!&amp;#10;+1 point&amp;#10;Total: ${score}`&amp;#10;;&amp;#10;    psychoJS.window.color = &quot;green&quot;;&amp;#10;    sound_feedback = null;&amp;#10;    durationtext = 0.5;&amp;#10;    volume = 1;&amp;#10;    duration = 0.25;&amp;#10;} else {&amp;#10;    score += 0;&amp;#10;    text_feedback = `Errado!&amp;#10;+0 points&amp;#10;Total: ${score}`&amp;#10;;&amp;#10;    psychoJS.window.color = &quot;red&quot;;&amp;#10;    sound_feedback = &quot;sound_files/ibl_noise_burst.wav&quot;;&amp;#10;    durationtext = 1.5;&amp;#10;    volume = 1;&amp;#10;    duration = 0.5;&amp;#10;}&amp;#10;psychoJS.window.flip();&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if correct_ans == keySide.keys:&amp;#10;    score += 1&amp;#10;    text_feedback = f&quot;Correto!\n+1 point\nTotal: {score}&quot;&amp;#10;    win.color = &quot;green&quot;&amp;#10;    sound_feedback = None&amp;#10;    durationtext = 0.5&amp;#10;    volume = 1&amp;#10;    duration = 0.25&amp;#10;else:&amp;#10;    score += 0&amp;#10;    text_feedback = f&quot;Errado!\n+0 points\nTotal: {score}&quot;&amp;#10;    win.color = &quot;red&quot;&amp;#10;    sound_feedback = &quot;sound_files/ibl_noise_burst.wav&quot;&amp;#10;    durationtext = 1.5&amp;#10;    volume = 1&amp;#10;    duration = 0.5&amp;#10;&amp;#10;    &amp;#10;win.flip()&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="raw_keys = keySide.keys;&amp;#10;pressed_key = (((raw_keys instanceof Array) &amp;&amp; (raw_keys.length &gt; 0)) ? raw_keys.slice((- 1))[0] : (raw_keys || &quot;&quot;));&amp;#10;if ((correct_ans === keySide.keys)) {&amp;#10;    score += 1;&amp;#10;    text_feedback = `Correto!&amp;#10;+1 point&amp;#10;Total: ${score}`&amp;#10;;&amp;#10;    psychoJS.window.color = &quot;green&quot;;&amp;#10;    durationtext = 1;&amp;#10;} else {&amp;#10;    score += 0;&amp;#10;    text_feedback = `Errado!&amp;#10;+0 points&amp;#10;Total: ${score}`&amp;#10;;&amp;#10;    psychoJS.window.color = &quot;red&quot;;&amp;#10;    durationtext = 2;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="raw_keys = keySide.keys&amp;#10;pressed_key = raw_keys[-1] if isinstance(raw_keys, list) and len(raw_keys) &gt; 0 else (raw_keys or &quot;&quot;)&amp;#10;&amp;#10;if correct_ans == keySide.keys:&amp;#10;    score += 1&amp;#10;    text_feedback = f&quot;Correto!\n+1 point\nTotal: {score}&quot;&amp;#10;    win.color = &quot;green&quot;&amp;#10;    durationtext = 1&amp;#10;&amp;#10;else:&amp;#10;    score += 0&amp;#10;    text_feedback = f&quot;Errado!\n+0 points\nTotal: {score}&quot;&amp;#10;    win.color = &quot;red&quot;&amp;#10;    durationtext = 2&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -553,6 +596,25 @@
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="codeFconditions" valType="code" updates="None" name="name"/>
       </CodeComponent>
+      <SoundComponent name="soundIncorrect" plugin="None">
+        <Param val="iblphones2" valType="device" updates="None" name="deviceLabel"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="True" valType="bool" updates="constant" name="hamming"/>
+        <Param val="soundIncorrect" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="sound_files/ibl_noise_burst.wav" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="condition" valType="str" updates="None" name="startType"/>
+        <Param val="pressed_key != correct_ans" valType="code" updates="None" name="startVal"/>
+        <Param val="time (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="duration" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+        <Param val="" valType="code" updates="None" name="validator"/>
+        <Param val="volume" valType="num" updates="set every frame" name="volume"/>
+      </SoundComponent>
       <TextComponent name="textFeedback" plugin="None">
         <Param val="white" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
@@ -580,25 +642,23 @@
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <SoundComponent name="soundFeedback" plugin="None">
-        <Param val="" valType="device" updates="None" name="deviceLabel"/>
+      <CodeComponent name="codeFEnd" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="if t &gt;= max(durationtext, duration):&amp;#10;    continueRoutine = False" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="if ((t &gt;= Math.max(durationtext, duration))) {&amp;#10;    continueRoutine = false;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="psychoJS.window.color = [0, 0, 0];&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="win.color = [0, 0 ,0]" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
-        <Param val="True" valType="bool" updates="constant" name="hamming"/>
-        <Param val="soundFeedback" valType="code" updates="None" name="name"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="$sound_feedback " valType="str" updates="set every repeat" name="sound"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0.0" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="duration" valType="code" updates="constant" name="stopVal"/>
-        <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
-        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
-        <Param val="" valType="code" updates="None" name="validator"/>
-        <Param val="1" valType="num" updates="constant" name="volume"/>
-      </SoundComponent>
+        <Param val="codeFEnd" valType="code" updates="None" name="name"/>
+      </CodeComponent>
     </Routine>
     <Routine name="Pause">
       <RoutineSettingsComponent name="Pause" plugin="None">
@@ -726,14 +786,14 @@
         <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
       </RoutineSettingsComponent>
       <SoundComponent name="soundTutGoCue" plugin="None">
-        <Param val="" valType="device" updates="None" name="deviceLabel"/>
+        <Param val="iblphones2" valType="device" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="soundTutGoCue" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="5000" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="2000" valType="str" updates="set every repeat" name="sound"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.1" valType="code" updates="None" name="startVal"/>
@@ -742,7 +802,7 @@
         <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
         <Param val="" valType="code" updates="None" name="validator"/>
-        <Param val="1" valType="num" updates="constant" name="volume"/>
+        <Param val="volume" valType="num" updates="set every frame" name="volume"/>
       </SoundComponent>
       <PolygonComponent name="polygonHorizontalTut" plugin="None">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
@@ -802,6 +862,23 @@
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="" valType="list" updates="constant" name="vertices"/>
       </PolygonComponent>
+      <CodeComponent name="codePhaseT" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="psychoJS.window.color = &quot;grey&quot;;&amp;#10;current_phaseT = np.random.uniform(0, (2 * np.pi));&amp;#10;gaborTut.phase = current_phaseT;&amp;#10;psychoJS.experiment.addData(&quot;gabor_phaseT&quot;, current_phaseT);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="win.color = &quot;grey&quot;&amp;#10;# Generate random phase&amp;#10;current_phaseT = np.random.uniform(0, 2 * np.pi)&amp;#10;&amp;#10;gaborTut.phase = current_phaseT&amp;#10;&amp;#10;# Creates a gabor phase column on the csv&amp;#10;thisExp.addData('gabor_phaseT', current_phaseT)&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="codePhaseT" valType="code" updates="None" name="name"/>
+      </CodeComponent>
       <GratingComponent name="gaborTut" plugin="None">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="avg" valType="str" updates="constant" name="blendmode"/>
@@ -816,7 +893,7 @@
         <Param val="gaborTut" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="orientationT" valType="num" updates="set every frame" name="ori"/>
-        <Param val="0" valType="num" updates="set every frame" name="phase"/>
+        <Param val="current_phaseT" valType="num" updates="set every frame" name="phase"/>
         <Param val="positionT" valType="list" updates="set every frame" name="pos"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="spacial_freqT" valType="num" updates="set every frame" name="sf"/>
@@ -832,30 +909,13 @@
         <Param val="deg" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
       </GratingComponent>
-      <CodeComponent name="codePhaseT" plugin="None">
-        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="current_phaseT = np.random.uniform(0, (2 * np.pi));&amp;#10;gaborTut.phase = current_phaseT;&amp;#10;psychoJS.experiment.addData(&quot;gabor_phaseT&quot;, current_phaseT);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="# Generate random phase&amp;#10;current_phaseT = np.random.uniform(0, 2 * np.pi)&amp;#10;&amp;#10;gaborTut.phase = current_phaseT&amp;#10;&amp;#10;# Creates a gabor phase column on the csv&amp;#10;thisExp.addData('gabor_phaseT', current_phaseT)&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
-        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="codePhaseT" valType="code" updates="None" name="name"/>
-      </CodeComponent>
       <CodeComponent name="codeCorKeyTut" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="if ((positionT[0] &gt; 0)) {&amp;#10;    correct_ans = (&quot;l&quot; || &quot;L&quot;);&amp;#10;} else {&amp;#10;    correct_ans = (&quot;s&quot; || &quot;S&quot;);&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if positionT[0] &gt; 0:&amp;#10;    correct_ans = &quot;l&quot; or &quot;L&quot;&amp;#10;else:&amp;#10;    correct_ans = &quot;s&quot; or &quot;S&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="if positionT[0] &gt; 0:&amp;#10;    correct_ans = &quot;l&quot; or &quot;L&quot;&amp;#10;else:&amp;#10;    correct_ans = &quot;s&quot; or &quot;S&quot;&amp;#10;    &amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -972,18 +1032,37 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="scoreT = 0" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="scoreT = 0;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="if ((correct_ans === keySideTut.keys)) {&amp;#10;    scoreT += 1;&amp;#10;    text_feedback = `Correto!&amp;#10;+1 point&amp;#10;Total: ${scoreT}`&amp;#10;;&amp;#10;    psychoJS.window.color = &quot;green&quot;;&amp;#10;    durationtextT = 0.5;&amp;#10;    sound_feedback = null;&amp;#10;    volume = 1;&amp;#10;    duration = 0;&amp;#10;} else {&amp;#10;    scoreT += 0;&amp;#10;    text_feedback = `Errado!&amp;#10;+0 points&amp;#10;Total: ${scoreT}`&amp;#10;;&amp;#10;    psychoJS.window.color = &quot;red&quot;;&amp;#10;    sound_feedback = &quot;sound_files/ibl_noise_burst.wav&quot;;&amp;#10;    durationtextT = 1;&amp;#10;    volume = 1;&amp;#10;    duration = 0.5;&amp;#10;}&amp;#10;psychoJS.window.flip();&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if correct_ans == keySideTut.keys:&amp;#10;    scoreT += 1&amp;#10;    text_feedback = f&quot;Correto!\n+1 point\nTotal: {scoreT}&quot;&amp;#10;    win.color = &quot;green&quot;&amp;#10;    durationtextT = 0.5&amp;#10;    sound_feedback = None&amp;#10;    volume = 1&amp;#10;    duration = 0&amp;#10;else:&amp;#10;    scoreT += 0&amp;#10;    text_feedback = f&quot;Errado!\n+0 points\nTotal: {scoreT}&quot;&amp;#10;    win.color = &quot;red&quot;&amp;#10;    sound_feedback = &quot;sound_files/ibl_noise_burst.wav&quot;&amp;#10;    durationtextT = 1&amp;#10;    volume = 1&amp;#10;    duration = 0.5&amp;#10;&amp;#10;win.flip()" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="raw_keysT = keySideTut.keys;&amp;#10;pressed_key = (((raw_keysT instanceof Array) &amp;&amp; (raw_keysT.length &gt; 0)) ? raw_keysT.slice((- 1))[0] : (raw_keysT || &quot;&quot;));&amp;#10;if ((correct_ans === keySideTut.keys)) {&amp;#10;    scoreT += 1;&amp;#10;    text_feedbackT = `Correto!&amp;#10;+1 point&amp;#10;Total: ${scoreT}`&amp;#10;;&amp;#10;    psychoJS.window.color = &quot;green&quot;;&amp;#10;    durationtextT = 1;&amp;#10;} else {&amp;#10;    scoreT += 0;&amp;#10;    text_feedbackT = `Errado!&amp;#10;+0 points&amp;#10;Total: ${scoreT}`&amp;#10;;&amp;#10;    psychoJS.window.color = &quot;red&quot;;&amp;#10;    durationtextT = 2;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="raw_keysT = keySideTut.keys&amp;#10;pressed_key = raw_keysT[-1] if isinstance(raw_keysT, list) and len(raw_keysT) &gt; 0 else (raw_keysT or &quot;&quot;)&amp;#10;&amp;#10;if correct_ans == keySideTut.keys:&amp;#10;    scoreT += 1&amp;#10;    text_feedbackT = f&quot;Correto!\n+1 point\nTotal: {scoreT}&quot;&amp;#10;    win.color = &quot;green&quot;&amp;#10;    durationtextT = 1&amp;#10;&amp;#10;else:&amp;#10;    scoreT += 0&amp;#10;    text_feedbackT = f&quot;Errado!\n+0 points\nTotal: {scoreT}&quot;&amp;#10;    win.color = &quot;red&quot;&amp;#10;    durationtextT = 2&amp;#10;&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="psychoJS.window.color = &quot;gray&quot;;&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="win.color=&quot;gray&quot;" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="codeFcondTut" valType="code" updates="None" name="name"/>
       </CodeComponent>
+      <SoundComponent name="soundIncorrectT" plugin="None">
+        <Param val="iblphones2" valType="device" updates="None" name="deviceLabel"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="True" valType="bool" updates="constant" name="hamming"/>
+        <Param val="soundIncorrectT" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="sound_files/ibl_noise_burst.wav" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="condition" valType="str" updates="None" name="startType"/>
+        <Param val="pressed_key != correct_ans" valType="code" updates="None" name="startVal"/>
+        <Param val="time (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="durationT" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+        <Param val="" valType="code" updates="None" name="validator"/>
+        <Param val="volume" valType="num" updates="set every frame" name="volume"/>
+      </SoundComponent>
       <TextComponent name="textFBTut" plugin="None">
         <Param val="white" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
@@ -1006,30 +1085,28 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="durationtextT" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="$text_feedback" valType="str" updates="set every frame" name="text"/>
+        <Param val="$text_feedbackT" valType="str" updates="set every frame" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <SoundComponent name="soundFBTut" plugin="None">
-        <Param val="" valType="device" updates="None" name="deviceLabel"/>
+      <CodeComponent name="codeFTutEnd" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="if t &gt;= max(durationtextT, durationT):&amp;#10;    continueRoutine = False" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="if ((t &gt;= Math.max(durationtextT, durationT))) {&amp;#10;    continueRoutine = false;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="psychoJS.window.color = [0, 0, 0];&amp;#10;soundGoCue.stop();&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="win.color = [0, 0 ,0]&amp;#10;soundGoCue.stop()" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
-        <Param val="True" valType="bool" updates="constant" name="hamming"/>
-        <Param val="soundFBTut" valType="code" updates="None" name="name"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="$sound_feedback " valType="str" updates="set every repeat" name="sound"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0.0" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="duration" valType="code" updates="constant" name="stopVal"/>
-        <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
-        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
-        <Param val="" valType="code" updates="None" name="validator"/>
-        <Param val="1" valType="num" updates="constant" name="volume"/>
-      </SoundComponent>
+        <Param val="codeFTutEnd" valType="code" updates="None" name="name"/>
+      </CodeComponent>
     </Routine>
     <Routine name="InstructionsFullTask">
       <RoutineSettingsComponent name="InstructionsFullTask" plugin="None">
@@ -1243,12 +1320,12 @@
     <Routine name="InstructionsTutorial"/>
     <LoopInitiator loopType="TrialHandler" name="PreTest1TrialsTut">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
-      <Param name="conditions" updates="None" val="[{'positionT': (30, 0), 'gratingT': 0.04, 'textureT': 'sin', 'maskT': 'gauss', 'spacial_freqT': 1, 'orientationT': 0, 'sizeT': (7, 7), 'fixation_posT': (0, 0), 'fixation_sizeT': (2, 0.1), 'fixation_widthT': 0.08}, {'positionT': (-30, 0), 'gratingT': 0.04, 'textureT': 'sin', 'maskT': 'gauss', 'spacial_freqT': 1, 'orientationT': 0, 'sizeT': (7, 7), 'fixation_posT': (0, 0), 'fixation_sizeT': (2, 0.1), 'fixation_widthT': 0.08}, {'positionT': (30, 0), 'gratingT': 1, 'textureT': 'sin', 'maskT': 'gauss', 'spacial_freqT': 1, 'orientationT': 0, 'sizeT': (7, 7), 'fixation_posT': (0, 0), 'fixation_sizeT': (2, 0.1), 'fixation_widthT': 0.08}, {'positionT': (30, 0), 'gratingT': 1, 'textureT': 'sin', 'maskT': 'gauss', 'spacial_freqT': 1, 'orientationT': 0, 'sizeT': (7, 7), 'fixation_posT': (0, 0), 'fixation_sizeT': (2, 0.1), 'fixation_widthT': 0.08}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'positionT': (25, 0), 'gratingT': 0.08, 'textureT': 'sin', 'maskT': 'gauss', 'spacial_freqT': 1, 'orientationT': 0, 'sizeT': (7, 7), 'fixation_posT': (0, 0), 'fixation_sizeT': (2, 0.1), 'fixation_widthT': 0.08}, {'positionT': (-25, 0), 'gratingT': 0.08, 'textureT': 'sin', 'maskT': 'gauss', 'spacial_freqT': 1, 'orientationT': 0, 'sizeT': (7, 7), 'fixation_posT': (0, 0), 'fixation_sizeT': (2, 0.1), 'fixation_widthT': 0.08}, {'positionT': (25, 0), 'gratingT': 1, 'textureT': 'sin', 'maskT': 'gauss', 'spacial_freqT': 1, 'orientationT': 0, 'sizeT': (7, 7), 'fixation_posT': (0, 0), 'fixation_sizeT': (2, 0.1), 'fixation_widthT': 0.08}, {'positionT': (25, 0), 'gratingT': 1, 'textureT': 'sin', 'maskT': 'gauss', 'spacial_freqT': 1, 'orientationT': 0, 'sizeT': (7, 7), 'fixation_posT': (0, 0), 'fixation_sizeT': (2, 0.1), 'fixation_widthT': 0.08}]" valType="str"/>
       <Param name="conditionsFile" updates="None" val="Conditions_Tut.xlsx" valType="file"/>
-      <Param name="endPoints" updates="None" val="[0, 1]" valType="code"/>
+      <Param name="endPoints" updates="None" val="[0,1]" valType="code"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="random" valType="str"/>
-      <Param name="nReps" updates="None" val="3" valType="code"/>
+      <Param name="nReps" updates="None" val="1" valType="code"/>
       <Param name="name" updates="None" val="PreTest1TrialsTut" valType="code"/>
       <Param name="random seed" updates="None" val="45" valType="code"/>
     </LoopInitiator>
@@ -1261,7 +1338,7 @@
       <Param name="Selected rows" updates="None" val="" valType="str"/>
       <Param name="conditions" updates="None" val="None" valType="str"/>
       <Param name="conditionsFile" updates="None" val="" valType="file"/>
-      <Param name="endPoints" updates="None" val="[0, 1]" valType="code"/>
+      <Param name="endPoints" updates="None" val="[0,1]" valType="code"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="random" valType="str"/>
       <Param name="nReps" updates="None" val="15" valType="code"/>
@@ -1270,14 +1347,14 @@
     </LoopInitiator>
     <LoopInitiator loopType="TrialHandler" name="pretest1trialsTraining">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
-      <Param name="conditions" updates="None" val="[{'position': (30, 0), 'grating': 0, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.02, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.02, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.04, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.04, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.08, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.08, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.01, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.01, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.005, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.005, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 1, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 1, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (30, 0), 'grating': 0.16, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-30, 0), 'grating': 0.16, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 1, 'orientation': 0, 'size': (7, 7), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'position': (25, 0), 'grating': 0, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 0.5, 'orientation': 0, 'size': (9, 9), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-25, 0), 'grating': 0, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 0.5, 'orientation': 0, 'size': (9, 9), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (25, 0), 'grating': 0.02, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 0.5, 'orientation': 0, 'size': (9, 9), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-25, 0), 'grating': 0.02, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 0.5, 'orientation': 0, 'size': (9, 9), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (25, 0), 'grating': 0.04, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 0.5, 'orientation': 0, 'size': (9, 9), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-25, 0), 'grating': 0.04, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 0.5, 'orientation': 0, 'size': (9, 9), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (25, 0), 'grating': 0.08, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 0.5, 'orientation': 0, 'size': (9, 9), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-25, 0), 'grating': 0.08, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 0.5, 'orientation': 0, 'size': (9, 9), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (25, 0), 'grating': 0.01, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 0.5, 'orientation': 0, 'size': (9, 9), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-25, 0), 'grating': 0.01, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 0.5, 'orientation': 0, 'size': (9, 9), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (25, 0), 'grating': 0.005, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 0.5, 'orientation': 0, 'size': (9, 9), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-25, 0), 'grating': 0.005, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 0.5, 'orientation': 0, 'size': (9, 9), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (25, 0), 'grating': 1, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 0.5, 'orientation': 0, 'size': (9, 9), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-25, 0), 'grating': 1, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 0.5, 'orientation': 0, 'size': (9, 9), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (25, 0), 'grating': 0.16, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 0.5, 'orientation': 0, 'size': (9, 9), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}, {'position': (-25, 0), 'grating': 0.16, 'texture': 'sin', 'mask': 'gauss', 'spacial_freq': 0.5, 'orientation': 0, 'size': (9, 9), 'fixation_pos': (0, 0), 'fixation_size': (2, 0.1), 'fixation_width': 0.08}]" valType="str"/>
       <Param name="conditionsFile" updates="None" val="Conditions_parameters.xlsx" valType="file"/>
-      <Param name="endPoints" updates="None" val="[0, 1]" valType="code"/>
+      <Param name="endPoints" updates="None" val="[0,1]" valType="code"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="random" valType="str"/>
       <Param name="nReps" updates="None" val="3" valType="code"/>
       <Param name="name" updates="None" val="pretest1trialsTraining" valType="code"/>
-      <Param name="random seed" updates="None" val="45" valType="code"/>
+      <Param name="random seed" updates="None" val="64" valType="code"/>
     </LoopInitiator>
     <Routine name="PreTest1Trials"/>
     <Routine name="PreTest1TrialFeedback"/>
