@@ -1,0 +1,4 @@
+1. Add webcam in devices
+2. Add headphones in devices (usually altifalantes)
+
+Do not save in excel, csv(summary), hdf5 file
