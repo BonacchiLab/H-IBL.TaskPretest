@@ -1,4 +1,7 @@
 1. Add webcam in devices
 2. Add headphones in devices (usually altifalantes)
+3. Check audio settings (psychtoolbox for ispa lab)
 
 Do not save in excel, csv(summary), hdf5 file
+
+
