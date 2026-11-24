@@ -1,4 +1,4 @@
-[![PsychoPy](https://img.shields.io/badge/PsychoPy-v2026.2.5-gray)](https://www.psychopy.org/)
+[![PsychoPy](https://img.shields.io/badge/PsychoPy-v2026.2.5-white)](https://www.psychopy.org/)
 [![Python](https://img.shields.io/badge/Python-3.11-blue)](https://www.python.org/)
 
 ## H-IBL Pretest
