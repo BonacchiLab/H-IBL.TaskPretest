@@ -1,6 +1,7 @@
-1. Add webcam in devices (check fps, change to 30 if needed)
-2. Add headphones in devices (usually altifalantes)
+1. Add webcam in devices (check fps, change to 30 if needed) (name: WebCam)
+2. Add headphones in devices (usually altifalantes) (name: iblphones2)
 3. Check audio settings (psychtoolbox for ispa lab)
+4. Check camera component (enable if session recording is intended)
 
 
 Do not save in excel, csv(summary), hdf5 file
