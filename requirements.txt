@@ -161,7 +161,7 @@ proglog==0.1.12
     # via moviepy
 psutil==7.2.2
     # via psychopy
-psychopy==2026.2.4
+psychopy==2026.2.5
     # via -r requirements.in
 psychtoolbox==3.0.19.14
     # via psychopy
