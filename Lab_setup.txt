@@ -2,6 +2,7 @@
 2. Add headphones in devices (usually altifalantes) (name: iblphones2)
 3. Check audio settings (psychtoolbox for ispa lab)
 4. Check camera component (enable if session recording is intended)
+5. Check cable position and ensure the participant wont be able to naturally touch the cables.
 
 
 Do not save in excel, csv(summary), hdf5 file
