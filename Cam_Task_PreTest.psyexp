@@ -116,13 +116,13 @@
                 <Param name="Code Type" val="Auto-&gt;JS" valType="str" updates="None" plugin="None"/>
                 <Param name="disabled" val="False" valType="bool" updates="None" plugin="None"/>
                 <Param name="Before Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Begin Experiment" val="volume = 0.25&#10;durationT = 0.5&#10;duration = 0.5&#10;pressed_key = &quot;&quot;" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Begin Experiment" val="volume = 0.25&#10;volume_gocue = 0.15&#10;durationT = 0.5&#10;duration = 0.5&#10;pressed_key = &quot;&quot;" valType="extendedCode" updates="constant" plugin="None"/>
                 <Param name="Begin Routine" val="" valType="extendedCode" updates="constant" plugin="None"/>
                 <Param name="Each Frame" val="" valType="extendedCode" updates="constant" plugin="None"/>
                 <Param name="End Routine" val="" valType="extendedCode" updates="constant" plugin="None"/>
                 <Param name="End Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
                 <Param name="Before JS Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Begin JS Experiment" val="volume = 0.25;&#10;durationT = 0.5;&#10;duration = 0.5;&#10;pressed_key = &quot;&quot;;&#10;" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Begin JS Experiment" val="volume = 0.25;&#10;volume_gocue = 0.15;&#10;durationT = 0.5;&#10;duration = 0.5;&#10;pressed_key = &quot;&quot;;&#10;" valType="extendedCode" updates="constant" plugin="None"/>
                 <Param name="Begin JS Routine" val="" valType="extendedCode" updates="constant" plugin="None"/>
                 <Param name="Each JS Frame" val="" valType="extendedCode" updates="constant" plugin="None"/>
                 <Param name="End JS Routine" val="" valType="extendedCode" updates="constant" plugin="None"/>
@@ -411,7 +411,7 @@
                 <Param name="deviceLabel" val="iblphones2" valType="device" updates="None" plugin="None"/>
                 <Param name="sound" val="2000" valType="str" updates="set every repeat" plugin="None"/>
                 <Param name="syncScreenRefresh" val="True" valType="bool" updates="constant" plugin="None"/>
-                <Param name="volume" val="volume" valType="num" updates="set every frame" plugin="None"/>
+                <Param name="volume" val="volume_gocue" valType="num" updates="set every frame" plugin="None"/>
                 <Param name="hamming" val="True" valType="bool" updates="constant" plugin="None"/>
                 <Param name="stopWithRoutine" val="True" valType="bool" updates="constant" plugin="None"/>
                 <Param name="forceEndRoutine" val="False" valType="bool" updates="constant" plugin="None"/>
@@ -795,7 +795,7 @@
                 <Param name="deviceLabel" val="iblphones2" valType="device" updates="None" plugin="None"/>
                 <Param name="sound" val="2000" valType="str" updates="set every repeat" plugin="None"/>
                 <Param name="syncScreenRefresh" val="True" valType="bool" updates="constant" plugin="None"/>
-                <Param name="volume" val="volume" valType="num" updates="set every frame" plugin="None"/>
+                <Param name="volume" val="volume_gocue" valType="num" updates="set every frame" plugin="None"/>
                 <Param name="hamming" val="True" valType="bool" updates="constant" plugin="None"/>
                 <Param name="stopWithRoutine" val="True" valType="bool" updates="constant" plugin="None"/>
                 <Param name="forceEndRoutine" val="False" valType="bool" updates="constant" plugin="None"/>
