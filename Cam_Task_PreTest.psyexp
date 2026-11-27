@@ -116,13 +116,13 @@
                 <Param name="Code Type" val="Auto-&gt;JS" valType="str" updates="None" plugin="None"/>
                 <Param name="disabled" val="False" valType="bool" updates="None" plugin="None"/>
                 <Param name="Before Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Begin Experiment" val="volume = 0.25&#10;volume_gocue = 0.15&#10;durationT = 0.5&#10;duration = 0.5&#10;pressed_key = &quot;&quot;" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Begin Experiment" val="from psychopy import sound&#10;volume = 0.25&#10;volume_gocue = 0.15&#10;durationT = 0.5&#10;duration = 0.5&#10;pressed_key = &quot;&quot;&#10;&#10;global_go_cue = sound.Sound(&quot;sound_files/go_cue_2000hz.wav&quot;, stereo = True, volume = 0.15)&#10;" valType="extendedCode" updates="constant" plugin="None"/>
                 <Param name="Begin Routine" val="" valType="extendedCode" updates="constant" plugin="None"/>
                 <Param name="Each Frame" val="" valType="extendedCode" updates="constant" plugin="None"/>
                 <Param name="End Routine" val="" valType="extendedCode" updates="constant" plugin="None"/>
                 <Param name="End Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
                 <Param name="Before JS Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Begin JS Experiment" val="volume = 0.25;&#10;volume_gocue = 0.15;&#10;durationT = 0.5;&#10;duration = 0.5;&#10;pressed_key = &quot;&quot;;&#10;" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Begin JS Experiment" val="import {sound} from 'psychopy';&#10;volume = 0.25;&#10;volume_gocue = 0.15;&#10;durationT = 0.5;&#10;duration = 0.5;&#10;pressed_key = &quot;&quot;;&#10;global_go_cue = new sound.Sound(&quot;sound_files/go_cue_2000hz.wav&quot;, {&quot;stereo&quot;: true, &quot;volume&quot;: 0.15});&#10;" valType="extendedCode" updates="constant" plugin="None"/>
                 <Param name="Begin JS Routine" val="" valType="extendedCode" updates="constant" plugin="None"/>
                 <Param name="Each JS Frame" val="" valType="extendedCode" updates="constant" plugin="None"/>
                 <Param name="End JS Routine" val="" valType="extendedCode" updates="constant" plugin="None"/>
@@ -400,6 +400,23 @@
                 <Param name="disabled" val="False" valType="bool" updates="None" plugin="None"/>
                 <Param name="desc" val="" valType="str" updates="constant" plugin="None"/>
             </RoutineSettingsComponent>
+            <CodeComponent name="codePhase" plugin="None">
+                <Param name="name" val="codePhase" valType="code" updates="None" plugin="None"/>
+                <Param name="Code Type" val="Auto-&gt;JS" valType="str" updates="None" plugin="None"/>
+                <Param name="disabled" val="False" valType="bool" updates="None" plugin="None"/>
+                <Param name="Before Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Begin Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Begin Routine" val="global_go_cue.stop()&#10;go_cue_played = False&#10;&#10;&#10;win.color = &quot;gray&quot;&#10;# Generate random phase&#10;current_phase = np.random.uniform(0, 2 * np.pi)&#10;&#10;gabor.phase = current_phase&#10;&#10;# Creates a gabor phase column on the csv&#10;thisExp.addData('gabor_phase', current_phase)" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Each Frame" val="if t &gt;= 0.1 and not go_cue_played:&#10;    global_go_cue.play()&#10;    go_cue_played = True" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="End Routine" val="" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="End Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Before JS Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Begin JS Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Begin JS Routine" val="global_go_cue.stop();&#10;go_cue_played = false;&#10;psychoJS.window.color = &quot;gray&quot;;&#10;current_phase = np.random.uniform(0, (2 * np.pi));&#10;gabor.phase = current_phase;&#10;psychoJS.experiment.addData(&quot;gabor_phase&quot;, current_phase);&#10;" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Each JS Frame" val="if (((t &gt;= 0.1) &amp;&amp; (! go_cue_played))) {&#10;    global_go_cue.play();&#10;    go_cue_played = true;&#10;}&#10;" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="End JS Routine" val="" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="End JS Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
+            </CodeComponent>
             <SoundComponent name="soundGoCue" plugin="None">
                 <Param name="name" val="soundGoCue" valType="code" updates="None" plugin="None"/>
                 <Param name="startVal" val="0.1" valType="code" updates="None" plugin="None"/>
@@ -408,9 +425,9 @@
                 <Param name="stopVal" val="0.08" valType="code" updates="constant" plugin="None"/>
                 <Param name="durationEstim" val="" valType="code" updates="None" plugin="None"/>
                 <Param name="stopType" val="duration (s)" valType="str" updates="None" plugin="None"/>
-                <Param name="deviceLabel" val="iblphones2" valType="device" updates="None" plugin="None"/>
-                <Param name="sound" val="2000" valType="str" updates="set every repeat" plugin="None"/>
-                <Param name="syncScreenRefresh" val="True" valType="bool" updates="constant" plugin="None"/>
+                <Param name="deviceLabel" val="ibl2phones" valType="device" updates="None" plugin="None"/>
+                <Param name="sound" val="sound_files/go_cue_2000hz.wav" valType="str" updates="set every repeat" plugin="None"/>
+                <Param name="syncScreenRefresh" val="False" valType="bool" updates="constant" plugin="None"/>
                 <Param name="volume" val="volume_gocue" valType="num" updates="set every frame" plugin="None"/>
                 <Param name="hamming" val="True" valType="bool" updates="constant" plugin="None"/>
                 <Param name="stopWithRoutine" val="True" valType="bool" updates="constant" plugin="None"/>
@@ -477,23 +494,6 @@
                 <Param name="lineWidth" val="fixation_width" valType="num" updates="set every frame" plugin="None"/>
                 <Param name="interpolate" val="linear" valType="str" updates="constant" plugin="None"/>
             </PolygonComponent>
-            <CodeComponent name="codePhase" plugin="None">
-                <Param name="name" val="codePhase" valType="code" updates="None" plugin="None"/>
-                <Param name="Code Type" val="Auto-&gt;JS" valType="str" updates="None" plugin="None"/>
-                <Param name="disabled" val="False" valType="bool" updates="None" plugin="None"/>
-                <Param name="Before Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Begin Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Begin Routine" val="win.color = &quot;gray&quot;&#10;# Generate random phase&#10;current_phase = np.random.uniform(0, 2 * np.pi)&#10;&#10;gabor.phase = current_phase&#10;&#10;# Creates a gabor phase column on the csv&#10;thisExp.addData('gabor_phase', current_phase)" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Each Frame" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="End Routine" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="End Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Before JS Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Begin JS Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Begin JS Routine" val="psychoJS.window.color = &quot;gray&quot;;&#10;current_phase = np.random.uniform(0, (2 * np.pi));&#10;gabor.phase = current_phase;&#10;psychoJS.experiment.addData(&quot;gabor_phase&quot;, current_phase);&#10;" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Each JS Frame" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="End JS Routine" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="End JS Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
-            </CodeComponent>
             <GratingComponent name="gabor" plugin="None">
                 <Param name="name" val="gabor" valType="code" updates="None" plugin="None"/>
                 <Param name="startVal" val="1" valType="code" updates="None" plugin="None"/>
@@ -603,7 +603,7 @@
                 <Param name="stopVal" val="duration" valType="code" updates="constant" plugin="None"/>
                 <Param name="durationEstim" val="" valType="code" updates="None" plugin="None"/>
                 <Param name="stopType" val="time (s)" valType="str" updates="None" plugin="None"/>
-                <Param name="deviceLabel" val="iblphones2" valType="device" updates="None" plugin="None"/>
+                <Param name="deviceLabel" val="ibl2phones" valType="device" updates="None" plugin="None"/>
                 <Param name="sound" val="sound_files/ibl_noise_burst.wav" valType="str" updates="set every repeat" plugin="None"/>
                 <Param name="syncScreenRefresh" val="True" valType="bool" updates="constant" plugin="None"/>
                 <Param name="volume" val="volume" valType="num" updates="set every frame" plugin="None"/>
@@ -784,6 +784,23 @@
                 <Param name="disabled" val="False" valType="bool" updates="None" plugin="None"/>
                 <Param name="desc" val="" valType="str" updates="constant" plugin="None"/>
             </RoutineSettingsComponent>
+            <CodeComponent name="codePhaseT" plugin="None">
+                <Param name="name" val="codePhaseT" valType="code" updates="None" plugin="None"/>
+                <Param name="Code Type" val="Auto-&gt;JS" valType="str" updates="None" plugin="None"/>
+                <Param name="disabled" val="False" valType="bool" updates="None" plugin="None"/>
+                <Param name="Before Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Begin Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Begin Routine" val="global_go_cue.stop()&#10;go_cue_played = False&#10;&#10;win.color = &quot;grey&quot;&#10;# Generate random phase&#10;current_phaseT = np.random.uniform(0, 2 * np.pi)&#10;&#10;gaborTut.phase = current_phaseT&#10;&#10;# Creates a gabor phase column on the csv&#10;thisExp.addData('gabor_phaseT', current_phaseT)&#10;" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Each Frame" val="if t &gt;= 0.1 and not go_cue_played:&#10;    global_go_cue.play()&#10;    go_cue_played = True" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="End Routine" val="" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="End Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Before JS Experiment" val="// Translating..." valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Begin JS Experiment" val="// Translating..." valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Begin JS Routine" val="// Translating..." valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="Each JS Frame" val="// Translating..." valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="End JS Routine" val="// Translating..." valType="extendedCode" updates="constant" plugin="None"/>
+                <Param name="End JS Experiment" val="// Translating..." valType="extendedCode" updates="constant" plugin="None"/>
+            </CodeComponent>
             <SoundComponent name="soundTutGoCue" plugin="None">
                 <Param name="name" val="soundTutGoCue" valType="code" updates="None" plugin="None"/>
                 <Param name="startVal" val="0.1" valType="code" updates="None" plugin="None"/>
@@ -792,9 +809,9 @@
                 <Param name="stopVal" val="0.08" valType="code" updates="constant" plugin="None"/>
                 <Param name="durationEstim" val="" valType="code" updates="None" plugin="None"/>
                 <Param name="stopType" val="duration (s)" valType="str" updates="None" plugin="None"/>
-                <Param name="deviceLabel" val="iblphones2" valType="device" updates="None" plugin="None"/>
-                <Param name="sound" val="2000" valType="str" updates="set every repeat" plugin="None"/>
-                <Param name="syncScreenRefresh" val="True" valType="bool" updates="constant" plugin="None"/>
+                <Param name="deviceLabel" val="ibl2phones" valType="device" updates="None" plugin="None"/>
+                <Param name="sound" val="sound_files/go_cue_2000hz.wav" valType="str" updates="set every repeat" plugin="None"/>
+                <Param name="syncScreenRefresh" val="False" valType="bool" updates="constant" plugin="None"/>
                 <Param name="volume" val="volume_gocue" valType="num" updates="set every frame" plugin="None"/>
                 <Param name="hamming" val="True" valType="bool" updates="constant" plugin="None"/>
                 <Param name="stopWithRoutine" val="True" valType="bool" updates="constant" plugin="None"/>
@@ -861,23 +878,6 @@
                 <Param name="lineWidth" val="fixation_widthT" valType="num" updates="set every frame" plugin="None"/>
                 <Param name="interpolate" val="linear" valType="str" updates="constant" plugin="None"/>
             </PolygonComponent>
-            <CodeComponent name="codePhaseT" plugin="None">
-                <Param name="name" val="codePhaseT" valType="code" updates="None" plugin="None"/>
-                <Param name="Code Type" val="Auto-&gt;JS" valType="str" updates="None" plugin="None"/>
-                <Param name="disabled" val="False" valType="bool" updates="None" plugin="None"/>
-                <Param name="Before Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Begin Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Begin Routine" val="win.color = &quot;grey&quot;&#10;# Generate random phase&#10;current_phaseT = np.random.uniform(0, 2 * np.pi)&#10;&#10;gaborTut.phase = current_phaseT&#10;&#10;# Creates a gabor phase column on the csv&#10;thisExp.addData('gabor_phaseT', current_phaseT)&#10;" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Each Frame" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="End Routine" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="End Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Before JS Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Begin JS Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Begin JS Routine" val="psychoJS.window.color = &quot;grey&quot;;&#10;current_phaseT = np.random.uniform(0, (2 * np.pi));&#10;gaborTut.phase = current_phaseT;&#10;psychoJS.experiment.addData(&quot;gabor_phaseT&quot;, current_phaseT);&#10;" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="Each JS Frame" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="End JS Routine" val="" valType="extendedCode" updates="constant" plugin="None"/>
-                <Param name="End JS Experiment" val="" valType="extendedCode" updates="constant" plugin="None"/>
-            </CodeComponent>
             <GratingComponent name="gaborTut" plugin="None">
                 <Param name="name" val="gaborTut" valType="code" updates="None" plugin="None"/>
                 <Param name="startVal" val="1" valType="code" updates="None" plugin="None"/>
@@ -1051,7 +1051,7 @@
                 <Param name="stopVal" val="durationT" valType="code" updates="constant" plugin="None"/>
                 <Param name="durationEstim" val="" valType="code" updates="None" plugin="None"/>
                 <Param name="stopType" val="time (s)" valType="str" updates="None" plugin="None"/>
-                <Param name="deviceLabel" val="iblphones2" valType="device" updates="None" plugin="None"/>
+                <Param name="deviceLabel" val="ibl2phones" valType="device" updates="None" plugin="None"/>
                 <Param name="sound" val="sound_files/ibl_noise_burst.wav" valType="str" updates="set every repeat" plugin="None"/>
                 <Param name="syncScreenRefresh" val="True" valType="bool" updates="constant" plugin="None"/>
                 <Param name="volume" val="volume" valType="num" updates="set every frame" plugin="None"/>
